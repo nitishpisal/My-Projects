@@ -1,0 +1,148 @@
+
+
+.signInFormHolder
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:500px;
+	font-weight:bold;
+	font-size:12px;
+	font-family: "Helvetica Neue" ,"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color:#606060;
+
+}
+.signInFormHolder a
+{
+	color:#da630b;
+	text-decoration:none;
+}
+.signInFormHolder a:hover
+{
+	text-decoration:underline;
+}
+
+.signInForm ,  .signInForm ul , .signInForm li ,  .signInForm input 
+{
+	padding:0px;
+	margin:0px;
+	font-family: "Helvetica Neue" ,"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	border:none;
+	color:#363636;
+	text-shadow: #f9f9f9 0px 1px 0px;
+	font-size:12px;
+}
+.signInForm 
+{
+	padding:0px;
+	margin:0px;
+	background:#e7e7e7;
+	width:470px;
+	margin-right:auto;
+	margin-left:auto;
+	margin-top:20px;
+	margin-bottom:20px;
+	border:1px solid #b6b6b6;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	font-weight:bold;
+	color:#606060;
+	
+	box-shadow:inset  #fff 0px 1px 0px;
+	-moz-box-shadow:inset  #fff 0px 1px 0px;
+	-webkit-box-shadow:inset  #fff 0px 1px 0px;
+}
+.signInForm .content
+{
+	padding:20px;
+	width:390px;
+	margin-right:auto;
+	margin-left:auto;
+}
+.signInForm ul
+{
+	list-style:none;
+}
+.signInForm li
+{
+	margin-bottom:10px;
+	list-style:none;
+	clear:both;
+}
+.signInForm li input[type="text"], .signInForm li input[type="text"]:hover ,  .signInForm li input[type="button"] ,
+.signInForm li input[type="password"]
+{
+	padding:10px;
+	width:370px;
+	border:3px solid #e7e7e7;
+	font-size:14px;
+	line-height:20px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	font-weight:normal;
+	box-shadow:inset #707070 0px 0px 3px, inset #acacac 1px 1px 0px, inset #acacac -1px -1px 0px;
+	-moz-box-shadow:inset #707070 0px 0px 3px, inset #acacac 1px 1px 0px, inset #acacac -1px -1px 0px;
+	-webkit-box-shadow:inset #707070 0px 0px 5px, inset #acacac 1px 1px 0px, inset #acacac -1px -1px 0px;
+		
+}
+.signInForm li input[type="text"]:focus , .signInForm li input[type="password"]:focus
+{
+	border:3px solid #f0c09b;
+	outline:none;
+	-webkit-box-shadow:inset #707070 0px 0px 3px , inset #ff8830 1px 1px 0px, inset #ff8830 -1px -1px 0px;
+	-moz-box-shadow:inset #707070 0px 0px 3px , inset #ff8830 1px 1px 0px, inset #ff8830 -1px -1px 0px;
+	box-shadow:inset #707070 0px 0px 3px, inset #ff8830 1px 1px 0px, inset #ff8830 -1px -1px 0px;
+}
+.signInForm .title
+{
+	font-size:30px;
+	font-weight:bold;
+	text-shadow:1px solid #fff;
+	margin-bottom:10px;
+}
+.signInForm ul li input[type="button"]
+{
+	background:url(images/signIn.jpg) repeat-x #d27028 0 0;
+	border:none;
+	text-shadow: #f7ddca 0px 1px 0px;
+	box-shadow:inset #ce6e27 1px 1px 0px, inset #ce6e27 -1px -1px 0px;
+	-webkit-box-shadow:inset #ce6e27 1px 1px 0px, inset #ce6e27 -1px -1px 0px;
+	-moz-box-shadow: inset #ce6e27 1px 1px 0px, inset #ce6e27 -1px -1px 0px;
+	font-weight:bold;
+	font-size:18px;
+	line-height:15px;
+	
+	background: #fe8830; /* Old browsers */
+background: -moz-linear-gradient(top, #fe8830 0%, #ba6525 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fe8830), color-stop(99%,#ba6525)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #fe8830 0%,#ba6525 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #fe8830 0%,#ba6525 99%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #fe8830 0%,#ba6525 99%); /* IE10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fe8830', endColorstr='#ba6525',GradientType=0 ); /* IE6-9 */
+background: linear-gradient(top, #fe8830 0%,#ba6525 99%); /* W3C */
+}
+.signInForm ul li input[type="button"]:active
+{
+	box-shadow:inset #000 0 0 5px;
+	-webkit-box-shadow:inset #000 0 0 5px;
+	-moz-box-shadow: inset #000 0 0 5px ;
+}
+.signInForm ul li input[type="button"]
+{
+	width:120px;
+	
+}
+.signInForm .btn
+{
+	float:right;
+	color:#303030;
+	background-color:#da630b;
+	
+}
+.signInFormHolder .register 
+{
+	color:#606060;
+	text-align:center;
+	width:100%;
+}

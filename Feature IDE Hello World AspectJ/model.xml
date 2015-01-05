@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="HelloWorld">
+				<alt abstract="true" mandatory="true" name="salute">
+					<feature mandatory="true" name="Hello"/>
+					<feature mandatory="true" name="Goodbye"/>
+				</alt>
+				<alt abstract="true" mandatory="false" name="Feature">
+					<feature mandatory="true" name="Wonderful"/>
+					<feature mandatory="true" name="Beautiful"/>
+					<feature mandatory="true" name="Terrible"/>
+				</alt>
+				<feature mandatory="true" name="World"/>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<eq>
+					<disj>
+						<var>Beautiful</var>
+						<var>Wonderful</var>
+					</disj>
+					<var>Hello</var>
+				</eq>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

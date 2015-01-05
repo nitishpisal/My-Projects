@@ -1,0 +1,43 @@
+USER TABLE
+USERID (FK)
+BILLING ADDRESS
+CREDITCARDNO
+PHONENUMBER
+DOB
+email
+
+LOGIN TABLE
+USERID
+USERNAME(unique)
+PASSWORD
+
+PRODUCT TABLE
+PRODUCTID
+PRODUCTNAME
+QUANTITY
+PRICE
+
+
+
+Alter table `orderdetails` Add Constraint FK_ORDER_userID FOREIGN KEY (USERID) references LOGINDETAILS(USERID)
+
+
+help:
+
+
+posted 30/03/2012 02:03:07  purple mooseage
+Hi, 
+
+You have to put the object or values into request attribute in your servlet and then get the same request attribute on jsp page. 
+
+Servlet 
+request.setAttribute("NAME", a); 
+request.setAttribute("SECN", b); 
+request.setAttribute("TITLE", d); 
+
+JSP 
+
+<tr>name="<%= request.getAttribute("Name") %>"</tr> 
+<tr>secn="<%= request.getAttribute("SECN") %>"</tr> 
+<tr>title="<%= request.getAttribute("TITLE") %>"</tr>
+----------------------------------------------------------------------
