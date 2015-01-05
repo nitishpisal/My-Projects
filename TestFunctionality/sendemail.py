@@ -1,9 +1,9 @@
 import sys
 import smtplib
 
-sender = 'badal.jain77@gmail.com'
-receivers = ['badal.jain@sjsu.edu']
-password = 'bj9691718895'
+sender = 'stulance.jobs1@yahoo.com'
+receivers = sys.argv[0]
+password = '******'
 
 message = """From: From Person <from@fromdomain.com>
 To: To Person <to@todomain.com>
@@ -13,7 +13,7 @@ This is a test e-mail message.
 """
 
 try:
- smtpObj = smtplib.SMTP('smtp.gmail.com',587)
+ smtpObj = smtplib.SMTP('smtp.mail.yahoo.com',587)
  smtpObj.ehlo()
  smtpObj.starttls()
  smtpObj.login(sender, password)
