@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ebuy | TV</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel='stylesheet' href='/stylesheets/1-col-portfolio.css' />
+    <!-- Custom CSS -->
+	<link rel='stylesheet' href='/stylesheets/bootstrap_catalg.min.css' />
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/store/home">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+		<!-- Previous page-->
+		<div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-primary" href="/store/tvcatalog"><span class="glyphicon glyphicon-chevron-left"></span> Previous</a>
+            </div>
+        </div>
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">TV's
+                    <small>Check what we have for you!</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Project One -->
+        <% tvs.forEach( function( todo ){ %>
+        <div class="row">
+            <div class="col-md-7">
+                <a href="/store/tv/<%= todo.series %>">
+                    <img class="img-responsive" src="/img/<%= todo.image2 %>" alt="">
+                </a>
+                <hr>
+            </div>
+            <div class="col-md-5">
+                <h3>Sansung</h3>
+                <h4>Series -- <%= todo.series %></h4>
+                <form method="post" action="http://localhost:8080/Ebuy_Inventory/productInventory/orderSummary.jsp">
+                <label for="quantity">Qty: </label>
+				<select id="quantity" name="quantity">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+				</select>
+               	<input name="productId" type="hidden" value="<%= todo.series%>">
+               	<input name="image" type="hidden" value="<%= todo.image%>">
+               	<input name="price" type="hidden" value="<%= todo.price%>">          
+               	<label><h4>Price : $</h4></label><b> <%= todo.price%> </b><hr>
+               	<% if(  available === 1  || (todo.startDate < todo.endDate && todo.currentDate < todo.endDate ) ) {%>
+               		<input type="submit" class="btn btn-primary" id="buynowBtn" name="submit" value="Buy Now "><hr>
+               		<h4><font color="green"><i>In Stock</i></font></h4>
+               	<% } else {%>      
+               		<input type="submit" class="btn btn-primary" id="buynowBtn" name="submit" value="Buy Now " disabled><hr>
+               		<h4><font color="red"><i> Product is no longer available</i></font></h4>
+               	<% }%>
+            </form>
+            </div>
+            <div class="col-md-12">
+            	<table style="width:100%">
+
+        	<tbody>
+				<thead>
+            	<td></td>
+        		<tr><b>SAMSUNG</tr>
+        		</thead>
+				
+				<thead><th>SERIES</th></thead>
+				<tr></tr>
+                <tr>
+                    <td><%= todo.series %></td>
+                </tr>
+                
+                <tr>
+                <td colspan="4" style="border-bottom: 2px solid #000;" ></td>
+                </tr>
+                <thead><th>Design</th></thead>
+                <tr>
+                	<td>Type: <%= todo.type %></td>
+                </tr>
+                <tr>
+                <td colspan="4" style="border-bottom: 1px solid #000;" ></td>
+                </tr>
+                <thead><th>VIDEO</th></thead>
+                <tr>
+                	<td>screen size: <%= todo.screen_size %></td>
+                	<td>Resulution : <%= todo.Resolution %></td>
+                </tr>
+                <tr>
+                <td colspan="4" style="border-bottom: 1px solid #000;" ></td>
+                </tr>
+   				<thead><th>Audio</th></thead>
+                <tr>
+                	<td>Sound Effect: <%= todo.sound_effect %></td>
+                </tr>
+                <tr>
+                <td colspan="4" style="border-bottom: 1px solid #000;" ></td>
+                </tr>
+                <thead><th>Features</th></thead>
+                <tr>
+                	<td>Ultra Clear Pannel : <%= todo.ultraclearpanel %></td>
+                	<td>Connect Share: <%= todo.connectshare %></td>
+                	<td>Game Mode : <%= todo.gamemode %></td>
+                	<td>Auto Power Off : <%= todo.autopoweroff %></td>
+                </tr>
+                <tr>
+                <td colspan="4" style="border-bottom: 1px solid #000;" ></td>
+                </tr>
+                <thead><th>Inputs and Outputs</th></thead>
+                <tr>
+                	<td>HDMI: <%= todo.hdmi %></td>
+                	<td>USB : <%= todo.usb %></td>
+                	<td>Ethernet: <%= todo.ethernet %></td>
+                </tr>
+                <tr>
+                <td colspan="4" style="border-bottom: 1px solid #000;" ></td>
+                </tr>
+                  <thead><th>Dimensions</th></thead>
+                <tr>
+                	<td>Product Size: <%= todo.productsize %></td>
+                </tr>
+                <tr>
+                <td colspan="4" style="border-bottom: 1px solid #000;" ></td>
+                </tr>
+                  <thead><th>Power</th></thead>
+                <tr>
+                	<td>Energy Star: <%= todo.energystar %></td>
+                </tr>           
+
+            </tbody>
+</table>
+            </div>
+        </div>
+        <% }); %>
+        <!-- /.row -->
+
+        <hr>
+
+        
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Enjoy Shopping!</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="/ui-Javascripts/jquery-catalog-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/ui-Javascripts/bootstrap_catalog.min.js"></script>
+
+</body>
+
+</html>

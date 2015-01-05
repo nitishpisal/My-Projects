@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to the Gumball Machine (Groovy Version)</title>
+</head>
+
+<body>
+<h1 align="center">Welcome to the Gumball Machine</h1>
+
+<!-- FORM SECTION -->
+	<form name="form1" method="post" action="/gumballController">
+    
+    <textarea name="message" cols="60" rows="10" align-center id="message">
+	-----------------------------------------
+	Mighty Gumball, Inc.
+	Groovy-Enabled Standing Gumball
+	Model# <%= data[0].modelNumber %>
+	Serial# <%=data[0].serialNumber %>
+	-----------------------------------------
+	Gumball Machine: <%= data[0].modelNumber %>
+	Current State: <%= state %>
+	Count: <%= data[0].countGumballs %> 
+			         
+	</textarea>
+       
+     	<input type="hidden" name="model" value=<%=data[0].modelNumber %>>
+        <input type="hidden" name="serial" value=<%= data[0].serialNumber  %>>
+        <input type="hidden" name="count" value=<%= data[0].countGumballs %>>
+        <input type="hidden" name="state" value=<%= state %>>
+
+    <p align="center"><img src="/images/giant-gumball-machine.jpg"  width="385" height="316"></p>
+	
+	<p align="center">
+    	
+        	<input type="submit" name="event" id="btnInsertQuarter" value="InsertQuarter">
+        	&nbsp; &nbsp;<br><br>
+  
+		 
+        	<input type="submit" name="event" id="btnTurnCrank" value="TurnCrank">
+        </p>  
+    </form align="center">
+
+
+
+</body>
+</html>

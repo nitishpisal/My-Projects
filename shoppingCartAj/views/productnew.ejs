@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ebuy Shopping</title>
+
+    <!-- Bootstrap Core CSS -->
+	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <!-- Custom CSS -->
+	<link rel='stylesheet' href='/stylesheets/shop-homepage.css' />
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/store/home">ebuy.com</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                    <li>
+                        <a href="#"><span style="display:inline-block; width: 350px;"></span></a>
+                    </li>
+                    <li>
+                     <div class="row">
+			            <div class="col-md-3">
+			            	<form method="get" action="/store/admin" name="firstpageLogin">
+			            	<span style="display:block; height: 8px;"></span>
+			            	<input type="hidden" name="backHome" value="home">
+			                <input type="submit" class="btn btn-primary" id="buynowBtn" name="admin" value="Admin ">
+			                </form>
+			            </div>
+        			</div>
+                    </li>
+                    <li>
+                        <a href="#"><span style="display:inline-block; width: 20px;"></span></a>
+                    </li>
+                    <li>
+                     <div class="row">
+			            <div class="col-md-3">
+			            	<form method="post" action="http://localhost:8080/Ebuy_Inventory/login" name="firstpageLogin">
+			            	<span style="display:block; height: 8px;"></span>
+			            	<input type="hidden" name="backHome" value="home">
+			                <input type="submit" class="btn btn-primary" id="buynowBtn" name="submit" value="Login ">
+			                </form>
+			            </div>
+        			</div>
+                    </li>
+                    <li>
+                        <a href="#"><span style="display:inline-block; width: 20px;"></span></a>
+                    </li>
+                    <li>
+                     <div class="row">
+			            <div class="col-md-3">
+			            	<form method="post" action="http://localhost:8080/Ebuy_Inventory/login" name="firstpageLogin">
+			            	<span style="display:block; height: 8px;"></span>
+			            	<input type="hidden" name="backHome" value="cancel">
+			                <input type="submit" class="btn btn-primary" id="cancelBtn" name="cancel" value="ManageOrders ">
+			                </form>
+			            </div>
+        			</div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Products</p>
+                <div class="list-group">
+                    <a href="/store/tvcatalog" class="list-group-item">TV</a>
+                    <a href="/store/carcatalog" class="list-group-item">Cars</a>
+                    <a href="/store/wificatalog" class="list-group-item">Wifi Routers</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="/img/carHome.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="/img/wifihome.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="/img/tvhome.jpg" alt="">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+				<hr>
+				<h2>Products</h2>
+				<hr>
+				<h3>TV</h3>
+                <div class="row">
+					<% tvs.forEach( function( todo ){ %>
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <a href="/store/tv/<%= todo.series %>"><img src="/img/<%= todo.image %>" alt=""></a>
+                            <div class="caption">
+                                <h4 class="pull-right">$<%= todo.price %></h4>
+                                <h4><a href="/store/tvCatalog">LED TV</a>
+                                </h4>
+                                <p><a href="/store/tv/<%= todo.series %>"><b>SAMSUNG - <%= todo.series %></a></p>
+                                <a class="btn btn-primary" href="/store/tv/<%= todo.series %>">View <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+					<%  }); %>
+                    
+                </div>
+                <hr>
+                <h3>Cars</h3>
+				<div class="row">
+					<% cars.forEach( function( todo ){ %>
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <a href="/store/car/<%= todo.brand %>"><img src="/img/<%= todo.image %>" alt=""></a>
+                            <div class="caption">
+                                <h4 class="pull-right">$<%= todo.price %></h4>
+                                <h4><a href="/store/carcatalog"><%= todo.brand%></a>
+                                </h4>
+                                <p><a href="/store/car/<%= todo.brand %>"><b><%= todo.brand %> <%= todo.series %></a></p>
+                                <a class="btn btn-primary" href="/store/car/<%= todo.brand %>">View <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+					<%  }); %>
+                    
+                </div>
+                
+                <hr>
+                <h3>Routers</h3>
+				<div class="row">
+					<% wifis.forEach( function( todo ){ %>
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <a href="/store/car/<%= todo.key %>"><img src="/img/<%= todo.image2 %>" alt=""></a>
+                            <div class="caption">
+                                <h4 class="pull-right">$<%= todo.price %></h4>
+                                <h4><a href="/store/carcatalog"><%= todo.type%></a>
+                                </h4>
+                                <p><a href="/store/wifi/<%= todo.key %>"><b><%= todo.key %> </a></p>
+                                <a class="btn btn-primary" href="/store/wifi/<%= todo.key %>">View <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+					<%  }); %>
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Enjoy Shopping!</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="/ui-Javascripts/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/ui-Javascripts/bootstrap.min.js"></script>
+
+</body>
+
+</html>

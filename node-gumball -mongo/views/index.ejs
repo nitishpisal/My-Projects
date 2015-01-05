@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to the Gumball Machine (Groovy Version)</title>
+</head>
+
+<body>
+<h1 align="center">Welcome to the Gumball Machine</h1>
+
+<!-- FORM SECTION -->
+<form name="form1" method="post" action="/machine">
+    <div align="center">
+    <% if (posts) {%>
+	<% posts.forEach( function( todo ){ %>
+    
+    	
+        <textarea name="message" cols="70" rows="7" readonly id="message">
+	-----------------------------------------
+	Mighty Gumball, Inc.
+	Groovy-Enabled Standing Gumball
+	Model# <%= todo.modelNumber %> 
+	Serial# <%= todo.serialNumber %>
+	-----------------------------------------
+	Gumball Machine: <%= todo.modelNumber %>
+	Current State: <%= state %>
+	Count: <%= todo.countGumballs%>	         	         
+			
+        </textarea>
+        
+         <input type="hidden" name="model" value=<%= todo.modelNumber %>>
+        <input type="hidden" name="serial" value=<%= todo.serialNumber %>>
+        <input type="hidden" name="count" value=<%= todo.countGumballs %>>
+        <input type="hidden" name="state" value=<%= state %>>
+        <input type="hidden" name="ts" value=<%= ts %>>
+        <input type="hidden" name="hash" value=<%= hash %>>
+    </div>
+    <%});%>
+	<%} else {%>
+        	 <textarea name="message" cols="70" rows="7" readonly id="message">
+ 	-----------------------------------------
+	Mighty Gumball, Inc.
+	Groovy-Enabled Standing Gumball 
+	Message : <%=message%>     	 
+        	 </textarea>
+        <%}%>
+   <p align="center"><img src="/images/giant-gumball-machine.jpg"  width="385" height="316"></p>
+	
+	<p align="center">
+    	
+        	<input type="submit" name="event" id="btnInsertQuarter" value="InsertQuarter">
+        	&nbsp; &nbsp;<br><br>
+  
+		 
+        	<input type="submit" name="event" id="btnTurnCrank" value="TurnCrank">
+        </p>  
+    </form align="center">
+
+
+
+</body>
+</html>
