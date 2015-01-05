@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Welcome to the Gumball Machine (Groovy Version)</title>
+</head>
+
+<body>
+<h1 align="center">Welcome to the Gumball Machine</h1>
+
+<!-- FORM SECTION -->
+<form name="form1" method="post" action="">
+    
+	<% posts.forEach( function( todo ){ %>
+    <div align="center">
+        <textarea name="message" cols="70" rows="7" readonly id="message">
+	-----------------------------------------
+	Mighty Gumball, Inc.
+	Groovy-Enabled Standing Gumball
+	Model# <%= todo.model_number %> 
+	Serial# <%= todo.serial_number %>
+	-----------------------------------------
+	Gumball Machine: <%= todo.model_number %>
+	Current State: <%= todo.state %>	         	         
+			
+        </textarea>
+    </div>
+    <%});%>
+
+    <p align="center"><img src="/images/giant-gumball-machine.jpg"  width="385" height="316"></p>
+	</form align="center">
+	<p align="center">
+    	<form name="startMachine" method="post" action="eventName">
+        	<input type="submit" name="event" id="btnInsertQuarter" value="start">
+        </form align="center">
+    </p>
+    <p align="center">
+    	<form name="insertQuarter" method="post" action="eventName">
+        	<input type="submit" name="event" id="btnInsertQuarter" value="InsertQuarter">
+        </form align="center">
+    </p>
+		 <form name="turnCarnk" method="post" action="eventName">
+        	<input type="submit" name="event" id="btnTurnCrank" value="TurnCrank">
+        </form align="center">
+    
+
+
+
+</body>
+</html>
