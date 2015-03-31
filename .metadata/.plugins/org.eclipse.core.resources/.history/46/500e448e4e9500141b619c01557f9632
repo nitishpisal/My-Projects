@@ -1,0 +1,225 @@
+package LLMethods;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+/**
+ * We'll be implementing singly linked list
+ * 
+ * @author badal
+ *
+ * @param <E>
+ */
+public class MyLinkedList<E> implements List<E> {
+	
+	
+	/**
+	 * create Node<E> type head and tail variable to be used over
+	 * by the methods for list functions 
+	 */
+	private Node<E> head;
+	private Node<E> tail;
+	private int currentSize;
+	
+	/**
+	 * create a constructor for MyLinkedList for initializing the list
+	 */
+	public MyLinkedList(){
+		this.head = null;
+		this.tail = null;
+		this.currentSize = 0;
+	}
+	
+	/**
+	 * we'll create a class node to hold the data inside out list
+	 * make it a generic type
+	 * new Node<E>(); this will call this class, with whatever the type on list will be.
+	 * 
+	 */
+	
+	class Node<T>{
+		private T data; // the data field in th elinked list
+		private Node<T> next; //pointer to next node in the list
+		
+		/**
+		 * to get and set the data of the node
+		 */
+		public T getData(){
+			return this.data;
+		}
+		public  void setData(T data){
+			this.data = data;
+		}
+		/**
+		 * the below two functions are for next pointers
+		 */
+		public Node<T> getNext(){
+			return this.next;
+		}
+		public void setData(Node<T> newNext){
+			this.next = newNext;
+		}
+		
+		
+	}
+	
+	public int size() {
+		// TODO Auto-generated method stub
+		return this.currentSize;
+	}
+
+	
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return this.size() == 0;
+	}
+
+	
+	public boolean contains(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public Iterator<E> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public <T> T[] toArray(T[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public boolean add(E e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean remove(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean containsAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean addAll(Collection<? extends E> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean addAll(int index, Collection<? extends E> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean removeAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean retainAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public E get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public E set(int index, E element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public void add(int index, E element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public E remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public int indexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	public int lastIndexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	public ListIterator<E> listIterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public ListIterator<E> listIterator(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+
+	
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+
+	
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
+
+	public List<E> subList(int fromIndex, int toIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,67 @@
+
+package crud.servlets;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import org.apache.tomcat.dbcp.dbcp.DbcpException;
+
+public class DBconnect {
+
+	private Connection con = null;
+	private Statement st;
+	private Statement st1;
+	private ResultSet rs;
+	private String query;
+	private String username = "";
+	private String password = "";
+	PreparedStatement preparedStatement = null;
+	public DBconnect(){
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserDetails", "root", "");
+			st =con.createStatement();
+		}catch(Exception ex){
+			System.out.println("Error :" + ex);
+		}
+	}
+	
+	public void insertUserDetails(HomePage user){
+		
+		try{
+			String query = "Insert into USER values ( '" + 
+					user.getId() + "', '" + user.getFirstname() + "', '" + user.getLastname() +
+					"', '" + user.getEmail() + "', '" + user.getAddress() + "', '" + user.getOrganization() +
+					"', '" + user.getAboutMyself() + "')";
+			System.out.println(query);
+			int insertStatus = st.executeUpdate(query);
+		}catch(Exception d){
+			System.out.println("Error inserting the details in db");
+		}
+	}
+	
+	public HomePage getUserDetails(String id){
+		HomePage user = new HomePage();
+		String query = "select * from USER where id = '" + id + "' LIMIT 1" ;
+		try{
+			rs = st.executeQuery(query);
+			while(rs.next()){
+				user.setId(rs.getString("ID"));
+				user.setFirstname(rs.getString("FIRSTNAME"));
+				user.setLastname(rs.getString("LASTNAME"));
+				user.setEmail(rs.getString("EMAIL"));
+				user.setAddress(rs.getString("ADDRESS"));
+				user.setOrganization(rs.getString("ORGANIZATION"));
+				user.setAboutMyself(rs.getString("ABOUTMYSELF"));
+			}
+		}catch(Exception ex){
+			System.out.println("Unable to fetch user information");
+		}
+		
+		return user;
+	}
+	
+}

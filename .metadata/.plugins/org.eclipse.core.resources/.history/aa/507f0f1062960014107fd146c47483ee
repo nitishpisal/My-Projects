@@ -1,0 +1,93 @@
+package Arrays;
+
+import java.lang.reflect.Array;
+import java.util.HashSet;
+
+public class GeeksForGeeks {
+	
+	public int[] generateRandomArray(int arraySize){
+		int[] theArray = new int[arraySize];
+		for(int i=0; i<arraySize; i++){
+			theArray[i] = (int)(Math.random()*10)+10;
+		}
+		return theArray;
+	}
+	
+	public String[][] generateRandomMultiArray(int i, int j){
+		String[][] arr = new String[i][j];
+		//int func = 37;
+		
+		for(int p=0; p<i; p++){
+			for (int q=0; q<j; q++){
+				if (((int)(Math.random()*10)+10)%2 == 0 ){
+					arr[p][q] = "X";
+				}
+				else{
+					arr[p][q] = "O";
+				}
+			}
+		}
+		
+		return arr;
+	}
+	
+	public void print(int[] a){
+		for (int i=0; i<a.length; i++){
+			System.out.print(" " + a[i] + " |");
+		}
+	}
+	
+	public void print(String[][] a){
+		for(int i=0; i < a.length; i++){
+			for(int j=0; j<a[1].length; j++){
+				System.out.print(a[i][j] + " |");
+			}
+			System.out.println();
+		}
+	}
+	/**
+	 * Question1: 
+	 * Given an unsorted array that may contain duplicates. Also given a number k which 
+		is smaller than size of array. Write a function that returns true if array contains 
+		duplicates within k distance.
+		
+		Solution:
+		We are approaching with iterating till K  and adding the values to the set
+		here the time complexity is O(K) and auxiliary space complexity is O(k)
+	 */
+	
+	public boolean duplicateValue(int[] a, int k){
+		HashSet<Integer> set = new HashSet<Integer>();
+		for(int i=0; i<k; i++){
+			if(set.contains(a[i]))
+				return true;
+			else{
+				set.add(a[i]);
+			}
+			
+		}
+		
+		return false;
+	}
+	/**
+	 * question2:
+	 * Given a matrix where every element is either ‘O’ or ‘X’, replace ‘O’ with ‘X’ if surrounded by ‘X’. 
+	 * A ‘O’ (or a set of ‘O’) is considered to be by 	 * surrounded by ‘X’ 
+	 * if there are ‘X’ at locations just below, just above, just left and just right of it. 
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GeeksForGeeks g = new GeeksForGeeks();
+		/*int[] arr;
+		arr = g.generateRandomArray(10);
+		g.print(arr);
+		System.out.println(g.duplicateValue(arr, 3));*/
+		
+		String[][] sArr;
+		sArr = g.generateRandomMultiArray(4, 4);
+		g.print(sArr);
+	}
+
+}

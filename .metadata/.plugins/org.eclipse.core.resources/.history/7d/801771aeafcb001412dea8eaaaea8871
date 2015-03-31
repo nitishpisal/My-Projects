@@ -1,0 +1,29 @@
+
+package crud.servlets;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DBconnect {
+
+	private Connection con = null;
+	private Statement st;
+	private Statement st1;
+	private ResultSet rs;
+	private String query;
+	private String username = "";
+	private String password = "";
+	PreparedStatement preparedStatement = null;
+	public DBconnect(){
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserDetails", "root", "");
+			st =con.createStatement();
+		}catch(Exception ex){
+			System.out.println("Error :" + ex);
+		}
+	}
+}

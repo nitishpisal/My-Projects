@@ -1,0 +1,381 @@
+package LLMethods;
+
+import java.awt.image.IndexColorModel;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+/**
+ * We'll be implementing singly linked list
+ * 
+ * @author badal
+ *
+ * @param <E>
+ */
+public class MyLinkedList<E> implements List<E> {
+	
+	
+	/**
+	 * create Node<E> type head and tail variable to be used over
+	 * by the methods for list functions 
+	 */
+	private Node<E> head;
+	private Node<E> tail;
+	private int currentSize;
+	
+	/**
+	 * create a constructor for MyLinkedList for initializing the list
+	 */
+	public MyLinkedList(){
+		this.head = null;
+		this.tail = null;
+		this.currentSize = 0;
+	}
+	
+	/**
+	 * we'll create a class node to hold the data inside out list
+	 * make it a generic type
+	 * new Node<E>(); this will call this class, with whatever the type on list will be.
+	 * 
+	 */
+	
+	class Node<T>{
+		private T data; // the data field in th elinked list
+		private Node<T> next; //pointer to next node in the list
+		
+		/**
+		 * constructor for initializing the values
+		 */
+		public Node(T data, Node<T> next){
+			this.data =  data;
+			this.next = next;
+		}
+		
+		/**
+		 * to get and set the data of the node
+		 */
+		public T getData(){
+			return this.data;
+		}
+		public  void setData(T data){
+			this.data = data;
+		}
+		/**
+		 * the below two functions are for next pointers
+		 */
+		public Node<T> getNext(){
+			return this.next;
+		}
+		public void setNext(Node<T> newNext){
+			this.next = newNext;
+		}
+		
+		
+	}
+	/**
+	 * Creating an Iterator for our List
+	 * 1. Create a new class that implements Iterator interface (List already implements Iterable)
+	 * 2. We need to implement 3 methods next(), hasNext(), remove()
+	 * 
+	 * 
+	 */
+	class LinkedListIterator implements Iterator<E> {
+
+		private Node<E> current;
+		private Node<E> previous;
+		private Node<E> beforePrevious;
+		private boolean removeCalled;
+		/**
+		 * constructor to set current, previous and beforePrevious nodes
+		 */
+		public LinkedListIterator(){
+			current = head;
+			previous = null;
+			beforePrevious = null;
+			removeCalled = false;
+		}
+		/**
+		 * 
+		 */
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		/**
+		 * check if current element is not null.. and throw no element exception if it is
+		 * assign previous to beforePrevious, current to previous and next element to current
+		 * store the currnt calue in temp and return it as the next is called
+		 * 
+		 */
+		public E next() {
+			// TODO Auto-generated method stub
+			if(current == null){
+				throw new NoSuchElementException();
+			}
+			E temp = current.getData();
+			beforePrevious = previous;
+			previous = current;
+			current = current.getNext();
+			removeCalled = false;
+			return temp;
+		}
+		/**
+		 * Remove the element which is just returned by the next function i.e the element
+		 * that will go into the previous variable.
+		 */
+		public void remove(){
+			// If there is no current element or remove is already called for this element
+			if(previous == null || removeCalled){
+				throw new IllegalStateException();
+			}
+			//if the element to remove is the head element(actual first element in the list), just make the current element to head
+			//as it it the element after previous and there is no beforePrevious element
+			if(beforePrevious == null){
+				head = current;
+			}
+			//if this is not the head element
+			else{
+				//eliminate the link of beforeprevious to previous and point in to current
+				beforePrevious.setNext(current);
+			}
+			currentSize--;
+			//check if remove is already called for this next i.e. donot call remove twice on same value
+			//we will use a flag and set is to true here
+			removeCalled = true;
+		}
+		
+	}
+	
+	public int size() {
+		// TODO Auto-generated method stub
+		return this.currentSize;
+	}
+
+	
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return this.size() == 0;
+	}
+
+	
+	public boolean contains(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public Iterator<E> iterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public <T> T[] toArray(T[] a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * Always returns true
+	 * check: 1. if list is empty, set the head node to new node and tail = head
+	 * 2. if it is not empty, set the tails's next to new node and newnode is not the tail
+	 * 3. imcrement the current size
+	 */
+	public boolean add(E e) {
+		// TODO Auto-generated method stub
+		if(isEmpty()){
+			head = new Node(e, null);
+			tail = head;
+		}
+		else{
+			tail.setNext(new Node(e, null));
+			tail = tail.getNext();
+		}
+		currentSize++;
+		return true;
+	}
+
+	
+	public boolean remove(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean containsAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean addAll(Collection<? extends E> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean addAll(int index, Collection<? extends E> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean removeAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean retainAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * clear the list, remove all elements
+	 */
+	public void clear() {
+		// TODO Auto-generated method stub
+		head = null;
+		tail = null;
+		currentSize = 0;
+		
+	}
+	/**
+	 * returns an element at specified location
+	 * 1. check if index is not out of bounds
+	 * 2. iterate through the list till size -2 [since the last index will not have any next and will be inefficient]
+	 * 3. return last element if code reaches there
+	 */
+	
+	public E get(int index) {
+		// TODO Auto-generated method stub
+		//1.
+		if(index <0 || index >= size()){
+			throw new IndexOutOfBoundsException();
+		}
+		//2.
+		if(index < size()-1){
+			Node<E> current = head;
+			for (int i=0; i<index; i++){
+				current = current.getNext();
+			}
+			return current.getData();
+		}
+		//3.
+		return tail.getData();
+	}
+
+	
+	public E set(int index, E element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * adding an element at specified index
+	 * 1. check if the index is less than 0 or greater than size; throw outof bound exception
+	 * 2. check if the i=size i.e same case as inserting at the last
+	 * 3. check if i = 0, inserting at the beginning
+	 * 4. inserting any where in the list
+	 * 5. increment the size for step 3 and 4, because 2 will call add(e) which will increment the size
+	 */
+	public void add(int index, E element){
+		// TODO Auto-generated method stub
+		//1.
+		if(index < 0 || index > size()){
+			throw new IndexOutOfBoundsException();
+		}
+		//2.
+		if(index == size()){
+			add(element);
+			return;
+		}
+		//3.
+		if(index == 0){
+			//System.out.println("Head is "+ head.getData());
+			head = new Node(element, head);
+			//System.out.println("Head changed to  "+ head.getData());
+		}
+		//4.
+		else{
+			Node<E> current = head;
+			for(int i=0;i<index-1;i++){
+				current = current.getNext();
+				//System.out.println("current data "+ current.getData());
+			}
+			//now current is pointing to to the node after wchich we need to add a new node
+			//current will point to new node and new node's next will point to current's next node
+			current.setNext(new Node(element, current.getNext()));
+ 		}
+		//5.
+		currentSize++;
+		
+	}
+
+	
+	public E remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public int indexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	public int lastIndexOf(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	public ListIterator<E> listIterator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public ListIterator<E> listIterator(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+
+	
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+
+	
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
+
+	public List<E> subList(int fromIndex, int toIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

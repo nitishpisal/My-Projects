@@ -1,0 +1,43 @@
+
+import java.math.*;
+public class Factorize {
+	
+	public static void printfact(int num, int orig, String val){
+        int temp=0;
+        for(int i=1;i<=Math.sqrt(num);i++){
+            if(num % i == 0){
+            	temp = num/i;
+            	if (isPrime(i)){
+            		System.out.println( val + temp + " X" + i);
+            		
+            	}
+            	else{
+            		val = " " + temp + " X";
+            		printfact(i, orig, val);
+            		
+            	}
+            }
+            System.out.println();
+            
+        }
+               
+}
+	 
+	
+	static boolean isPrime(int n){
+         for(int i=2;i<n;i++) {
+             if(n%i==0)
+                 return false;
+         }
+         return true;
+     }
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//printFactors2(12,"",12);
+		Factorize.printfact(12, 12, "");
+		//Factorize.printPrimeNumbers(12);
+
+	}
+
+}

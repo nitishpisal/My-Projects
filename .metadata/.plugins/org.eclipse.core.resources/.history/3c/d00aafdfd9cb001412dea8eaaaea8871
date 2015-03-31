@@ -1,0 +1,11 @@
+<html>
+	<body>
+		<h1>${hdr}</h1>
+		<pre>
+		details
+		</pre>
+		
+		
+	</body>
+
+</html>

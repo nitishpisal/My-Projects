@@ -1,0 +1,85 @@
+package Arrays;
+
+public class MyArray {
+	
+	private int[] theArray = new int[50];
+	private int arraySize = 10;
+	
+	public void generateRandomArray(){
+		for(int i=0; i<arraySize; i++){
+			theArray[i] = (int)(Math.random()*10)+10;
+		}
+	}
+	
+	public void printArray(){
+		for(int i=0; i<arraySize; i++){
+			System.out.println("----------");
+			System.out.print("| "+ i + " | ");
+			System.out.println(theArray[i]+ " |");
+		}
+	}
+	
+	public int getValueAtIndex(int index){
+		
+		return (index<arraySize) ? theArray[index] : 0;
+	}
+	
+	public boolean isValuePresent(int value){
+		boolean op = false;
+		for(int i=0; i<arraySize; i++){
+			if (theArray[i] == value)
+				op =true;
+		}
+		return op;
+	}
+	
+	public void deleteIndex(int index){
+		if(index<arraySize){
+			for (int i=index; i<arraySize-1; i++){
+				theArray[i] = theArray[i+1];
+			}
+			arraySize--;
+		}
+	}
+	
+	public void insertValue(int value){
+		if(arraySize<50){
+			theArray[arraySize]= value;
+			arraySize++;
+		}
+		
+	}
+	
+	public String linerSearch(int value){
+		boolean isValue = false;
+		String valueLoc = "";
+		for(int i=0; i<arraySize; i++){
+			if(theArray[i] == value){
+				isValue = true;
+				valueLoc += i + " ";
+			}
+		}
+		if(!isValue){
+			System.out.println();
+			valueLoc = "None";
+		}
+		System.out.println("Index(s) with value "+ value + "--" + valueLoc);
+		return valueLoc;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyArray arr =  new MyArray();
+		arr.generateRandomArray();
+		arr.printArray();
+		System.out.println("value at 2 " +arr.getValueAtIndex(2));
+		System.out.println("Is value present "+ arr.isValuePresent(18));
+		arr.deleteIndex(3);
+		arr.printArray();
+		arr.insertValue(20);
+		arr.printArray();
+		arr.linerSearch(10);
+	
+	}
+
+}

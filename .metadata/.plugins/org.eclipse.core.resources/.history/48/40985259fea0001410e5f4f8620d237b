@@ -1,0 +1,13 @@
+
+public class JAVAQues {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String s = new String("Badal");
+		s = s+ "Jain";
+		s.concat("Jain");
+		System.out.println(s);
+
+	}
+
+}

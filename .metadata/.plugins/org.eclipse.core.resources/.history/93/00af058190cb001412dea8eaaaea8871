@@ -1,0 +1,17 @@
+<html>
+	<body>
+		<h1>Hello user please enter your details</h1>
+		<form action="/SpringWebMVC/submitForm.html" method="post">
+			<input type="text" name = "id" /> <br>
+			<input type="text" name = "firstname" /> <br>
+ 			<input type="text" name = "lastname" /> <br>
+			<input type="text" name = "email" /> <br>
+			<input type="text" name = "address" /> <br>
+			<input type="text" name = "organization" /> <br>
+			<input type="text" name = "aboutMyself" /> <br>
+		
+			<input type="submit" value = "Create" />
+		</form>
+	</body>
+
+</html>

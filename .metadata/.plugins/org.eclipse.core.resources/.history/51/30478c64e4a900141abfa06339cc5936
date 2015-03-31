@@ -1,0 +1,58 @@
+
+public class Solution {
+	
+	public int getIntegerComplement(int n){
+        int binaryArr[] = new int[50];
+        int i = 0;
+        String binaryNumber="";
+        while(n > 0){
+            binaryArr[i] = n%2;
+            n = n/2;
+            i = i+1;
+        }
+        for(int j = i -1 ;j >= 0;j--){
+        	binaryNumber=binaryNumber+String.valueOf(binaryArr[j]);
+           // System.out.print(binaryArr[j]);
+            
+        }
+      
+    System.out.println(binaryNumber);
+	
+	
+	String complement="";
+	
+	for(int k=0;k<binaryNumber.length();k++){
+		
+		int number=Integer.parseInt(Character.toString(binaryNumber.charAt(k)));
+		//int number  = (int)binaryNumber.charAt(k);
+		if(number==1){
+			number=0;
+		}else{
+			number=1;
+		}
+		
+		complement=complement+String.valueOf(number);
+		
+	}
+	
+	System.out.println(complement);
+    int compl = module(complement);    
+	return compl;
+        
+        
+}
+	public int module(String complement){
+		int number;
+		number = Integer.parseInt(complement, 2);
+		return number;
+	}
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Solution s= new Solution();
+		s.getIntegerComplement(50);
+
+	}
+
+}

@@ -1,0 +1,66 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+	<body>
+
+		<h1>${hdr}</h1>
+		<form action="/SpringWebMVC/homepage/${details.id}" method="post">
+			<c:if test="${json == 'yes'}">
+				<pre>
+					{	${json} : testing
+						"id":"${details.id}", 
+						"firstname":"${details.firstname}",
+						"lastname":"${details.lastname}",
+						"email":"${details.email}",
+						"address":"${details.address}",
+						"organization":"${details.organization}",
+						"aboutMyself":"${details.aboutMyself}"
+					}
+				</pre>
+			</c:if>
+		<c:if test="${json=='NO' }">
+		<table>
+		<tr>
+			<td> ID: </td><td><label>ID: ${details.id}</label></td> 
+		</tr>
+		<tr>
+			<td> First Name: </td><td><input type="text" name = "firstname" value=${details.firstname} ></td> 
+		</tr>
+		<tr>
+			<td> Last Name: </td><td><input type="text" name = "lastname" value=${details.lastname}></td> 
+		</tr>
+		<tr>
+			<td> Email: </td><td><input type="text" name = "email" value=${details.email}></td> 
+		</tr>
+		<tr>
+			<td> Address: </td><td><input type="text" name = "address" value=${details.address}></td> 
+		</tr>
+		<tr>
+			<td> Organization: </td><td><input type="text" name = "organization" value=${details.organization}></td> 
+		</tr>
+		<tr>
+			<td> About Myself: </td><td><input type="text" name = "aboutMyself" value=${details.aboutMyself}></td> 
+		</tr>
+		
+		
+		</table>
+		</c:if>
+		<input type="hidden" name="id" value=${details.id}>
+		<input type="hidden" name="firstname" value=${details.firstname}>
+		<br>
+		<input type="submit" value = "update" />
+		
+		</form>
+		
+		<form action="/SpringWebMVC/deleteUser" method="post">
+			<input type="hidden" name="id" value=${details.id}>
+			<input type="submit" value = "Delete" />
+		</form>
+		<form action="/SpringWebMVC/homepage/${details.id}" method="get">
+			<input type="hidden" name="brief" value="true">
+			<input type="submit" value = "Get Json" />
+		</form>
+		
+		
+	</body>
+
+</html>

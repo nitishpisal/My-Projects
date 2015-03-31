@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<form action="/homepage/create" method="post">
+			<input type="text" name = "id" />
+			<input type="text" name = "firstname" />
+			<input type="text" name = "lastname" />
+			<input type="text" name = "email" />
+			<input type="text" name = "address" />
+			<input type="text" name = "organization" />
+			<input type="text" name = "aboutMyself" />
+		
+			<input type="submit" value = "Create">
+		</form>
+	</body>
+
+</html>

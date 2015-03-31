@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ApplicationContextProvider.java&apos; to &apos;SpringWebMVC/src/crud.servlets&apos;&#x0A;- Original project: &apos;FileSharingAOP&apos;&#x0A;- Destination element: &apos;SpringWebMVC/src/crud.servlets&apos;&#x0A;- Original element: &apos;edu.sjsu.cmpe275.lab1.ApplicationContextProvider.java&apos;" description="Copy compilation unit" destination="=SpringWebMVC/src&lt;crud.servlets" element1="/src&lt;edu.sjsu.cmpe275.lab1{ApplicationContextProvider.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1426487689314" units="1" version="1.0"/>
+</session>

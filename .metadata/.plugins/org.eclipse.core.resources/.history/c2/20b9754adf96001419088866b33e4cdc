@@ -1,0 +1,46 @@
+package Arrays;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GeeksForGeeks g = new GeeksForGeeks();
+		
+		/**
+		 * Solution 1:
+		 */
+		 /* int[] arr;
+		arr = g.generateRandomArray(10);
+		g.print(arr);
+		System.out.println(g.duplicateValue(arr, 3));*/
+		
+		/**
+		 * Solution 2:
+		 */
+		/*String[][] sArr;
+		sArr = g.generateRandomMultiArray(6, 6);
+		g.print(sArr);
+		g.replaceOwithX(sArr);
+		System.out.println();
+		g.print(sArr);*/
+		/**
+		 * Solution 3:
+		 */
+		/*String binary = "100100110";
+		String result[] = g.stringStartEndwith1(binary);
+		g.print(result);*/
+		
+		/**
+		 * Solution 4:
+		 * 
+		 */
+		int[] arr =  g.generateRandomArray(10);
+		MergeSort m = new MergeSort();
+		m.mergeSort(arr, arr.length);
+		g.waveArray(arr);
+		
+		
+		
+	}
+
+}

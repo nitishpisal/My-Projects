@@ -1,0 +1,61 @@
+public void printHorzArray(int i, int j){
+120	         
+121	        for(int n = 0; n < 51; n++)System.out.print("-");
+122	         
+123	        System.out.println();
+124	         
+125	        for(int n = 0; n < arraySize; n++){
+126	             
+127	            System.out.print("| " + n + "  ");
+128	             
+129	        }
+130	         
+131	        System.out.println("|");
+132	         
+133	        for(int n = 0; n < 51; n++)System.out.print("-");
+134	         
+135	        System.out.println();
+136	         
+137	        for(int n = 0; n < arraySize; n++){
+138	             
+139	            System.out.print("| " + theArray[n] + " ");
+140	             
+141	        }
+142	         
+143	        System.out.println("|");
+144	         
+145	        for(int n = 0; n < 51; n++)System.out.print("-");
+146	         
+147	        System.out.println();
+148	         
+149	        // END OF FIRST PART
+150	         
+151	         
+152	        // ADDED FOR BUBBLE SORT
+153	         
+154	        if(j != -1){
+155	         
+156	            // ADD THE +2 TO FIX SPACING
+157	             
+158	            for(int k = 0; k < ((j*5)+2); k++)System.out.print(" ");
+159	             
+160	            System.out.print(j);
+161	             
+162	        }
+163	         
+164	         
+165	        // THEN ADD THIS CODE
+166	         
+167	        if(i != -1){
+168	             
+169	            // ADD THE -1 TO FIX SPACING
+170	             
+171	            for(int l = 0; l < (5*(i - j)-1); l++)System.out.print(" ");
+172	             
+173	            System.out.print(i);
+174	             
+175	        }
+176	         
+177	        System.out.println();
+178	         
+179	    }

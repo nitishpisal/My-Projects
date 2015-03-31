@@ -1,0 +1,90 @@
+
+public class Factorize {
+	
+	public static void printfact(int num, int orig, String val){
+        int temp=0;
+        for(int i=1;i<=num/2;i++){
+            if(num % i == 0){
+                temp = num/i;
+               if(isPrime(i) && temp*i == orig){
+            	   System.out.print(val + temp + " * " + i);
+            	  val = "";
+               }
+               if(!isPrime(i)){
+                	//System.out.print(i + " * ");
+                	val = val + " " + i + "*";
+                	printfact(num/i, orig, val);
+                }
+            }
+            System.out.println();
+            
+        }
+               
+}
+	 
+	
+	
+	public static void printPrimeNumbers(int prime) {
+
+	    int n;
+
+	    for (int i = 2; i <= prime; i++) {
+	        n = 0;
+	        while (prime % i == 0) {
+	            prime /= i;
+	            n++;
+
+	        }
+
+	        if (n != 0) {
+	            for (int j = n; j > 0; j--) {
+	                System.out.print(i);
+
+	                if (prime != 1) {
+	                    System.out.print("*");
+	                }
+	            }
+	        }
+	    }
+	}
+	
+	public static void printFactors2(int number, String val, int parentVal) {
+	    int newVal = parentVal;
+	    for (int i = number - 1; i >= 2; i--) {
+
+	        if (number % i == 0) {
+	            if (newVal > i) {
+	                newVal = i;
+	            }
+	            if (number / i <= parentVal && i <= parentVal && number / i <= i) {
+	                System.out.println(val + i + "*" + number / i);
+	                newVal = number / i;
+	            }
+
+	            if (i <= parentVal) {
+	                printFactors2(number / i, val + i + "*", newVal);
+	            }
+	        }
+
+	    }
+
+	}
+	
+	
+	static boolean isPrime(int n){
+         for(int i=2;i<n;i++) {
+             if(n%i==0)
+                 return false;
+         }
+         return true;
+     }
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//printFactors2(12,"",12);
+		Factorize.printfact(12, 12, "");
+		//Factorize.printPrimeNumbers(12);
+
+	}
+
+}

@@ -1,0 +1,30 @@
+
+public class Base10 {
+	public static int checkBase10(int num){
+		int i = 1;
+		int temp;
+		String nm;
+		int j;
+		while(true){ //Every number will have such value so out loop will return a value at some point.
+			temp = num*i;
+			nm = String.valueOf(temp);
+			
+			for(j=0; j<nm.length(); j++){
+				//System.out.println(nm.charAt(j));
+				//parse the multiplied op and check if all the digits are 0 or 1
+				if(nm.charAt(j) != '0' && nm.charAt(j) != '1')
+					break;
+				if(j == nm.length()-1)
+					return temp;
+			}
+			i++;
+			
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(Base10.checkBase10(3));
+
+	}
+
+}

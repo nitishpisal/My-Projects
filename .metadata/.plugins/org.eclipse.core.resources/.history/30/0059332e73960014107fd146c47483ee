@@ -1,0 +1,189 @@
+package Arrays;
+
+import java.lang.reflect.Array;
+import java.util.HashSet;
+
+import javax.xml.soap.SAAJMetaFactory;
+
+public class GeeksForGeeks {
+	
+	public int[] generateRandomArray(int arraySize){
+		int[] theArray = new int[arraySize];
+		for(int i=0; i<arraySize; i++){
+			theArray[i] = (int)(Math.random()*10)+10;
+		}
+		return theArray;
+	}
+	
+	public String[][] generateRandomMultiArray(int i, int j){
+		String[][] arr = new String[i][j];
+		//int func = 37;
+		
+		for(int p=0; p<i; p++){
+			for (int q=0; q<j; q++){
+				if (((int)(Math.random()*10)+10)%3 == 0 ){
+					arr[p][q] = "O";
+				}
+				else{
+					arr[p][q] = "X";
+				}
+			}
+		}
+		
+		return arr;
+	}
+	
+	public void print(int[] a){
+		for (int i=0; i<a.length; i++){
+			System.out.print(" " + a[i] + " |");
+		}
+	}
+	public void print(String[] a){
+		for (int i=0; i<a.length; i++){
+			System.out.print(" " + a[i] + " |");
+		}
+	}
+	
+	public void print(String[][] a){
+		for(int i=0; i < a.length; i++){
+			for(int j=0; j<a[1].length; j++){
+				if(j==0){
+					System.out.print("|");
+				}
+				System.out.print(a[i][j] + " |");
+			}
+			System.out.println();
+		}
+	}
+	/**
+	 * Question1: 
+	 * Given an unsorted array that may contain duplicates. Also given a number k which 
+		is smaller than size of array. Write a function that returns true if array contains 
+		duplicates within k distance.
+		
+		Solution:
+		We are approaching with iterating till K  and adding the values to the set
+		here the time complexity is O(K) and auxiliary space complexity is O(k)
+	 */
+	
+	public boolean duplicateValue(int[] a, int k){
+		HashSet<Integer> set = new HashSet<Integer>();
+		for(int i=0; i<k; i++){
+			if(set.contains(a[i]))
+				return true;
+			else{
+				set.add(a[i]);
+			}
+			
+		}
+		
+		return false;
+	}
+	/**
+	 * question2:
+	 * Given a matrix where every element is either ‘O’ or ‘X’, replace ‘O’ with ‘X’ if surrounded by ‘X’. 
+	 * A ‘O’ (or a set of ‘O’) is considered to be by 	 * surrounded by ‘X’ 
+	 * if there are ‘X’ at locations just below, just above, just left and just right of it. 
+	 * @param args
+	 * Solution:
+	 * 1. I first continue the loop if we are on the edges
+	 * 2. Then i check if we have found O, if so i just have four pointer left, right, up and down.
+	 * 3. Then i have an inner for loop which moves these pointers 
+	 * in their respective direction till boundaries or till we have found the element "X"
+	 * 4. If we find X for all the four pointers, i set their boolean value to true 
+	 * and repllace the element "O" with "X"
+	 * 
+	 */
+	public void replaceOwithX(String[][] sArr){
+		
+		for(int i =0; i<sArr.length; i++){
+			for(int j = 0; j<sArr[1].length; j++){
+				if(i==0 || j==0 || i==sArr.length-1 ||  j==sArr[1].length-1)
+					continue;
+				
+				if(sArr[i][j].equals("O")){
+					boolean bP=false, bQ=false, bR =false, bS =false;
+					for(int p=j-1, q=j+1,r=i-1,s=i+1;p<=0 || q<sArr[1].length-j || r<=0 || s<sArr.length-i;p--,q++,r--,s++){
+						
+						if(p>=0 && sArr[i][p].equals("X")){
+							bP = true;
+						}
+						if(q < sArr[1].length && sArr[i][q].equals("X")){
+							bQ = true;
+						}
+						if(r>=0 && sArr[r][j].equals("X")){
+							bR = true;
+						}
+						if(s<sArr.length && sArr[s][j].equals("X")){
+							bS = true;
+						}
+						if(bP == true && bQ ==true && bR == true && bS ==true){
+							sArr[i][j] = "X";
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Quesiton: 
+	 * Given a binary string, count number of substrings that start and end with 1. For example, 
+	 * if the input string is “00100101”, then there are three substrings “1001”, “100101” and “101”.
+	 * 1. First we'll convert the string to array
+	 * 2.create two for loops
+	 */
+	public String[] stringStartEndwith1(String s){
+		int count = 0;
+		String result[] = new String[s.length()];
+		String[] sArr = s.split("");
+		for(int i=0; i< sArr.length; i++){
+			String iVal = sArr[i];
+			String result1 = result1 + sArr[i];
+			if(iVal.equals("1")){
+				for(int j=i+1; j<sArr.length; j++){
+					String jVal = sArr[j];
+					result1 = result1+jVal;
+					if(jVal.equals("1")){
+						result[count] = result1;
+						
+					}
+				}
+			}
+		}
+		return result;
+	}
+	//  "100100110"
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GeeksForGeeks g = new GeeksForGeeks();
+		
+		/**
+		 * Solution 1:
+		 */
+		 /* int[] arr;
+		arr = g.generateRandomArray(10);
+		g.print(arr);
+		System.out.println(g.duplicateValue(arr, 3));*/
+		
+		/**
+		 * Solution 2:
+		 */
+		/*String[][] sArr;
+		sArr = g.generateRandomMultiArray(6, 6);
+		g.print(sArr);
+		g.replaceOwithX(sArr);
+		System.out.println();
+		g.print(sArr);*/
+		/**
+		 * Solution 3:
+		 */
+		String binary = "100100110";
+		String result[] = g.stringStartEndwith1(binary);
+		g.print(result);
+		
+	}
+
+}

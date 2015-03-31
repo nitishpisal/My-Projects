@@ -1,0 +1,13 @@
+package LLMethods;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MyLinkedList<String> list = new MyLinkedList<String>();
+		list.add("badal");
+		list.add("Rishi");
+		list.add("Apoorv");
+	}
+
+}

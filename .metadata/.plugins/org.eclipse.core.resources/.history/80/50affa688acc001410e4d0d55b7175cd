@@ -1,0 +1,17 @@
+package crud.servlets;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Table {
+	
+	private Map<String, HomePage> userMap = new HashMap<String, HomePage>();
+
+	public HomePage getUser(String id) {
+		return this.userMap.get(id);	
+	}
+
+	public void setUser(String id, HomePage details) {
+		this.userMap.put(id, details);	
+	}
+}

@@ -1,0 +1,11 @@
+package crud.servlets;
+
+import java.util.Map;
+
+public class Table {
+	
+	private Map<String, HomePage> user;
+	
+	
+
+}

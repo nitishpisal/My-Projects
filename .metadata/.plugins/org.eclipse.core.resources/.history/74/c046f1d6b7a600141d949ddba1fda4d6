@@ -1,0 +1,103 @@
+
+public class Factorize {
+	
+	public static void printfact(int num, int orig, String val){
+        int temp=0;
+        val = "";
+        for(int i=1;i<=num/2;i++){
+            if(num % i == 0){
+                temp = num/i;
+               if(isPrime(i) && temp*i == orig)
+            	   System.out.print(val + temp + " * " + i);
+               else{
+                	//System.out.print(i + " * ");
+                	val = val + " " + temp + "*";
+                	printfact(i, orig, val);
+                }
+            }
+            System.out.println();
+            
+        }
+               
+}
+	public static void printFactors(int number) {
+        if (number <= 0) throw new IllegalArgumentException("The number should be greater than 0.");
+        printFactorsList(number, number + "*" + 1 + "\n", number);
+    }
+
+    private static void printFactorsList(int dividend, String factorString, int prevDivisor) {
+        /*
+         * This function contains factorString as an argument to facilitate the recursive call for subsequent
+         * factors until it reaches prime values. For example, let's say input number = 32 and when i = 8 it prints
+         * 8*(32/8) ==> 8 * 4 but the subsequent reduction of 4 is needed and this is done by recursively passing in 4
+         * as number. But we also want to maintain the chain "8 * ". So this makes the carry over string as an input
+         * argument for the helper function printFactorsList
+         */
+        for (int divisor = dividend - 1; divisor >= 2; divisor--) {
+
+            if (dividend % divisor != 0)
+                continue;
+
+            if (divisor > prevDivisor)
+                continue;
+
+            int quotient = dividend / divisor;
+
+            /*
+             * 32*1 16*2 8*4 8*2*2 4*4*2 4*2*2*2 2*2*2*2*2
+             * 
+             * Note: as we go right, the values keeps descending.
+             */
+            if (quotient <= divisor) {
+                if (quotient <= prevDivisor) {
+                    System.out.println(factorString + divisor + "*" + quotient);
+                }
+            }
+            printFactorsList(quotient, factorString + divisor + "*", divisor);
+        }
+    }
+
+	
+	
+	public static void printPrimeNumbers(int prime) {
+
+	    int n;
+
+	    for (int i = 2; i <= prime; i++) {
+	        n = 0;
+	        while (prime % i == 0) {
+	            prime /= i;
+	            n++;
+
+	        }
+
+	        if (n != 0) {
+	            for (int j = n; j > 0; j--) {
+	                System.out.print(i);
+
+	                if (prime != 1) {
+	                    System.out.print("*");
+	                }
+	            }
+	        }
+	    }
+	}
+	
+	
+	static boolean isPrime(int n){
+         for(int i=2;i<n;i++) {
+             if(n%i==0)
+                 return false;
+         }
+         return true;
+     }
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//Factorize.printfact(12, 12, "");
+		printFactors(12);
+		//Factorize.printPrimeNumbers(12);
+
+	}
+
+}

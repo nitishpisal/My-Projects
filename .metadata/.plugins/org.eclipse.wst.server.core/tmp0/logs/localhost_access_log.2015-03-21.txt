@@ -1,0 +1,14 @@
+127.0.0.1 - - [21/Mar/2015:22:10:07 -0700] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [21/Mar/2015:22:10:09 -0700] "GET /SpringWebMVC/ HTTP/1.1" 200 847
+127.0.0.1 - - [21/Mar/2015:22:10:55 -0700] "POST /SpringWebMVC/submitForm.html HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2015:22:10:55 -0700] "GET /SpringWebMVC/homepage/101 HTTP/1.1" 200 119
+127.0.0.1 - - [21/Mar/2015:22:11:00 -0700] "GET /SpringWebMVC/ HTTP/1.1" 200 847
+127.0.0.1 - - [21/Mar/2015:22:11:08 -0700] "POST /SpringWebMVC/submitForm.html HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2015:22:11:08 -0700] "GET /SpringWebMVC/homepage/101 HTTP/1.1" 200 119
+127.0.0.1 - - [21/Mar/2015:22:11:15 -0700] "GET /SpringWebMVC/homepage/1 HTTP/1.1" 200 117
+127.0.0.1 - - [21/Mar/2015:22:11:23 -0700] "GET /SpringWebMVC/homepage/101 HTTP/1.1" 200 119
+127.0.0.1 - - [21/Mar/2015:22:12:23 -0700] "GET /SpringWebMVC/ HTTP/1.1" 200 847
+127.0.0.1 - - [21/Mar/2015:22:12:25 -0700] "POST /SpringWebMVC/submitForm.html HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2015:22:12:25 -0700] "GET /SpringWebMVC/homepage/101 HTTP/1.1" 200 1356
+127.0.0.1 - - [21/Mar/2015:22:30:27 -0700] "POST /SpringWebMVC/homepage/101 HTTP/1.1" 302 -
+127.0.0.1 - - [21/Mar/2015:22:30:27 -0700] "GET /SpringWebMVC/homepage/101 HTTP/1.1" 200 1368

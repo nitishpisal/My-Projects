@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Sat Mar 21 22:10:14 PDT 2015
+org.eclipse.jst.jee.server\:/binary\:/home/badal/workspace/SpringWebMVC/WebContent/WEB-INF/lib/spring-web-4.1.4.RELEASE-sources.jar=WEB-INF/lib/spring-web-4.1.4.RELEASE-sources.jar
+org.eclipse.jst.jee.server\:/binary\:/home/badal/workspace/SpringWebMVC/WebContent/WEB-INF/lib/spring-web-4.1.4.RELEASE.jar=WEB-INF/lib/spring-web-4.1.4.RELEASE.jar

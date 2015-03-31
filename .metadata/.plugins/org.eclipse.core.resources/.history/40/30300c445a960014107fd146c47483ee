@@ -1,0 +1,26 @@
+package Arrays;
+
+import java.lang.reflect.Array;
+
+public class GeeksForGeeks {
+	
+	public int[] generateRandomArray(int arraySize){
+		int[] theArray = new int[arraySize];
+		for(int i=0; i<arraySize; i++){
+			theArray[i] = (int)(Math.random()*10)+10;
+		}
+		return theArray;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GeeksForGeeks g = new GeeksForGeeks();
+		int[] arr;
+		arr = g.generateRandomArray(10);
+		for (int i=0; i<arr.length; i++){
+			System.out.print("| " + arr[i] + " |");
+		}
+
+	}
+
+}
