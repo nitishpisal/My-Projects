@@ -66,7 +66,7 @@
 	
 </script>
 	<body>
-
+		<c:if test="${valid == 'yes' }">
 		<h1>${hdr}</h1>
 		<c:if test="${who == 'player'}">
 		<form:form modelAttribute="updatePlayer">
@@ -75,34 +75,34 @@
 				<td> ID: </td><td><label> ${details.getId()}</label></td> 
 			</tr>
 			<tr>
-				<td><input type="hidden" id = "id" value=${details.getId()} ></td>
+				<td><input type="hidden" id = "id" value="${details.getId()}" ></td>
 			</tr>
 			<tr>
-				<td> First Name: </td><td><input type="text" id = "firstname" value=${details.getFirstname()} ></td> 
+				<td> First Name: </td><td><input type="text" id = "firstname" value="${details.getFirstname()}" ></td> 
 			</tr>
 			<tr>
-				<td> Last Name: </td><td><input type="text" id = "lastname" value=${details.getLastname()}></td> 
+				<td> Last Name: </td><td><input type="text" id = "lastname" value="${details.getLastname()}"></td> 
 			</tr>
 			<tr>
-				<td> Email: </td><td><input type="text" id = "email" value=${details.getEmail()}></td> 
+				<td> Email: </td><td><input type="text" id = "email" value="${details.getEmail()}"></td> 
 			</tr>
 			<tr>
-				<td> Description: </td><td><input type="text" id="description" value=${details.getDescription()}></td> 
+				<td> Description: </td><td><input type="text" id="description" value="${details.getDescription()}"></td> 
 			</tr>		
 			<tr>
-				<td> Street: </td><td><input type="text" id="street" value=${details.getAddress().getStreet()} ></td> 
+				<td> Street: </td><td><input type="text" id="street" value="${details.getAddress().getStreet()}" ></td> 
 			</tr>
 			<tr>
-				<td> City: </td><td><input type="text" id="city" value=${details.getAddress().getCity()}></td> 
+				<td> City: </td><td><input type="text" id="city" value="${details.getAddress().getCity()}"></td> 
 			</tr>
 			<tr>
-				<td> State: </td><td><input type="text" id="state" value=${details.getAddress().getState()}></td> 
+				<td> State: </td><td><input type="text" id="state" value="${details.getAddress().getState()}"></td> 
 			</tr>
 			<tr>
-				<td> Zip: </td><td><input type="text" id="zip" value=${details.getAddress().getZip()}></td> 
+				<td> Zip: </td><td><input type="text" id="zip" value="${details.getAddress().getZip()}"></td> 
 			</tr>
 			<tr>
-				<td> Sponsor: </td><td><input type="text" id="sponsor" value=${details.getSponsor().getId()}></td> 
+				<td> Sponsor: </td><td><input type="text" id="sponsor" value="${details.getSponsor().getId()}"></td> 
 			</tr>
 			<tr>
 					<td style="border: 0;"><input type="button" value="Update"
@@ -111,9 +111,10 @@
 			
 			</table>
 		
-	</form:form>
+		</form:form>
+		</c:if>
 	</c:if>
-	
+	<c:if test="${valid == 'yes'}">
 	<c:if test="${who == 'sponsor'}">
 		<form:form modelAttribute="updateSponsor">
 		
@@ -122,25 +123,25 @@
 				<td> ID: </td><td><label> ${details.getId()}</label></td> 
 			</tr>
 			<tr>
-				<td><input type="hidden" id = "id" value=${details.getId()} ></td>
+				<td><input type="hidden" id = "id" value="${details.getId()}" ></td>
 			</tr>
 			<tr>
-				<td> Name: </td><td><input type="text" id = "name" value=${details.getName()} ></td> 
+				<td> Name: </td><td><input type="text" id = "name" value="${details.getName()}" ></td> 
 			</tr>
 			<tr>
-				<td> Description: </td><td><input type="text" id="description" value=${details.getDescription()}></td> 
+				<td> Description: </td><td><input type="text" id="description" value="${details.getDescription()}"></td> 
 			</tr>		
 			<tr>
-				<td> Street: </td><td><input type="text" id="street" value=${details.getAddress().getStreet()} ></td> 
+				<td> Street: </td><td><input type="text" id="street" value="${details.getAddress().getStreet()}" ></td> 
 			</tr>
 			<tr>
-				<td> City: </td><td><input type="text" id="city" value=${details.getAddress().getCity()}></td> 
+				<td> City: </td><td><input type="text" id="city" value="${details.getAddress().getCity()}"></td> 
 			</tr>
 			<tr>
-				<td> State: </td><td><input type="text" id="state" value=${details.getAddress().getState()}></td> 
+				<td> State: </td><td><input type="text" id="state" value="${details.getAddress().getState()}"></td> 
 			</tr>
 			<tr>
-				<td> Zip: </td><td><input type="text" id="zip" value=${details.getAddress().getZip()}></td> 
+				<td> Zip: </td><td><input type="text" id="zip" value="${details.getAddress().getZip()}"></td> 
 			</tr>
 			<tr>
 					<td style="border: 0;"><input type="button" value="Update"
@@ -149,10 +150,12 @@
 			
 			</table>
 		
-	</form:form>
+		</form:form>
+		</c:if>
 	</c:if>
-	
-	
+	<c:if test="${valid == 'no' }">
+		404 Not Found
+	</c:if>
 	</body>
 
 </html>

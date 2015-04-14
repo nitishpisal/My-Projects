@@ -56,6 +56,7 @@ public class SponsorController {
 			
 			return new ResponseEntity<Sponsor>(s, HttpStatus.NOT_FOUND);
 		}
+		
 		//get update form for Sponsor
 		
 		@RequestMapping(value="/update/sponsor/{id}", method = RequestMethod.GET)
@@ -65,6 +66,10 @@ public class SponsorController {
 			s = (Sponsor)c.get(s, id);
 			ModelAndView mv = new ModelAndView("update");
 			mv.addObject("who", "sponsor");
+			if(s==null)
+				mv.addObject("valid", "no");
+			else
+				mv.addObject("valid","yes");
 			mv.addObject("details", s);
 			System.out.println("I am here");
 			return mv;
@@ -94,6 +99,7 @@ public class SponsorController {
 			
 			a = (Address)c.get(a, s.getAddress().getAddressId());
 			a.addressUpdate(street, city, state, zip);
+			s.sponsorUpdate(name, description);
 			s.setAddress(a);
 			c.update(a);
 			c.update(s);
@@ -106,7 +112,7 @@ public class SponsorController {
 		}
 		
 		//Delete Sponsor
-		@RequestMapping(value="/delete/sponsor/{id}", method=RequestMethod.DELETE)
+		@RequestMapping(value="/sponsor/{id}", method=RequestMethod.DELETE)
 		public @ResponseBody ResponseEntity<String> deleteSponsor(@PathVariable("id") long id, HttpServletRequest request){
 			HttpHeaders header = new HttpHeaders();
 			header.setContentType(MediaType.APPLICATION_JSON);
@@ -115,7 +121,14 @@ public class SponsorController {
 			s = (Sponsor)c.get(s, id);
 			if(s == null)
 				return new ResponseEntity<String>("404 Not Found",HttpStatus.NOT_FOUND);
-			c.delete(s);
+			//If a valid sponsor is present, try to delete it
+			try{
+				c.delete(s);
+			}catch(Exception E){
+				System.out.println("Unale to delete the spomsor");
+				return new ResponseEntity<String>("400 Bad Request",HttpStatus.BAD_REQUEST);
+			}
+			
 			return new ResponseEntity<String>("Ok", HttpStatus.OK);
 			
 		}

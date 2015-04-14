@@ -23,6 +23,11 @@ public class Sponsor implements Record{
     
     public Sponsor(){}
     
+    public void sponsorUpdate(String name, String description){
+    	this.name = name;
+    	this.description = description;
+    }
+    
     public Sponsor(String name, String description){
     	this.name = name;
     	this.description = description;

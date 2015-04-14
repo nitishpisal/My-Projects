@@ -36,8 +36,8 @@ public class Player implements Record{
     @JoinColumn(name="addressid")
     private Address address;
     
-    @ManyToOne(cascade =CascadeType.ALL)
-    @JoinColumn(name="sponsorid")
+    @ManyToOne
+    @JoinColumn(name="sponsorid")  
     private Sponsor sponsor;
     
     private String opponents;

@@ -33,7 +33,7 @@
 		regForm.submit();
 	}
 	
-	function getPlayer(){
+	function getSponsor(){
 		var id = document.getElementById("id3").value;
 		var regForm = document.forms['navigate'];
 		regForm.method = "GET";
@@ -53,7 +53,7 @@
 		var id = document.getElementById("id5").value;
 		var regForm = document.forms['deleteEntity'];
 		regForm.method = "POST";
-		regForm.action = "http://localhost:8080/Poker/delete/sponsor/" + id;
+		regForm.action = "http://localhost:8080/Poker/player/" + id;
 		regForm.submit();
 	}
 	
@@ -61,7 +61,7 @@
 		var id = document.getElementById("id6").value;
 		var regForm = document.forms['deleteEntity'];
 		regForm.method = "POST";
-		regForm.action = "http://localhost:8080/Poker/delete/sponsor/" + id;
+		regForm.action = "http://localhost:8080/Poker/sponsor/" + id;
 		regForm.submit();
 	}
 	
@@ -69,6 +69,16 @@
 		var id1 = document.getElementById("id7").value;
 		var id2 = document.getElementById("id8").value;
 		var regForm = document.forms['createOpponent'];
+		regForm.method = "POST";
+		regForm.action = "http://localhost:8080/Poker/opponents/" + id1 + "/" + id2;
+		regForm.submit();
+	}
+	
+
+	function deleteOpponent(){
+		var id1 = document.getElementById("id9").value;
+		var id2 = document.getElementById("id10").value;
+		var regForm = document.forms['deleteOpponent'];
 		regForm.method = "POST";
 		regForm.action = "http://localhost:8080/Poker/opponents/" + id1 + "/" + id2;
 		regForm.submit();
@@ -151,6 +161,25 @@
 					<td style="border: 0;">
 						<input type="button" path="Put" value = "Create Opponent" 
 						onclick="javascript:createOpponent();">
+					</td>
+				</tr>
+			</table>
+		</form:form>
+		
+		<form:form modelAttribute="deleteOpponent">
+			<table>
+				<input type="hidden" name="_method" value="delete"/>
+				<tr>
+					<td> Player 1: </td>
+					<td><input type="text" id="id9"/></td> 
+					<td> Player 2: </td>
+					<td><input type="text" id="id10"/></td> 
+				</tr>
+				<tr>
+					
+					<td style="border: 0;">
+						<input type="button" path="Delete" value = "Delete Opponent" 
+						onclick="javascript:deleteOpponent();">
 					</td>
 				</tr>
 			</table>
