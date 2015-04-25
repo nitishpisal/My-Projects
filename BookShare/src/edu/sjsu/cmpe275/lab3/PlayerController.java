@@ -30,7 +30,7 @@ public class PlayerController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ModelAndView getHome(){
 		
-		ModelAndView mv = new ModelAndView("homePage");
+		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
 	

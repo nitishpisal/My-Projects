@@ -40,6 +40,7 @@
 		<mapping class="edu.sjsu.cmpe275.lab3.Userdetail"/>
 		<mapping class="edu.sjsu.cmpe275.lab3.Books"/>
 		<mapping class="edu.sjsu.cmpe275.lab3.Bids"/>
+		<mapping class="edu.sjsu.cmpe275.lab3.RequiredBooks"/>
 		<!-- <mapping class="edu.sjsu.cmpe275.lab3.Sponsor"/> -->
     </session-factory>
 

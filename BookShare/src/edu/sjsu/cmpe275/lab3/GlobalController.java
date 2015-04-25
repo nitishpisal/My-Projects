@@ -34,10 +34,11 @@ public class GlobalController {
 	 *validate login 
 	 * 
 	 */
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<String> validateLogin(@RequestParam("username") String username,
-															  @RequestParam("password") String password,
-															  HttpServletRequest request){
+	@RequestMapping(value="/validate", method = RequestMethod.GET)
+	public String validateLogin(HttpServletRequest request){
+		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
@@ -48,9 +49,14 @@ public class GlobalController {
 		if(details.getPassword().equals(password)){
 			request.getSession().setAttribute("login", "true");
 			request.getSession().setAttribute("username", username);
+			request.getSession().setAttribute("userid", details.getUserid());
 		}
 		c.crudClose();
-		return new ResponseEntity<String>(details.getUserName(), HttpStatus.BAD_REQUEST);
+		
+		String ret = "redirect:/books";
+		//return new ResponseEntity<String>(details.getUserName(), HttpStatus.BAD_REQUEST);
+		
+		return ret;
 	}
 	
 	
