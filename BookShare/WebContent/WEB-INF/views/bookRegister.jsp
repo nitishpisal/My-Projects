@@ -140,7 +140,7 @@
    <!-- FindLancer Ends -->
 	
 	 <!-- Post your book to sell -->
-	<c:if test="${who == 'sellRequest'}">
+	<c:if test="${what == 'sellRequest'}">
 	    <section id="contact">
 	        <div class="container">
 	            <div class="row">
@@ -151,47 +151,46 @@
 	            </div>
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2">
-	                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-	                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-	                    <form name="contactForm2" id="contactForm2" method="post" action='submitJob'>
+	                    
+	                    <form name="sellRequest" id="sellRequest" method="post" action='<%=request.getContextPath() %>/postBookToSell'>
 	                        <div class="row control-group">
 	                        	<h4>Add your Book details</h4><br><br>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="ISBN" id="isbn" name="isbn" >
+	                                <input type="text" class="form-control" placeholder="ISBN"  name="isbn" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="Title" id="title" name="title" >
+	                                <input type="text" class="form-control" placeholder="Title"  name="title" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="Author" id="author" name="author" >
+	                                <input type="text" class="form-control" placeholder="Author"  name="author" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="Publisher" id="publisher" name="publisher" >
+	                                <input type="text" class="form-control" placeholder="Publisher"  name="publisher" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="Year" id="year" name="year" >
+	                                <input type="text" class="form-control" placeholder="Year" name="year" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="Quantity" id="quantity" name="quantity" >
+	                                <input type="text" class="form-control" placeholder="Quantity" name="quantity" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                <input type="text" class="form-control" placeholder="Price" id="price" name="price" >
+	                                <input type="text" class="form-control" placeholder="Price" name="price" >
 	                                <p class="help-block text-danger"></p>
 	                            </div>
 	                            <div class="row control-group">
 		                            <div class="form-group col-xs-12 floating-label-form-group controls">
 				                    	<!-- <input type="tel" class="form-control" name="price" placeholder="Enter the pay amount" id="price" > -->
-			                       			<input type="tel" class="form-control" name="price" placeholder="Enable bidding" id="price" >
-						                       	<form action="">
-						                       	<input type="radio" name="bid" value="yes" >Yes<br>      
-												<input type="radio" name="bid" value="no">No
-												</form>
+			                       			<input type="tel" class="form-control" name="price" placeholder="Enable bidding" " >
+						                       	<!-- <form action=""> -->
+						                       	<input type="radio" name="bid" value="Y" >Yes<br>      
+												<input type="radio" name="bid" value="N">No
+												<!-- </form> -->
 			                           			<p class="help-block text-danger"></p>
 			                     	</div>
 		                        </div>

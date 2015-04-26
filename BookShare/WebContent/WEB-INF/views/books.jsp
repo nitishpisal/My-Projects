@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <script type="text/javascript">
 	
@@ -7,6 +8,16 @@
 		var regForm = document.forms['navigate'];
 		regForm.method = "GET";
 		regForm.action = "http://localhost:8080/Poker/login?search="+search;
+		regForm.submit();
+	}
+	
+	function login(){
+		var loginVal = document.getElementById("buyNow").value;
+		var bookId2 = document.getElementById("bookId").value;
+		var regForm = document.forms['buyForm'];
+		alert(loginVal + bookId2);
+		regForm.method = "POST";
+		regForm.action = "http://localhost:8080/Poker/login/" + loginVal + "?bookId=" + bookId2;
 		regForm.submit();
 	}
 
@@ -77,7 +88,7 @@
                     <%String login= (String)request.getSession().getAttribute("login");
                     if(login != null && login.equals("true")) { %>
                     <li>
-                        <a href="#">Welcome, <%= request.getSession().getAttribute("userName") %></a>
+                        <a href="#">Welcome, <%= request.getSession().getAttribute("firstname") %></a>
                     </li>
                      <li>
                         <a href="<%=request.getContextPath() %>/myStulance/?jobs=all">My Account</a>
@@ -88,7 +99,7 @@
                     </li>
                     <%} else{ %>
                      <li class="page-scroll">
-                        <a href="<%=request.getContextPath()%>/login.jsp">Login/Register</a>
+                        <a href="<%=request.getContextPath()%>/login">Login/Register</a>
                     </li>
                     <%} %>
                 </ul>
@@ -154,7 +165,8 @@
                 </div>
                 <c:if test="${not empty books}">
                 	<c:forEach var="book" items="${books}">
-						<form method= "post" action="<%=request.getContextPath()%>/proposal.jsp"> 
+                	<form:form modelAttribute="buyForm">
+						<%-- <form method= "post" action="<%=request.getContextPath()%>/proposal.jsp">  --%>
 		                <div class="well" style="color:#2c3e50">
 		                	<h5><b>Title:</b> ${book.title}</h5>
 							<h6> <b>Author:</b> ${book.author}</h6> 
@@ -166,18 +178,22 @@
 							<input type="hidden" name="jobDesc" value="<%= itr.getDescription() %>">
 							<input type="hidden" name="jobDeadline" value="<%= itr.getDeadlines() %>">
 							<input type="hidden" name="jobPay" value="<%= itr.getPay() %>"> --%>
-							<%-- <%if(login != null && login.equals("true")) { %> --%>
+							<%if(login != null && login.equals("true")) { %>
+							<input type="hidden" id="buyNow" value="loggedin">
+							<input type="hidden" id="bookId" value="${book.bookId}">
 		                    <div class="text-right">
-		                    	<button type="submit" class="btn btn-success btn-lg">Buy now</button>
+		                    	<button type="submit" onclick="javascript:login();" class="btn btn-success btn-lg">Buy now</button>
 		                    </div>
-		                    <%-- <%}else { %>
+		                     <%}else {%>
+		                     	<input type="hidden" id="buyNow" value="noLogin">
+		                     	<input type="hidden" id="bookId" value="0">
 		                    <div class="text-right">
-		                    <font size=2>**Please login to apply for this job</font>
-		                    	<button type="submit" class="btn btn-success btn-lg" disabled>Buy now</button>
+		                    	<input type=button value="Buy now" onclick="javascript:login();" class="btn btn-success btn-lg">
 		                    </div>
-		                    <%} %> --%>
+		                    <%} %>
 		                </div>
-		                </form>
+		                <!-- </form> -->
+		               </form:form>
 		            </c:forEach>
 				</c:if>
             </div>

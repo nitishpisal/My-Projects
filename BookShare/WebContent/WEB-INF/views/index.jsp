@@ -188,6 +188,9 @@ $(function() {
                         <li class="page-scroll">
                         <a href="#sellbooks">Sell Books</a>
                         </li>
+                        <li class="page-scroll">
+                        <a href="<%= request.getContextPath()%>/books">View Books</a>
+                        </li>
                         </ul>
                     </li>
                     <li class="page-scroll">
@@ -268,7 +271,7 @@ $(function() {
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>Post Your Job</h3>
+                    <h3>Sell your Book</h3>
                     <hr class="star-light">
                 </div>
             </div>
@@ -279,11 +282,14 @@ $(function() {
                 <div class="col-lg-4">
                     <p>The categories range from highly technical functionality like develeoping a realtime application to small house hold activities like baby sitting or shopping Assistance!!</p>
                 </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="<c:url value="/resources/postjob" />" class="btn btn-lg btn-outline">
-                         Post Your Job!
-                    </a>
-                </div>
+               <%--  <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="<c:url value="<%=request.getContextPath() %>/sellbook'" />" class="btn btn-lg btn-outline">
+                         Sell your Book!
+                    </a> --%>
+                    <div class="col-lg-8 col-lg-offset-2 text-center">
+		          		<button onclick="window.location.href='<%=request.getContextPath() %>/sellbook'" class="btn btn-lg btn-outline">Sell your Book</button>
+		       		</div>
+                <!-- </div> -->
             </div>
         </div>
      
@@ -330,7 +336,7 @@ $(function() {
                 </div>
                 <!-- Register Section -->
                 <div class="col-lg-5 col-lg-offset-1">
-                    <form name="register" id="register" action="<c:url value="/resources/register.jsp" />">
+                    <form name="register" id="register" method="post" action="<%=request.getContextPath() %>/register" >
                         
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group controls">

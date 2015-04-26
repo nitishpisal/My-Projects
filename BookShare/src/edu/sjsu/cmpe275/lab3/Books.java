@@ -29,11 +29,11 @@ public class Books implements Record{
 	private int price;
 	private int quantity;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name="owner",referencedColumnName = "userid")
 	private Login owner;
 	
-	private char bid;
+	private String bid;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Transient
@@ -42,9 +42,18 @@ public class Books implements Record{
 	private char available;
 
 	//constructors-------------------
-	
-	
-	
+	public Books(){}
+	public Books(String isbn, String title, String author, String publisher, int year, int price, int quantity, String bid){
+		this.isbn = isbn;
+		this.title = title;
+		this.author = author;
+		this.publisher = publisher;
+		this.year = year;
+		this.price = price;
+		this.quantity = quantity;
+		this.bid = bid;
+		this.setAvailable('Y');
+	}
 	
 	public long getBookId() {
 		return bookId;
@@ -118,11 +127,11 @@ public class Books implements Record{
 		this.owner = owner;
 	}
 
-	public char getBid() {
+	public String getBid() {
 		return bid;
 	}
 
-	public void setBid(char bid) {
+	public void setBid(String bid) {
 		this.bid = bid;
 	}
 

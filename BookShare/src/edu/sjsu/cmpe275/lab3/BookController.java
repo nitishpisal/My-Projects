@@ -20,10 +20,13 @@ public class BookController {
 	 */
 	@RequestMapping(value="/books", method = RequestMethod.GET)
 	public ModelAndView getbooks(HttpServletRequest request){
-		
-		long uid = (Long) request.getSession().getAttribute("userid");
-		//long userId = Long.parseLong(uid);
-		
+		long uid;
+		try{
+			uid = (Long) request.getSession().getAttribute("userid");
+		}catch(NullPointerException e){
+			System.out.println("User not logged in");
+			uid = 0;
+		}
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
 		Query query = session.createQuery("from Books where owner.userid <>:usid");
@@ -64,6 +67,13 @@ public class BookController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/sellbook", method = RequestMethod.GET)
+	public ModelAndView sellBooks(){
+		ModelAndView mv = new ModelAndView("bookRegister");
+		mv.addObject("what", "sellRequest");
+		return mv;
+	}
+	
 	/**
 	 * get the details of the books required by user and add it to DB
 	 * @return
@@ -97,9 +107,50 @@ public class BookController {
 		
 		ModelAndView mv = new ModelAndView("bookRegister");
 		mv.addObject("what", "buyRequest");
-		return mv;
-		
+		return mv;		
 	}
+	
+	/**
+	 * Post your book to sell
+	 * @param request
+	 * @return
+	 */
+	
+	
+	@RequestMapping(value="/postBookToSell", method = RequestMethod.POST)
+	public ModelAndView sellBooksDetails(HttpServletRequest request){
+		String isbn = request.getParameter("isbn");
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String publisher = request.getParameter("publisher");
+		String year = request.getParameter("year");
+		String price = request.getParameter("price");
+		String quantity = request.getParameter("quantity");
+		String bid = request.getParameter("bid");
+		int yr = Integer.parseInt(year);
+		int qty = Integer.parseInt(quantity);
+		int prc = Integer.parseInt(price);
+		
+		//get the user details using the username
+		Crud c = new Crud();
+		Session session = (Session) c.crudOpen();
+		Query query = session.createQuery("from Login where username = :uname");
+		query.setParameter("uname", "badal.jain77@gmail.com");
+		List<?> list = query.list();
+		Login details = (Login)list.get(0);
+		c.crudClose();
+		
+		//set the book object
+		Books book = new Books(isbn, title, author, publisher, yr, prc, qty, bid);
+		book.setOwner(details);
+		c.save(book);
+		
+		ModelAndView mv = new ModelAndView("success");
+		mv.addObject("success", "Thank you! Your book details are posted");
+		return mv;		
+	}
+	
+	
 	
 	
 	
