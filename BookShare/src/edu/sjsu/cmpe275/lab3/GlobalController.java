@@ -37,30 +37,85 @@ public class GlobalController {
 	}
 	
 	/**
-	 * login before buying or bidding
+	 * 
+	 * 
+	 * Login post call for buying or fulfilling the request
 	 */
-	@RequestMapping(value="/login/{loginVal}", method = RequestMethod.POST)
-	public ModelAndView getLoginPage2(	@PathVariable("loginVal") String loginVal,
-										@RequestParam("bookId") String bookId,
+	
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public ModelAndView getLoginPageWithAction(	
 										HttpServletRequest request){
-		//System.out.println(loginVal + bookId);
+		
+		String bookId = (String )request.getParameter("bookId");
+		String postId = (String )request.getParameter("postId");
+		String action = (String )request.getParameter("action");
+		/*int bookid = 0; int postid = 0;
+		if(bookId != null)
+			bookid = Integer.parseInt(bookId);
+		if(postId != null)
+			postid = Integer.parseInt(postId);
+		if(action.equals("buy")){
+			
+		}*/
 		ModelAndView mv = new ModelAndView("login");
-		int bookid = Integer.parseInt(bookId);
-		mv.addObject("bookId",bookid);
+		if(action.equalsIgnoreCase("buy")){
+				//mv = new ModelAndView("specificBook");
+				mv.addObject("bookOrPostId", bookId);
+				mv.addObject("what", "buy");
+		}
+		else{
+			mv.addObject("bookOrPostId", postId);
+			mv.addObject("what", "fulfill");
+		}
 		return mv;
 	}
+
+	
+	
+	/**
+	 * login before buying or bidding
+	 */
+	/*@RequestMapping(value="/login/{loginVal}", method = RequestMethod.POST)
+	public ModelAndView getLoginPage2(	@PathVariable("loginVal") String loginVal,
+										HttpServletRequest request){
+		String bookId = (String) request.getParameter("bookId");
+		//System.out.println(loginVal + bookId);
+		ModelAndView mv;
+		int bookid = Integer.parseInt(bookId);
+		System.out.println(loginVal);
+		if(loginVal.equalsIgnoreCase("nologin")){
+			mv = new ModelAndView("login");
+		}
+		else{
+			mv = new ModelAndView("specificBook");
+			Books book = new Books();
+			Crud c = new Crud();
+			book = (Books)c.get(book, bookid);
+			mv.addObject("book", book);
+		}
+		mv.addObject("bookId",bookid);
+		return mv;
+	}*/
 	
 	/**
 	 *validate login 
 	 * 
 	 */
-	@RequestMapping(value="/validate", method = RequestMethod.GET)
-	public String validateLogin(HttpServletRequest request){
+	@RequestMapping(value="/validate", method = RequestMethod.POST)
+	public ModelAndView validateLogin(HttpServletRequest request){
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String bookId = request.getParameter("bookId");
-		System.out.println("book "+ bookId);
+		String what = request.getParameter("what");
+		String bookOrPostId = request.getParameter("bookOrPostId");
+		long bookOrPost = 0;
+		try{
+			bookOrPost = Long.parseLong(bookOrPostId);
+		}catch(NumberFormatException e){
+			System.out.println("Normal login");
+		}
+	//	String bookId = request.getParameter("bookId");
+	//	System.out.println("book "+ bookId);
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
 		Query query = session.createQuery("from Login where username = :uname");
@@ -71,21 +126,42 @@ public class GlobalController {
 		query.setParameter("uid", details.getUserid());
 		List<?> list2 = query.list();
 		Userdetail userDetail = (Userdetail)list2.get(0);
-		c.crudClose();
+		ModelAndView mv;
 		if(details.getPassword().equals(password)){
 			request.getSession().setAttribute("login", "true");
 			request.getSession().setAttribute("username", username);
 			request.getSession().setAttribute("firstname", userDetail.getFirstname());
 			request.getSession().setAttribute("userid", details.getUserid());
+			request.getSession().setAttribute("userDetails", userDetail);
+			request.getSession().setAttribute("loginDetails", details);
+			if(what.equalsIgnoreCase("buy")){
+				mv = new ModelAndView("specificBook");
+				Books book = new Books();
+				book = (Books)c.get(book, bookOrPost);
+				mv.addObject("book", book);
+			}
+			else if(what.equalsIgnoreCase("fulfill")){
+				mv = new ModelAndView("fulfillProposal");
+				RequiredBooks post = new RequiredBooks();
+				post = (RequiredBooks) c.get(post, bookOrPost);
+				mv.addObject("post", post);
+			}
+			else{
+				mv = new ModelAndView("books");
+				query = session.createQuery("from Books where owner.userid <>:usid");
+				query.setParameter("usid", details.getUserid());
+				mv.addObject("what", "available");
+				list = query.list();
+				mv.addObject("books", list);
+			}
 		}
 		else{
-			
+			mv = new ModelAndView("login");
+			mv.addObject("bookOrPostId", bookOrPost);
+			mv.addObject("what", "buy");
 		}
-		
-		String ret = "redirect:/books";
-		//return new ResponseEntity<String>(details.getUserName(), HttpStatus.BAD_REQUEST);
-		
-		return ret;
+		c.crudClose();
+		return mv;
 	}
 	
 	/**
@@ -101,49 +177,6 @@ public class GlobalController {
 		return ret;
 	
 	}
-	
-	/**
-	 * Register to Bookshare
-	 */
-	@RequestMapping(value="/register", method = RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request){
-		
-		ModelAndView mv = new ModelAndView("register");
-		mv.addObject("email", request.getParameter("email"));
-		mv.addObject("password1", request.getParameter("password1"));
-		mv.addObject("confirmPass2", request.getParameter("confirmPass2"));
-		
-		return mv;
-	
-	}
-	
-	@RequestMapping(value="/registerUserDetails", method = RequestMethod.POST)
-	public String registerUser(HttpServletRequest request){
-		
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
-		String doi = request.getParameter("doi");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String street = request.getParameter("street");
-		String city= request.getParameter("city");
-		String state = request.getParameter("state");
-		String zip = request.getParameter("zip");
-		
-		Login newLogin = new Login(email, password);
-		Address address = new Address(street, city, state, zip);
-		Userdetail userdetail = new Userdetail(firstname, lastname, email, "I am " + doi, doi);
-		userdetail.setAddress(address);
-		userdetail.setLogin(newLogin);
-		Crud c= new Crud();
-		c.save(userdetail);
-		
-		String ret = "redirect:/";
-		return ret;
-	
-	}
-	
-	
 	
 	
 }

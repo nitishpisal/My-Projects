@@ -16,6 +16,7 @@ public class Userdetail implements Record{
 	private String firstname;
 	private String lastname;
 	private String description;
+	private String phoneno;
 	
 	@Column(name="dealerorindividual")
 	private String dealerOrIndividual;
@@ -34,12 +35,13 @@ public class Userdetail implements Record{
 	 */
 	
 	Userdetail(){}
-	Userdetail(String firstname, String lastname, String email, String desc, String doi){
+	Userdetail(String firstname, String lastname, String email, String desc, String doi,String phno){
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.description = desc;
 		this.dealerOrIndividual = doi;
+		this.phoneno = phno;
 	}
 	
 	//-----------------------//
@@ -103,5 +105,12 @@ public class Userdetail implements Record{
 	public void setLogin(Login login) {
 		this.login = login;
 	}
+	public String getPhoneno() {
+		return phoneno;
+	}
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
+	}
+	
 
 }

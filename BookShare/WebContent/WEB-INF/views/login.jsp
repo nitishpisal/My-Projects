@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 
@@ -96,6 +97,22 @@ $(function() {
 });
 });
  
+ 
+function login(){
+	var bookOrPostId = document.getElementById("bookOrPostId").value;
+	var what = document.getElementById("what").value;
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	
+	var regForm = document.forms['loginform'];
+	regForm.method = "POST";
+	regForm.action = "http://localhost:8080/Poker/validate/?username=" + username 
+						+ "&password=" + password
+						+ "&what=" + what
+						+ "&bookOrPostId=" + bookOrPostId;
+	regForm.submit();
+}
+
 </script>
 
 </head>
@@ -148,15 +165,16 @@ $(function() {
             <div class="row">
             	
                 <div class="col-lg-5 col-lg-offset-1">
-                    <form  name="loginform" id="loginform" action="<%=request.getContextPath() %>/validate">
+                    <%-- <form  name="loginform" id="loginform" action="<%=request.getContextPath() %>/validate"> --%>
+                    <form:form modelAttribute="loginform">
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group ">
                                 <label>Email</label>
-                                <input type="text" class="form-control" name="username" placeholder="Email" id="name" >
+                                <input type="text" class="form-control" name="username" placeholder="Email" id="username" >
                                 <!-- <p class="help-block text-danger"></p>  -->
                             </div>
                         </div>
-                        <input type="hidden" name="bookId" value="${bookId}">
+                        <%-- <input type="hidden" name="bookId" value="${bookId}"> --%>
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group ">
                                 <label>password</label>
@@ -171,11 +189,15 @@ $(function() {
                         <br>
                         <div id="success"></div>
                         <div class="row">
+                        <input type="hidden" id="bookOrPostId" value="${bookOrPostId}">
+                        <input type="hidden" id="what" value="${what}">
                             <div class="form-group col-xs-10">
-                                <button type="submit" class="btn btn-success btn-lg">Login</button>
+                                <button type="submit" onclick="javascript:login();" class="btn btn-success btn-lg">Login</button>
                             </div>
                         </div>
-                    </form>
+                    </form:form>
+                    <%-- </form> --%>
+                   
                 </div>
                 <!-- Register Section -->
                 <div class="col-lg-5 col-lg-offset-1">
@@ -277,7 +299,7 @@ $(function() {
  	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>  
 	
     <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
     <!-- Plugin JavaScript -->
     <script src="<c:url value="/resources/js/jquery.easing.min.js" />"></script>

@@ -183,13 +183,16 @@ $(function() {
                         <a href="#">Jobs</a>
                         <ul>
                         <li class="page-scroll">
-                        <a href="#requestbooks">Request Books</a>
+                        <a href="#requestbooks">Request A Book</a>
                         </li>
                         <li class="page-scroll">
-                        <a href="#sellbooks">Sell Books</a>
+                        <a href="#sellbooks">Sell A Book</a>
                         </li>
                         <li class="page-scroll">
-                        <a href="<%= request.getContextPath()%>/books">View Books</a>
+                        <a href="<%= request.getContextPath()%>/books?action=available">Available Books</a>
+                        </li>
+                        <li class="page-scroll">
+                        <a href="<%= request.getContextPath()%>/books?action=required">Required Books</a>
                         </li>
                         </ul>
                     </li>

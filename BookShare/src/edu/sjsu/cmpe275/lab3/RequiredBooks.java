@@ -34,6 +34,8 @@ public class RequiredBooks implements Record{
 	 * Constructors
 	 */
 	
+	public RequiredBooks(){}
+	
 	public RequiredBooks(String isbn, String title, String author, String publisher, int year, int quantity){
 		this.isbn = isbn;
 		this.title = title;

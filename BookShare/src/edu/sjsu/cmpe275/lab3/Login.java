@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Login {
+public class Login implements Record{
 	
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long userid;

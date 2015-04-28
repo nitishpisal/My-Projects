@@ -206,7 +206,11 @@
                         <div class="col-md-12">
                             <form > 
 								<font size="4"><b>${success}</font><br><br>
-								
+								 <c:if test="${not empty order}">
+								 	<font size="3"><b> Order ID :</b> ${order.orderId }</font><br><br>
+									<font size="3"><b> Quantity : </b>${order.quantity }</font><br><br>
+									<font size="3"><b> Amount : </b>${order.amount }</font><br><br>
+								 </c:if>
                                 <button type="button" onclick="location.href='<%=request.getContextPath() %>/'" class="btn btn-success btn-lg">  Home</button>
                          	</form>
                         </div>

@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -20,6 +22,7 @@ public class BookController {
 	 */
 	@RequestMapping(value="/books", method = RequestMethod.GET)
 	public ModelAndView getbooks(HttpServletRequest request){
+		String action = (String) request.getParameter("action");
 		long uid;
 		try{
 			uid = (Long) request.getSession().getAttribute("userid");
@@ -27,12 +30,23 @@ public class BookController {
 			System.out.println("User not logged in");
 			uid = 0;
 		}
+		
+		List<?> list;
+		ModelAndView mv = new ModelAndView("books");
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
-		Query query = session.createQuery("from Books where owner.userid <>:usid");
-		query.setParameter("usid", uid);
-		List<?> list = query.list();
-		ModelAndView mv = new ModelAndView("books");
+		if(action.equalsIgnoreCase("available")){
+			Query query = session.createQuery("from Books where owner.userid <>:usid");
+			query.setParameter("usid", uid);
+			mv.addObject("what", "available");
+			list = query.list();
+		}
+		else{
+			Query query = session.createQuery("from RequiredBooks where postUserId.userid <>:usid");
+			query.setParameter("usid", uid);
+			mv.addObject("what", "required");
+			list = query.list();
+		}
 		mv.addObject("books", list);
 		return mv;
 	}
@@ -150,10 +164,70 @@ public class BookController {
 		return mv;		
 	}
 	
+	/**
+	 * this is called when a user presses to buy a paricular book
+	 * and specfbook page is called
+	 * 
+	 * @param bookId
+	 * @return
+	 */
+	@RequestMapping(value="/buy", method = RequestMethod.POST)
+	public ModelAndView buyBook(@RequestParam("bookId") long bookId){
+		
+		ModelAndView mv;
+		Crud c = new Crud();
+		mv = new ModelAndView("specificBook");
+		Books book = new Books();
+		book = (Books)c.get(book, bookId);
+		mv.addObject("book", book);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/fulfill", method = RequestMethod.POST)
+	public ModelAndView fulfillProposal(@RequestParam("postId") long postId){
+		
+		ModelAndView mv;
+		Crud c = new Crud();
+		mv = new ModelAndView("fulfillProposal");
+		RequiredBooks post = new RequiredBooks();
+		post = (RequiredBooks) c.get(post, postId);
+		mv.addObject("post", post);
+		
+		return mv;
+	}
 	
 	
+	/**
+	 * Submit the user proposal
+	 */
 	
-	
+	@RequestMapping(value="/proposal", method=RequestMethod.POST)
+	public ModelAndView submitProposal(@RequestParam("postId") long postId,
+										HttpServletRequest request){
+		
+		System.out.println("I am here");
+		String desc = (String) request.getParameter("desc");
+		ModelAndView mv = new ModelAndView("success");
+		Login detail = new Login();
+		RequiredBooks post = new RequiredBooks();
+		Proposals proposal = new Proposals(desc, 'N');
+		detail = (Login) request.getSession().getAttribute("loginDetails");
+		String success = "";
+		/*try{*/
+			Crud c = new Crud();
+			post = (RequiredBooks) c.get(post, postId);
+			proposal.setProposerId(detail);
+			proposal.setProposalForPostId(post);
+			c.save(proposal);
+			success = "Thank you, Your proposal has been submitted successfully";
+		/*}catch (Exception e){
+			success = "Sorry! Could not process your proposal at this moment";
+		}*/
+		mv.addObject("success", success);
+		return mv;
+		
+	}
 	
 		
 }
