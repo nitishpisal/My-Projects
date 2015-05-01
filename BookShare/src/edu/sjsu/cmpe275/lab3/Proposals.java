@@ -25,6 +25,10 @@ public class Proposals implements Record{
 	
 	private String proposal;
 	
+	private String bookdetails;
+	private String username;
+	private String phno;
+	
 	private char accepted;
 	
 	/**
@@ -33,9 +37,12 @@ public class Proposals implements Record{
 	 */
 	public Proposals(){}
 	
-	public Proposals(String proposal, char accepted){
+	public Proposals(String proposal, char accepted, String username, String phno, String bookdetails){
 		this.proposal = proposal;
 		this.accepted = accepted;
+		this.username = username;
+		this.phno = phno;
+		this.bookdetails = bookdetails;
 	}
 	
 	public long getProposalID() {
@@ -67,6 +74,30 @@ public class Proposals implements Record{
 	}
 	public void setAccepted(char accepted) {
 		this.accepted = accepted;
+	}
+
+	public String getBookdetails() {
+		return bookdetails;
+	}
+
+	public void setBookdetails(String bookdetails) {
+		this.bookdetails = bookdetails;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPhno() {
+		return phno;
+	}
+
+	public void setPhno(String phno) {
+		this.phno = phno;
 	}
 	
 	

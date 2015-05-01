@@ -119,7 +119,7 @@
                         <a href="#">Welcome, <%= request.getSession().getAttribute("firstname") %></a>
                     </li>
                      <li>
-                        <a href="<%=request.getContextPath() %>/myStulance/?jobs=all">My Account</a>
+                        <a href="<%=request.getContextPath() %>/myaccount?action=mybooks">My Account</a>
                     </li>
                     
                     <li class="page-scroll">

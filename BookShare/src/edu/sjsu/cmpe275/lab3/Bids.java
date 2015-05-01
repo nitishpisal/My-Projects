@@ -26,6 +26,11 @@ public class Bids {
 	
 	private int price;
 	
+	private String biddername;
+	private String phno;
+	private String bookdetails;
+	private char accepted;
+	
 	//-----------Constructors-----------------------//
 	
 	
@@ -60,6 +65,38 @@ public class Bids {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public String getBiddername() {
+		return biddername;
+	}
+
+	public void setBiddername(String biddername) {
+		this.biddername = biddername;
+	}
+
+	public String getPhno() {
+		return phno;
+	}
+
+	public void setPhno(String phno) {
+		this.phno = phno;
+	}
+
+	public String getBookdetails() {
+		return bookdetails;
+	}
+
+	public void setBookdetails(String bookdetails) {
+		this.bookdetails = bookdetails;
+	}
+
+	public char getAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(char accepted) {
+		this.accepted = accepted;
 	}
 	
 	

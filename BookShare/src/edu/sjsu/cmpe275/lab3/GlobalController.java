@@ -134,13 +134,13 @@ public class GlobalController {
 			request.getSession().setAttribute("userid", details.getUserid());
 			request.getSession().setAttribute("userDetails", userDetail);
 			request.getSession().setAttribute("loginDetails", details);
-			if(what.equalsIgnoreCase("buy")){
+			if(what != null && what.equalsIgnoreCase("buy")){
 				mv = new ModelAndView("specificBook");
 				Books book = new Books();
 				book = (Books)c.get(book, bookOrPost);
 				mv.addObject("book", book);
 			}
-			else if(what.equalsIgnoreCase("fulfill")){
+			else if(what != null && what.equalsIgnoreCase("fulfill")){
 				mv = new ModelAndView("fulfillProposal");
 				RequiredBooks post = new RequiredBooks();
 				post = (RequiredBooks) c.get(post, bookOrPost);

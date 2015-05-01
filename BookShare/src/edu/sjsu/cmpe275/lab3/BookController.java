@@ -1,5 +1,7 @@
 package edu.sjsu.cmpe275.lab3;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sun.xml.internal.ws.resources.HttpserverMessages;
 
 @Controller
 public class BookController {
@@ -207,18 +211,23 @@ public class BookController {
 										HttpServletRequest request){
 		
 		System.out.println("I am here");
+		Crud c = new Crud();
 		String desc = (String) request.getParameter("desc");
 		ModelAndView mv = new ModelAndView("success");
 		Login detail = new Login();
 		RequiredBooks post = new RequiredBooks();
-		Proposals proposal = new Proposals(desc, 'N');
 		detail = (Login) request.getSession().getAttribute("loginDetails");
 		String success = "";
 		/*try{*/
-			Crud c = new Crud();
+			Userdetail userdetail = (Userdetail) request.getSession().getAttribute("userDetails");
+			String username = userdetail.getFirstname() +  " " + userdetail.getLastname();
+			String phno = userdetail.getPhoneno();
+			String bookdetails = post.getIsbn() + " " + post.getAuthor() + " " +post.getTitle();
+			Proposals proposal = new Proposals(desc, 'N', username, phno, bookdetails);
 			post = (RequiredBooks) c.get(post, postId);
 			proposal.setProposerId(detail);
 			proposal.setProposalForPostId(post);
+			
 			c.save(proposal);
 			success = "Thank you, Your proposal has been submitted successfully";
 		/*}catch (Exception e){
@@ -228,6 +237,62 @@ public class BookController {
 		return mv;
 		
 	}
+	
+	/**
+	 * 
+	 * My account redirection
+	 */
+	@RequestMapping (value="/myaccount" , method=RequestMethod.GET)
+	public ModelAndView myAccount(HttpServletRequest request){
+		
+		String action = (String) request.getParameter("action");
+		long uid = (Long) request.getSession().getAttribute("userid");
+		Query query;
+		ModelAndView mv = new ModelAndView("myAccount");
+		List<?> list;
+		Crud c = new Crud();
+		Session session = (Session) c.crudOpen();
+		if(action == null || action.equalsIgnoreCase("mybooks")){
+			query = session.createQuery("from Books where owner.userid =:usid");
+			mv.addObject("what", "mybooks");
+			query.setParameter("usid", uid);
+			list = query.list();
+			mv.addObject("books", list);
+		}else{
+			if(action.equalsIgnoreCase("myrequestedbooks")){
+				query = session.createQuery("from RequiredBooks where postUserId.userid =:usid");
+				mv.addObject("what", "reqbooks");
+				System.out.println("uid is " + uid);
+				query.setParameter("usid", uid);
+				list = query.list();
+				mv.addObject("books", list);
+				mv.addObject("what", "myrequestedbooks");
+			}
+			else if(action.equalsIgnoreCase("myproposals")){
+				/*query = session.createQuery("from Proposals p inner join edu.sjsu.cmpe275.lab3.RequiredBooks r "
+													+ " inner join edu.sjsu.cmpe275.lab3.Userdetail u"
+													+ " where p.proposerId <> : uid");*/
+				query = session.createQuery("from Proposals where proposerId.userid <> :usid"
+						+ "	and accepted = 'N'");
+				
+				System.out.println("userid   " + uid);
+				query.setParameter("usid", uid);
+				list = query.list();
+				mv.addObject("details", list);
+				mv.addObject("what", "myproposals");
+				
+			}
+			else{
+				DBconnect db = new DBconnect();
+				List<Bids> bids = db.getBids(uid);
+				mv.addObject("bids", bids);
+				mv.addObject("what", "mybids");
+			}
+		}
+		
+		return mv;
+	}
+	
 	
 		
 }

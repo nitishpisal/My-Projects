@@ -313,7 +313,7 @@ $(function() {
             <div class="row">
             	
                 <div class="col-lg-5 col-lg-offset-1">
-                    <form  name="loginform" id="loginform" action="<%=request.getContextPath() %>/validate">
+                    <form  name="loginform" id="loginform" method="post" action="<%=request.getContextPath() %>/validate">
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group">
                                 <label>Email</label>
