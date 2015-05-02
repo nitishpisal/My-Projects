@@ -10,28 +10,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Bids {
+public class Bids implements Record{
 	
 	@Id @GeneratedValue(strategy =GenerationType.AUTO)
 	@Column(name="bidid")
 	private long bidId;
 	
-	@ManyToOne(cascade =CascadeType.ALL)
-	@JoinColumn(name="bookid")
+	@ManyToOne
+	@JoinColumn(name="bookid",referencedColumnName = "bookid")
 	private Books bookId;
 	
-	@ManyToOne(cascade =CascadeType.ALL)
-	@JoinColumn(name="userid")
-	private Login bidder;
+	@ManyToOne
+	@JoinColumn(name="bidder",referencedColumnName = "userid")
+	private Userdetail bidder;
 	
-	private int price;
+	@Column(name="bidprice")
+	private int bidPrice;
 	
-	private String biddername;
+	/*private String biddername;
 	private String phno;
-	private String bookdetails;
+	private String bookdetails;*/
 	private char accepted;
 	
 	//-----------Constructors-----------------------//
+	
+	public Bids(){}
+	
+	public Bids(int bidPrice, char accepted){
+		this.bidPrice = bidPrice;
+		this.accepted = accepted;
+	}
 	
 	
 	//------------getter and setters ---------------//
@@ -51,44 +59,12 @@ public class Bids {
 		this.bookId = bookId;
 	}
 
-	public Login getBidder() {
-		return bidder;
+	public int getBidPrice() {
+		return bidPrice;
 	}
 
-	public void setBidder(Login bidder) {
-		this.bidder = bidder;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getBiddername() {
-		return biddername;
-	}
-
-	public void setBiddername(String biddername) {
-		this.biddername = biddername;
-	}
-
-	public String getPhno() {
-		return phno;
-	}
-
-	public void setPhno(String phno) {
-		this.phno = phno;
-	}
-
-	public String getBookdetails() {
-		return bookdetails;
-	}
-
-	public void setBookdetails(String bookdetails) {
-		this.bookdetails = bookdetails;
+	public void setBidPrice(int price) {
+		this.bidPrice = price;
 	}
 
 	public char getAccepted() {
@@ -97,6 +73,14 @@ public class Bids {
 
 	public void setAccepted(char accepted) {
 		this.accepted = accepted;
+	}
+
+	public Userdetail getBidder() {
+		return bidder;
+	}
+
+	public void setBidder(Userdetail bidder) {
+		this.bidder = bidder;
 	}
 	
 	

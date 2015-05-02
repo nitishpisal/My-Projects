@@ -47,6 +47,7 @@ public class GlobalController {
 										HttpServletRequest request){
 		
 		String bookId = (String )request.getParameter("bookId");
+		System.out.println("book Id " + bookId);
 		String postId = (String )request.getParameter("postId");
 		String action = (String )request.getParameter("action");
 		/*int bookid = 0; int postid = 0;
@@ -102,8 +103,9 @@ public class GlobalController {
 	 * 
 	 */
 	@RequestMapping(value="/validate", method = RequestMethod.POST)
-	public ModelAndView validateLogin(HttpServletRequest request){
+	public String validateLogin(HttpServletRequest request){
 		
+		String ret = "";
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String what = request.getParameter("what");
@@ -135,10 +137,7 @@ public class GlobalController {
 			request.getSession().setAttribute("userDetails", userDetail);
 			request.getSession().setAttribute("loginDetails", details);
 			if(what != null && what.equalsIgnoreCase("buy")){
-				mv = new ModelAndView("specificBook");
-				Books book = new Books();
-				book = (Books)c.get(book, bookOrPost);
-				mv.addObject("book", book);
+				ret = "redirect:/books/?action=available";
 			}
 			else if(what != null && what.equalsIgnoreCase("fulfill")){
 				mv = new ModelAndView("fulfillProposal");
@@ -147,12 +146,7 @@ public class GlobalController {
 				mv.addObject("post", post);
 			}
 			else{
-				mv = new ModelAndView("books");
-				query = session.createQuery("from Books where owner.userid <>:usid");
-				query.setParameter("usid", details.getUserid());
-				mv.addObject("what", "available");
-				list = query.list();
-				mv.addObject("books", list);
+				ret = "redirect:/books/?action=available";
 			}
 		}
 		else{
@@ -160,8 +154,8 @@ public class GlobalController {
 			mv.addObject("bookOrPostId", bookOrPost);
 			mv.addObject("what", "buy");
 		}
-		c.crudClose();
-		return mv;
+		//c.crudClose();
+		return ret;
 	}
 	
 	/**

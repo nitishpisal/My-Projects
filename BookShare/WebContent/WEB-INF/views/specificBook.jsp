@@ -23,6 +23,23 @@
 				+ "&quantity=" + quantity;
 		regForm.submit();
 	}
+	
+	function placeBid(){
+		var bookid = document.getElementById("bookid").value;
+		var buyerid = document.getElementById("buyerid").value;
+		var price = document.getElementById("price").value;
+		var quantity = document.getElementById("quantity").value;
+		var regForm = document.forms['buyForm'];
+		var bidPrice = document.getElementById("bidPrice").value;
+		regForm.method = "POST";
+		regForm.action = "http://localhost:8080/Poker/placebid?"
+				+ "bookid="+bookid
+				+ "&buyerid="+buyerid 
+				+ "&price=" + price
+				+ "&bidPrice=" + bidPrice;
+		regForm.submit();
+	}
+	
 </script>
 
 <head>
@@ -128,6 +145,7 @@
 					<font size="2"><b> Year: </b>  ${book.year }</font><br>
 					<font size="2"><b> Available Quantity :</b> ${book.quantity }</font><br>
 					
+					<font size="2"><b> Bid: </b>  ${book.bid }</font><br>
 					<font size="2"><b> Price :</b> $ ${book.price }</font><br>
 					<font size="2"><b> Available : </b>${book.available }</font>
 					<hr>
@@ -142,9 +160,19 @@
 					<input type="hidden" id="buyerid" value=<%=request.getSession().getAttribute("userid")%>> 
 					<input type="hidden" id="bookid" value=${book.bookId }>
 					<input type="hidden" id="price" value=${book.price }>
-                    <div class="text-right">
-                        <button type="submit" onclick="javascript:buyNow();" class="btn btn-success btn-lg">Buy now</button>
-                    </div>
+					<input type="hidden" id="bid" value=${book.bid }>
+					<c:if test="${book.bid == 'N' }">
+	                    <div class="text-right">
+	                        <button type="submit" onclick="javascript:buyNow();" class="btn btn-success btn-lg">Buy now</button>
+	                    </div>
+                    </c:if>
+                    
+                    <c:if test="${book.bid == 'Y' }">
+                    	<input type="text" class="form-control" placeholder="Place Bid" id="bidPrice" >
+	                    <div class="text-right">
+	                        <button type="submit" onclick="javascript:placeBid();" class="btn btn-success btn-lg">Bid now</button>
+	                    </div>
+                    </c:if>
 					<hr>   
                     
                 	</div>

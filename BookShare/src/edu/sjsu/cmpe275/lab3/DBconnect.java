@@ -31,7 +31,7 @@ public class DBconnect {
 		}
 	}
 
-	protected List<Bids> getBids(long userId){
+	/*protected List<Bids> getBids(long userId){
 		
 		List<Bids> bids = new ArrayList<Bids>();
 		query = "select * from Bids Bi inner join Books Bo on "
@@ -49,8 +49,8 @@ public class DBconnect {
 				g.setBookdetails(rs.getString("bookdetails"));
 				g.setAccepted(rs.getString("accepted").charAt(0));
 				b.setBookId(rs.getLong("bookid"));
-				/*Crud c = new Crud();
-				b = (Books) c.get(b, b.getBookId());*/
+				Crud c = new Crud();
+				b = (Books) c.get(b, b.getBookId());
 				g.setBookId(b);
 				g.setBidId(rs.getLong("bidid"));
 				
@@ -61,7 +61,7 @@ public class DBconnect {
 		}
 		
 		return bids;
-	}
+	}*/
 	
 
 	protected void close(){

@@ -99,7 +99,7 @@
             </div>
             <div class="col-md-9"> 
             <c:choose>
-            	<c:when test="${what != 'myproposals'}">
+            	<c:when test="${what == 'myproposals'}">
 				<c:if test="${not empty books}">
 				<form method= "post" action="<%=request.getContextPath()%>/awardJob">
 					<h5><b>Your Inventory</b></h5>
@@ -134,19 +134,24 @@
 			        </c:when>
 			        
 			        <c:when test="${what == 'mybids'}">
+			        I am here
 				<c:if test="${not empty bids}">
 				<form method= "post" action="<%=request.getContextPath()%>/awardJob">
 					<h5><b>Bids for your books</b></h5>
 	                <c:forEach var="bid" items="${bids}">
 			            	
 			                <div class="well" style="color:#2c3e50">
-			                	<h5><b>BidId : </b> ${bid.bidId }</h5>
+			                	<h5><b>Bid Id : </b> ${bid[0].bidId }</h5>
 			                	<hr>
-			                	<font size="3"><b> ISBN/ Author/ Title:</b> ${bid.bookdetails }</font><br><br>
+			                	<font size="2"><b> ISBN :</b> ${bid[0].bookId.isbn }</font><br><br>
+			                	<font size="2"><b> Title :</b> ${bid[0].bookId.title }</font><br><br>
+			                	<font size="2"><b> Author :</b> ${bid[0].bookId.author }</font><br><br>
+			                	<font size="2"><b> Bid Price :</b> ${bid[0].bidPrice }</font><br><br>
 								<hr>
-								<font size="2"><b> Bidder : </b>  ${bid.biddername }</font><br>
-								<font size="2"><b> Phone Number :</b> ${bid.phno }</font><br>
-								<font size="2"><b> Accepted :</b> ${bid.accepted }</font><br>
+								<h5><b>Bidder Details </b></h5>
+								<font size="2"><b> Name :</b> ${bid[0].bidder.firstname }</font><br><br>
+			                	<font size="2"><b> Phone Number :</b> ${bid[0].bidder.phoneno }</font><br><br>
+			                	<font size="2"><b> Bidder :</b> ${bid[0].bidder.email }</font><br><br>
 								
 			                    <div class="text-right">
 			                        <button type="submit" onclick="javascript:submitProposal();" class="btn btn-success btn-lg">Submit</button>

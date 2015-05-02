@@ -13,19 +13,19 @@
 	
 	function login(){
 		var loginVal = document.getElementById("buyNow").value;
-		var bookId2 = document.getElementById("bookId").value;
+		var bookId = document.getElementById("bookIdt").value;
 		var regForm = document.forms['buyForm'];
-		alert(loginVal + bookId2);
+		alert(loginVal + bookId);
 		regForm.method = "POST";
 		/* regForm.action = "http://localhost:8080/Poker/login/" + loginVal + "?bookId=" + bookId2
 				+ "&action=buy";
 		 */
 		if(loginVal == "noLogin"){
-			regForm.action = "http://localhost:8080/Poker/login/?bookId=" + bookId2 
+			regForm.action = "http://localhost:8080/Poker/login/?bookId=" + bookId
 					+ "&action=buy" ;
 		}
 		else{
-			regForm.action = "http://localhost:8080/Poker/buy?bookId=" + bookId2;
+			regForm.action = "http://localhost:8080/Poker/buy?bookId=" + bookId;
 		}
 		
 		regForm.submit();
@@ -86,7 +86,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">Simply Hired</a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/">Simply Hired</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -193,8 +193,66 @@
                 </div>
                 <c:if test="${not empty books}">
                 	<c:forEach var="book" items="${books}">
-                	<form:form modelAttribute="buyForm">
-						<%-- <form method= "post" action="<%=request.getContextPath()%>/proposal.jsp">  --%>
+                	<%-- <form:form modelAttribute="buyForm"> --%>
+                	
+                	<c:if test="${what == 'available' }">
+						<form method= "post" action="<%=request.getContextPath()%>/buy/?bookId=${book.bookId }&action=buy"> 
+		                <div class="well" style="color:#2c3e50">
+		                	<h5><b>Title:</b> ${book.title}</h5>
+							<h6> <b>Author:</b> ${book.author}</h6> 
+							 Publisher:    ${book.publisher} &nbsp;<b>| </b>&nbsp;  year:  ${book.year} &nbsp;<br>
+							 Bid:    ${book.bid} &nbsp;
+							 <c:if test="${what == 'available' }">
+							 	price: $  ${book.price}<br>
+							 </c:if>
+							
+							
+									<input type="hidden" id="bookIdt" value="${book.bookId}">
+									<input type="hidden" id="buyNow" value="loggedin">
+								<%if(login != null && login.equals("true")) { %>
+									<c:if test="${book.bid == 'Y' }">
+								 		<div class="text-right">
+					                    	<button type="submit"  class="btn btn-success btn-lg">Bid Now</button>
+					                    </div>
+				                    </c:if>
+				                    <c:if test="${book.bid == 'N' }">
+								 		<div class="text-right">
+					                    	<button type="submit" class="btn btn-success btn-lg">Buy now</button>
+					                    </div>
+				                    </c:if>
+
+				                    
+		                     <%}else {%>
+		                     	
+		                     		<div class="text-right">
+		                     				**Please Login
+					                    	<button type="submit" class="btn btn-success btn-lg" disabled>Buy/Bid</button>
+					                </div>
+		                     		<%-- 
+		                     		
+		                     		<input type="hidden" id="bookIdt" value="${book.bookId}">
+		                     		<input type="hidden" id="buyNow" value="noLogin">
+				                    <c:if test="${book.bid == 'Y' }">
+					                    <div class="text-right">
+					                    	<input type=submit value="Bid Now" class="btn btn-success btn-lg">
+					                    </div>
+				                    </c:if>
+				                    <c:if test="${book.bid == 'N' }">
+					                    <div class="text-right">
+					                    	<input type=button value="Buy Now" onclick="javascript:login();" class="btn btn-success btn-lg">
+					                    </div>
+				                    </c:if> --%>
+		                    <%} %>
+		                </div>
+		              <%--  </form:form> --%>
+		             
+		             	</form>
+		             </c:if>
+		             
+		             <!-- form for required -->
+		             
+		             <c:if test="${what == 'required' }">
+						<form method= "post" action="<%=request.getContextPath()%>/fulfill/?postId=${book.postId }&action=buy"> 
 		                <div class="well" style="color:#2c3e50">
 		                	<h5><b>Title:</b> ${book.title}</h5>
 							<h6> <b>Author:</b> ${book.author}</h6> 
@@ -202,49 +260,28 @@
 							 <c:if test="${what == 'available' }">
 							 	price: $  ${book.price}<br>
 							 </c:if>
-							<%-- <input type="hidden" name="jobId" value="<%= itr.getJobId() %>">						        
-							<input type="hidden" name="jobTitle" value="<%= itr.getTitle() %>">
-							<input type="hidden" name="jobDesc" value="<%= itr.getDescription() %>">
-							<input type="hidden" name="jobDeadline" value="<%= itr.getDeadlines() %>">
-							<input type="hidden" name="jobPay" value="<%= itr.getPay() %>"> --%>
 							<%if(login != null && login.equals("true")) { %>
 							
-								<c:if test="${what == 'available' }">
-									<input type="hidden" id="bookId" value="${book.bookId}">
-									<input type="hidden" id="buyNow" value="loggedin">
-							 		<div class="text-right">
-				                    	<button type="submit" onclick="javascript:login();" class="btn btn-success btn-lg">Buy now</button>
-				                    </div>
-							 	</c:if>
-							 	<c:if test="${what == 'required' }">
 							 		<input type="hidden" id="postId" value="${book.postId}">
 							 		<input type="hidden" id="sellNow" value="loggedin">
 							 		<div class="text-right">
-				                    	<button type="submit" onclick="javascript:required();" class="btn btn-success btn-lg">Fulfill</button>
+				                    	<button type="submit" class="btn btn-success btn-lg">Fulfill</button>
 				                    </div>
-							 	</c:if>
 				                    
 		                     <%}else {%>
 		                     	
-		                     	
-		                     	<c:if test="${what == 'available' }">
-		                     		<input type="hidden" id="bookId" value="${book.bookId}">
-		                     		<input type="hidden" id="buyNow" value="noLogin">
-				                    <div class="text-right">
-				                    	<input type=button value="Buy Now" onclick="javascript:login();" class="btn btn-success btn-lg">
-				                    </div>
-			                    </c:if>
-			                    <c:if test="${what == 'required' }">
-			                    	<input type="hidden" id="postId" value="${book.postId}">
-							 		<input type="hidden" id="sellNow" value="noLogin">
-							 		<div class="text-right">
-				                    	<button type="submit" onclick="javascript:required();" class="btn btn-success btn-lg">Fulfill</button>
-				                    </div>
-							 	</c:if>
+			                    	<div class="text-right">
+		                     				**Please Login
+					                    	<button type="submit" class="btn btn-success btn-lg" disabled>Fulfill</button>
+					                </div>
 		                    <%} %>
 		                </div>
-		                <!-- </form> -->
-		               </form:form>
+		              <%--  </form:form> --%>
+		             
+		             	</form>
+		             </c:if>
+		             
+		             
 		            </c:forEach>
 				</c:if>
             </div>

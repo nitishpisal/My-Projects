@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import sun.security.krb5.internal.crypto.crc32;
+
 import com.sun.xml.internal.ws.resources.HttpserverMessages;
 
 @Controller
@@ -283,13 +285,55 @@ public class BookController {
 				
 			}
 			else{
-				DBconnect db = new DBconnect();
-				List<Bids> bids = db.getBids(uid);
-				mv.addObject("bids", bids);
+				query = session.createQuery("from Bids Bi inner join Bi.bookId B where Bi.bidder.userid <> :usid"
+						+ " and B.owner.userid = :usid");
+				query.setParameter("usid", uid);
+				list = query.list();
+				List<Object> bidList = new ArrayList<Object>();
+				List<Object> bookList = new ArrayList<Object>();
+				
+				for(int i=0; i<list.size(); i++){
+				//	System.out.println(((Object[]) list.get(i))[0]);
+				//	System.out.println(((Object[]) list.get(i))[1]);
+					bidList.add(((Object[]) list.get(i))[0]);
+					bookList.add(((Object[]) list.get(i))[1]);
+				}
+				
+				
+				mv.addObject("bids", list);
+				//mv.addObject("books", list);
 				mv.addObject("what", "mybids");
 			}
 		}
 		
+		return mv;
+	}
+	
+	@RequestMapping(value="/placebid" , method=RequestMethod.POST)
+	public ModelAndView placeBid(@RequestParam("bookid") long bookid,
+									@RequestParam("bidPrice") int bidPrice,
+									@RequestParam("buyerid") long buyerId,
+									HttpServletRequest request){
+		
+		ModelAndView mv = new ModelAndView("success");
+		String success ="";
+		System.out.println("Bid price is  " + bidPrice);
+		Crud c = new Crud();
+		Userdetail user = new Userdetail();
+		user = (Userdetail) request.getSession().getAttribute("userDetails");
+		Books book = new Books();
+		book = (Books) c.get(book, bookid);
+		Bids bid = new Bids(bidPrice, 'N');
+		bid.setBidder(user);
+		bid.setBookId(book);
+		try{
+			c.save(bid);
+		}catch(Exception e){
+			System.out.println("Exception in placing bid : " + e);
+			success = "Sorry, unable to place bid at this time";
+		}
+		success = "Thank you, Your proposal has been submitted successfully";
+		mv.addObject("success", success);
 		return mv;
 	}
 	
