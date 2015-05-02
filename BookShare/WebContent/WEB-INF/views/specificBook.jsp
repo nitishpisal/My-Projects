@@ -79,15 +79,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<c:url value="/resources/index.jsp" />">Simply Hired</a>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/">Simply Hired</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                	<li>
-                        <a href="<c:url value="/resources/postjob" />">Post Your Job</a>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <%String login= (String)request.getSession().getAttribute("login");
                     if(login != null && login.equals("true")) { %>
@@ -112,26 +107,17 @@
         <div class="row">
 
              <div class="col-md-3">
-                <p class="lead" style="color:#2c3e50"><b>Categories</b></p>
+                <p class="lead" style="color:#2c3e50"><b>Navigation</b></p>
                 <div class="list-group">
-                	<h5><a href = "#">As a Client</a></h5>
+                	<h5><a href = "<%=request.getContextPath()%>/books">Go to..</a></h5>
                 	<ul>
-                    <li><a href="<c:url value="/resources/myStulance/?jobs=all" />"class="l">Posted Jobs</a></li>
-                    <li><a href="<c:url value="/resources/myStulance/?jobs=proposalsForMe" />" class="l">Received Proposals</a></li>
-                    <li><a href="<c:url value="/resources/myStulance/?jobs=completed" />" class="l">Completed Jobs</a></li>   
-					</ul>
+	                    <li><a href="<%=request.getContextPath()%>/" class="l">Home</a></li>                	             	                 	
+	                    <li><a href="<%=request.getContextPath()%>/requestbook" class="l">Request A Book</a></li>
+	                	<li><a href="<%=request.getContextPath()%>/sellbook" class="l">Sell A Book</a></li>
+	                    <li><a href="<%=request.getContextPath()%>/books?action=available" class="l">Available Books</a></li>
+	                	<li><a href="<%=request.getContextPath()%>/books?action=required" class="l">Required Books</a></li>
+				 	</ul>
                 </div>
-				<div class="list-group">
-                	<h5><a href = "#">As a Student</a></h5>
-                	<ul>
-                    <li><a href="<c:url value="/resources/myStulance/?jobs=myJobs" />" class="l">Assigned Jobs</a></li>
-                    <li><a href="<c:url value="/resources/myStulance/?jobs=myProposals" />"class="l">My Proposals</a></li>
-                    <li><a href="<c:url value="/resources/myStulance/?jobs=completedByMe" />" class="l">Completed Jobs</a></li>   
-					</ul>
-                </div>
-                <%-- <div class="list-group">
-                	<h5><a href = "<c:url value="/resources/personalitySurvey.jsp" />">Discover Your Interest</h5>
-                </div> --%>				
             </div>
 
             <div class="col-md-9">  

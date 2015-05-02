@@ -26,11 +26,7 @@ public class GlobalController {
 	 */
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public ModelAndView getLoginPage(	
-										HttpServletRequest request){
-		
-		//String loginOrNot = (String)request.getAttribute("login");
-		//System.out.println(loginVal);
+	public ModelAndView getLoginPage(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("login");
 		
 		return mv;
@@ -71,32 +67,6 @@ public class GlobalController {
 		return mv;
 	}
 
-	
-	
-	/**
-	 * login before buying or bidding
-	 */
-	/*@RequestMapping(value="/login/{loginVal}", method = RequestMethod.POST)
-	public ModelAndView getLoginPage2(	@PathVariable("loginVal") String loginVal,
-										HttpServletRequest request){
-		String bookId = (String) request.getParameter("bookId");
-		//System.out.println(loginVal + bookId);
-		ModelAndView mv;
-		int bookid = Integer.parseInt(bookId);
-		System.out.println(loginVal);
-		if(loginVal.equalsIgnoreCase("nologin")){
-			mv = new ModelAndView("login");
-		}
-		else{
-			mv = new ModelAndView("specificBook");
-			Books book = new Books();
-			Crud c = new Crud();
-			book = (Books)c.get(book, bookid);
-			mv.addObject("book", book);
-		}
-		mv.addObject("bookId",bookid);
-		return mv;
-	}*/
 	
 	/**
 	 *validate login 

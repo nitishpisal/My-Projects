@@ -85,17 +85,6 @@
                     <li><a href="<%=request.getContextPath()%>/myaccount?action=bidsformybooks" class="l">Bids for my Books</a></li>   
 					</ul>
                 </div>
-				<%-- <div class="list-group">
-                	<h5><a href = "#">As a Student</a></h5>
-                	<ul>
-                    <li><a href="<%=request.getContextPath()%>/myStulance/?jobs=myJobs" class="l">Assigned Jobs</a></li>
-                    <li><a href="<%=request.getContextPath()%>/myStulance/?jobs=myProposals" class="l">My Proposals</a></li>
-                    <li><a href="<%=request.getContextPath()%>/myStulance/?jobs=completedByMe" class="l">Completed Jobs</a></li>   
-					</ul>
-                </div> 
-                <div class="list-group">
-                	<h5><a href = "<%=request.getContextPath()%>/personalitySurvey.jsp">Discover Your Interest</h5>
-                </div>	--%>			
             </div>
             <div class="col-md-9"> 
             <c:choose>

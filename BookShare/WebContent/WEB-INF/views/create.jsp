@@ -4,7 +4,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <html>
 <script type="text/javascript">
-	function createPlayer() {
+	function create() {
 		//var userId = document.getElementById("pageId").value;
 		var username = document.getElementById("username").value;
 		var password = document.getElementById("password").value;
@@ -108,7 +108,7 @@
 		</tr>
 		<tr>
 				<td style="border: 0;"><input type="button" value="Register"
-					onclick="javascript:createPlayer();"></td>
+					onclick="javascript:create();"></td>
 		</tr>
 		
 		</table>

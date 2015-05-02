@@ -68,10 +68,6 @@
     </nav>
 	<hr>
     <!-- Header -->
-        
-    
-
-   <!-- FindLancer Ends -->
 	
 	 <!-- Post your Job Section -->
     <section id="contact">

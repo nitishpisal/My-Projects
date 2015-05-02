@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<c:url value="/index.jsp" />">Simply Hired</a>
+                <a class="navbar-brand" href="<c:url value="/" />">Simply Hired</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,18 +49,6 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                   <%--  <%if(request.getSession().getAttribute("login").equals("true")) { %>
-                    <li>
-                        <a href="#">Welcome, <%= request.getSession().getAttribute("userName") %></a>
-                    </li>
-                     <li>
-                        <a href="<%=request.getContextPath() %>/myStulance/?jobs=all">My Account</a>
-                    </li>
-                    
-                    <li class="page-scroll">
-                        <a href="<%= request.getContextPath()%>/logout">Logout</a>
-                    </li>
-                    <%} %> --%>
                    
                 </ul>
             </div>

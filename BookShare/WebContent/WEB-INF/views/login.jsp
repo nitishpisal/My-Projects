@@ -182,10 +182,6 @@ function login(){
                                 <!-- <p class="help-block text-danger"></p>  -->
                             </div>
                         </div>
-                        <% String postJobCall = (String)request.getAttribute("postJobCall");
-                        if (postJobCall != null){ %>
-                        <input type="hidden" name="postJobCall" value="<%= (String)request.getAttribute("postJobCall")%>">
-                        <%} %>
                         <br>
                         <div id="success"></div>
                         <div class="row">
@@ -224,10 +220,6 @@ function login(){
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-                        <% String postJobCall2 = (String)request.getAttribute("postJobCall");
-                        if (postJobCall2 != null){ %>
-                        <input type="hidden" name="postJobCall" value="<%= (String)request.getAttribute("postJobCall")%>">
-                        <%} %>
                         <br>
                         <div id="success"></div>
                         <div class="row">

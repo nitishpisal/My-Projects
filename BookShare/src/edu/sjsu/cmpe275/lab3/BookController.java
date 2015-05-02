@@ -66,12 +66,7 @@ public class BookController {
 	@RequestMapping(value="/bookpost", method = RequestMethod.GET)
 	public ModelAndView postBooks(){
 		
-		/*Crud c = new Crud();
-		Session session = (Session) c.crudOpen();
-		Query query = session.createQuery("from Books");
-		List<?> list = query.list();*/
 		ModelAndView mv = new ModelAndView("bookRegister");
-		//mv.addObject("books", list);
 		mv.addObject("what", "sellRequest");
 		return mv;
 	}
@@ -81,16 +76,28 @@ public class BookController {
 	 * 
 	 */
 	@RequestMapping(value="/requestbook", method = RequestMethod.GET)
-	public ModelAndView requestBooks(){
-		ModelAndView mv = new ModelAndView("bookRegister");
-		mv.addObject("what", "buyRequest");
+	public ModelAndView requestBooks(HttpServletRequest request){
+		ModelAndView mv;
+		String login = (String) request.getSession().getAttribute("login");
+		if(login != null && login.equalsIgnoreCase("true")){
+			mv = new ModelAndView("bookRegister");
+			mv.addObject("what", "buyRequest");
+		}else{
+			mv = new ModelAndView("login");
+		}
 		return mv;
 	}
 	
 	@RequestMapping(value="/sellbook", method = RequestMethod.GET)
-	public ModelAndView sellBooks(){
-		ModelAndView mv = new ModelAndView("bookRegister");
-		mv.addObject("what", "sellRequest");
+	public ModelAndView sellBooks(HttpServletRequest request){
+		ModelAndView mv;
+		String login = (String) request.getSession().getAttribute("login");
+		if(login != null && login.equalsIgnoreCase("true")){
+			mv = new ModelAndView("bookRegister");
+			mv.addObject("what", "sellRequest");
+		}else{
+			mv = new ModelAndView("login");
+		}
 		return mv;
 	}
 	
@@ -337,6 +344,43 @@ public class BookController {
 		return mv;
 	}
 	
+	
+	/**
+	 * 
+	 * Search for a book based on title, author or ISBN
+	 * 
+	 */
+	
+	@RequestMapping (value="/search" , method=RequestMethod.POST)
+	public ModelAndView searchBooks(HttpServletRequest request){
+		String searchStr = (String) request.getParameter("value");
+		
+		ModelAndView mv = new ModelAndView("search");
+		
+		Query query;
+		List<?> list;
+		Crud c = new Crud();
+		Session session = (Session) c.crudOpen();
+		Userdetail user = new Userdetail();
+		user = (Userdetail) request.getSession().getAttribute("userDetails");
+		if (user != null){
+			query = session.createQuery("from Books where isbn like :si or title like :st or author like :sa"
+					+ " and owner.userid <> :uid");
+			query.setParameter("uid", user.getUserid());
+		}else{
+			query = session.createQuery("from Books where isbn like :si or title like :st or author like :sa");
+		}
+		query.setString("si", '%'+searchStr+'%');
+		query.setString("st", '%'+searchStr+'%');
+		query.setString("sa", '%'+searchStr+'%');
+		list = query.list();
+		
+		mv.addObject("books", list);
+		mv.addObject("what", "available");
+		 
+		return mv;
+		
+	}
 	
 		
 }

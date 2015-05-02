@@ -46,54 +46,7 @@ public class PlayerController {
 		}
 		return mv;
 	}
-	// creating Player
-/*	@RequestMapping(value="/player", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<Player> registerPlayer(	@RequestParam("firstname") String firstname,
-										@RequestParam("lastname") String lastname,
-										@RequestParam("email") String email,
-										@RequestParam("street") String street,
-										@RequestParam("city") String city,
-										@RequestParam("state") String state,
-										@RequestParam("zip") String zip,
-										@RequestParam("description") String description,
-										@RequestParam("sponsor") String sponsor){
-		
-		if(!email.isEmpty() && !firstname.isEmpty() && !lastname.isEmpty()){
-			System.out.println(lastname);
-			Crud c = new Crud();
-			Sponsor s = new Sponsor();
-			int sponsorid = 0;
-			try{
-				sponsorid = Integer.parseInt(sponsor);
-			}catch(Exception e){
-				System.out.println("No sponsor");
-			}
-			s = (Sponsor) c.get(s, sponsorid);
-			//If sponsor id is provided and sponsor is not present
-			if(sponsorid != 0 && s == null)
-				return new ResponseEntity<Player>(HttpStatus.BAD_REQUEST);
-			
-			Player p = new Player(firstname, lastname, email, description);
-			Address a = new Address(street, city, state, zip);
-			p.setAddress(a);
-			p.setSponsor(s);
-			long id = 0;
-			try{
-		    id = c.save(p);
-			}catch(Exception e){
-				System.out.println("Unable to insert record");
-				return new ResponseEntity<Player>(HttpStatus.BAD_REQUEST);
-			}
-		    p = (Player) c.get(p, id);
-		    HttpHeaders header = new HttpHeaders();
-			header.setContentType(MediaType.APPLICATION_JSON);
-			
-			return new ResponseEntity<Player>(p, HttpStatus.OK);
-		}
-		else
-			return new ResponseEntity<Player>(HttpStatus.BAD_REQUEST);
-		
-	}*/
+	
 	//get Player
 	@RequestMapping(value="/player/{id}", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<Player> getPlayer(@PathVariable("id") long id){

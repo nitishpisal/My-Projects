@@ -4,11 +4,9 @@
 <script type="text/javascript">
 	
 	function search(){
-		alert("I am here 1");
 		var search = document.getElementById("search").value;
-		alert(search);
 		var regForm = document.forms['searchForm'];
-		regForm.method = "POST";
+		regForm.method = "GET";
 		regForm.action = "http://localhost:8080/Poker/search/?value="+search;
 		regForm.submit();
 	}
@@ -96,7 +94,6 @@
                 	
                 	<li>
                 	  	 &nbsp;
-	                	<%-- <form:form modelAttribute="searchForm"> --%>
 	                	<form method="post" action="<%=request.getContextPath() %>/search">
 							<table>
 								<tr>
@@ -108,7 +105,6 @@
 								</tr>
 							</table>
 						</form>
-						<%-- </form:form> --%>
 					</li>
 				</ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -225,59 +221,11 @@
 		                     				**Please Login
 					                    	<button type="submit" class="btn btn-success btn-lg" disabled>Buy/Bid</button>
 					                </div>
-		                     		<%-- 
-		                     		
-		                     		<input type="hidden" id="bookIdt" value="${book.bookId}">
-		                     		<input type="hidden" id="buyNow" value="noLogin">
-				                    <c:if test="${book.bid == 'Y' }">
-					                    <div class="text-right">
-					                    	<input type=submit value="Bid Now" class="btn btn-success btn-lg">
-					                    </div>
-				                    </c:if>
-				                    <c:if test="${book.bid == 'N' }">
-					                    <div class="text-right">
-					                    	<input type=button value="Buy Now" onclick="javascript:login();" class="btn btn-success btn-lg">
-					                    </div>
-				                    </c:if> --%>
 		                    <%} %>
 		                </div>
-		              <%--  </form:form> --%>
 		             
 		             	</form>
 		             </c:if>
-		             
-		             <!-- form for required -->
-		             
-		             <c:if test="${what == 'required' }">
-						<form method= "post" action="<%=request.getContextPath()%>/fulfill/?postId=${book.postId }&action=buy"> 
-		                <div class="well" style="color:#2c3e50">
-		                	<h5><b>Title:</b> ${book.title}</h5>
-							<h6> <b>Author:</b> ${book.author}</h6> 
-							 Publisher:    ${book.publisher} &nbsp;<b>| </b>&nbsp;  year:  ${book.year} &nbsp;<br>
-							 <c:if test="${what == 'available' }">
-							 	price: $  ${book.price}<br>
-							 </c:if>
-							<%if(login != null && login.equals("true")) { %>
-							
-							 		<input type="hidden" id="postId" value="${book.postId}">
-							 		<input type="hidden" id="sellNow" value="loggedin">
-							 		<div class="text-right">
-				                    	<button type="submit" class="btn btn-success btn-lg">Fulfill</button>
-				                    </div>
-				                    
-		                     <%}else {%>
-		                     	
-			                    	<div class="text-right">
-		                     				**Please Login
-					                    	<button type="submit" class="btn btn-success btn-lg" disabled>Fulfill</button>
-					                </div>
-		                    <%} %>
-		                </div>
-		              <%--  </form:form> --%>
-		             
-		             	</form>
-		             </c:if>
-		             
 		             
 		            </c:forEach>
 				</c:if>
