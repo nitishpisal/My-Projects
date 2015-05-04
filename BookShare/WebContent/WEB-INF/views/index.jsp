@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simply Hired - Get your job done </title>
+    <title>Book Share - Share Knowledge, Go Wise </title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
@@ -22,14 +22,7 @@
     <link href="<c:url value="/resources/css/font-awesome.min.css"/>" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>  
 
@@ -170,7 +163,7 @@ $(function() {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">Simply Hired</a>
+                <a class="navbar-brand" href="#page-top">BookShare</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -180,7 +173,7 @@ $(function() {
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#">Jobs</a>
+                        <a href="#">Books</a>
                         <ul>
                         <li class="page-scroll">
                         <a href="#requestbooks">Request A Book</a>
@@ -202,7 +195,7 @@ $(function() {
                     <% String login=(String) request.getSession().getAttribute("login");
                     	if (login != null && login.equalsIgnoreCase("true")){%>
                     <li>
-                        <a href="<%=request.getContextPath() %>/myStulance/?jobs=all">My Account</a>
+                        <a href="<%=request.getContextPath() %>/myaccount?action=mybooks">My Account</a>
                     </li>
                     <li class="page-scroll">
                         <a href="<%= request.getContextPath()%>/logout">Logout</a>
@@ -231,9 +224,9 @@ $(function() {
            <div class="col-lg-12">
            		<img class="img-responsive" src="<c:url value="/resources/img/profile.png" />" alt="">
                  	<div class="intro-text">
-                        <span class="name"><font size="5">Start Freelancing Today!</font></span>
-                        <hr style="border-top: solid 2px; max-width: 700px;">
-                        <span class="skills">Web Developer - Graphic Artist - Shopping Assistance</span>
+                        <span class="name"><font size="5">Get Your Books Today!</font></span>
+                        <hr style="border-top: solid 2px; max-width: 400px;">
+                        <span class="skills">Buy - Sell - Bid</span>
                     </div>
                 </div>
           </div>  
@@ -251,10 +244,10 @@ $(function() {
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>You can post your jobs here and get it done by the Students at optimal price and quality deliverable benefitial for both. </p>
+                    <p>You can post the details of the books that you need and other users can give you proposals. </p>
                 </div>
                 <div class="col-lg-4">
-                    <p>The categories range from highly technical functionality like develeoping a realtime application to small house hold activities like baby sitting or shopping Assistance!!</p>
+                    <p>You can receive multiple proposals for your requests and you can choose which one to go with!</p>
                 </div>
                 <%-- <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="<c:url value="/resources/postjob" />" class="btn btn-lg btn-outline">
@@ -280,10 +273,10 @@ $(function() {
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>You can post your jobs here and get it done by the Students at optimal price and quality deliverable benefitial for both. </p>
+                    <p>You can post the books that are availabe in your inventory and you can sell them to others. </p>
                 </div>
                 <div class="col-lg-4">
-                    <p>The categories range from highly technical functionality like develeoping a realtime application to small house hold activities like baby sitting or shopping Assistance!!</p>
+                    <p>You can also enable bidding option for your book, Choose which user you want to go with!</p>
                 </div>
                <%--  <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="<c:url value="<%=request.getContextPath() %>/sellbook'" />" class="btn btn-lg btn-outline">
@@ -391,10 +384,10 @@ $(function() {
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Simply Hired is reinventing the way we work. Today more than 2 million busines tap into Simply Hired to find, hire, and pay the world's best stulancers, making it easier than ever to build successful companies and thriving careers</p>
+                    <p>BookShare is reinventing the way we work. Today more than 2 million busines tap into BookShare to find, Buy and Sell the world's best Books, making it easier than ever to build successful companies and thriving careers</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>Innovative global enterprises, small businesses and startups alike can connect with the world's most talenterd developers, designers, writers, admins and more. If your job can be done online, you can hire the best person to do it.</p>
+                    <p>People are connecting via Bookshare to Bid, offer proposals, sell and buy books. The company is providing transparency in the process and Users are loving it.</p>
                 </div>
             </div>
             <div class="row">
@@ -405,21 +398,25 @@ $(function() {
             </div>
             <div class="row">
                 <div class="col-sm-3">
-                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="images/prachi.png">
-                <h5>Prachi Jain</h5> 
-                </div>
-                <div class="col-sm-3">
-                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="images/apurva.jpg">
-                <h5>Apurva HP</h5> 
-                </div>
-                <div class="col-sm-3">
-                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="images/badal.jpg">
+                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="<%=request.getContextPath() %>/resources/images/badal.jpg">
                 <h5>Badal Jain</h5> 
                 </div>
                 <div class="col-sm-3">
-                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="images/rishi.jpg">
+                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="<%=request.getContextPath() %>/resources/images/rishi.jpg">
                 <h5>Rishi Khurana</h5> 
-                </div> 
+                </div>
+                <div class="col-sm-3">
+                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="<%=request.getContextPath() %>/resources/images/aditya.jpg">
+                <h5>Aditya Shingvi</h5> 
+                </div>
+                <div class="col-sm-3">
+                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="<%=request.getContextPath() %>/resources/images/pranjal.jpg">
+                <h5>Pranjal Shah</h5> 
+                </div>
+                <div class="col-sm-3">
+                <img style="background-repeat: no-repeat; background-position: 50%; border-radius: 50%; width: 100px; height: 100px;" alt="" src="<%=request.getContextPath() %>/resources/images/agam.jpg">
+                <h5>Agam Masalia</h5> 
+                </div>
             </div>
         </div>
     </section>
@@ -501,8 +498,8 @@ $(function() {
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Simply Hired Team</h3>
-                        <p>Simply Hired is a web app created by a group of SJSU students</p>
+                        <h3>About BookShare Team</h3>
+                        <p>BookShare is a web app created by a group of SJSU students</p>
                     </div>
                 </div>
             </div>
@@ -511,7 +508,7 @@ $(function() {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; stulance.mybluemix.net . All Rights Reserved
+                        Copyright@Bookshare.com . All Rights Reserved
                     </div>
                 </div>
             </div>

@@ -59,7 +59,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simply Hired - Get your Job done</title>
+    <title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -86,7 +86,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/">Simply Hired</a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/">BookShare</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -233,14 +233,6 @@
 
         </div>
 
-    </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-      
     </div>
     <!-- /.container -->
 

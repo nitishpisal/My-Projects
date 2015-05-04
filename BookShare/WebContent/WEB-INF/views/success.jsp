@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simply Hired - Get your Job done</title>
+    <title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -37,23 +37,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<c:url value="/resources/index.jsp" />">Simply Hired</a>
+                <a class="navbar-brand" href="<c:url value="/resources/index.jsp" />">BookShare</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="<c:url value="/resources/postjob" />">Post Your Job</a>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <%String login= (String)request.getSession().getAttribute("login");
                     if(login != null && login.equals("true")) { %>
                     <li>
-                        <a href="#">Welcome, <%= request.getSession().getAttribute("userName") %></a>
+                        <a href="#">Welcome, <%= request.getSession().getAttribute("firstname") %></a>
                     </li>
                      <li>
-                        <a href="<%=request.getContextPath() %>/myStulance/?jobs=all">My Account</a>
+                        <a href="<%=request.getContextPath() %>/myaccount?action=mybooks">My Account</a>
                     </li>
                     
                     <li class="page-scroll">
@@ -61,7 +56,7 @@
                     </li>
                     <%} else{ %>
                      <li class="page-scroll">
-                        <a href="<c:url value="/resources/login.jsp" />">Login/Register</a>
+                        <a href="<%=request.getContextPath() %>/login">Login/Register</a>
                     </li>
                     <%} %>
                 </ul>
@@ -97,15 +92,15 @@
                             <form > 
 								<font size="4"><b>${success}</font><br><br>
 								 <c:if test="${not empty order}">
-								 	<font size="3"><b> Order ID :</b> ${order.orderId }</font><br><br>
-									<font size="3"><b> Quantity : </b>${order.quantity }</font><br><br>
-									<font size="3"><b> Amount : </b>${order.amount }</font><br><br>
+								 	<font size="3"><b> Order ID :</b> ${order.orderId }</font><br>
+									<font size="3"><b> Quantity : </b>${order.quantity }</font><br>
+									<font size="3"><b> Amount : </b>${order.amount }</font><br>
+									<hr>
 								 </c:if>
                                 <button type="button" onclick="location.href='<%=request.getContextPath() %>/'" class="btn btn-success btn-lg">  Home</button>
                          	</form>
                         </div>
                     </div>
-                    <hr>
                  </div> 
 			</div>
         </div>

@@ -50,7 +50,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simply Hired - Get your Job done</title>
+    <title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -79,13 +79,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<%=request.getContextPath() %>/">Simply Hired</a>
+                <a class="navbar-brand" href="<%=request.getContextPath() %>/">BookShare</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <%String login= (String)request.getSession().getAttribute("login");
                     if(login != null && login.equals("true")) { %>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/myaccount?action=mybooks">My Account</a>
+                    </li>
                     <li class="page-scroll">
                         <a href="<%= request.getContextPath()%>/logout">Logout</a>
                     </li>
@@ -125,36 +128,49 @@
                 <div class="well" style="color:#2c3e50">
                 	<h5><b>Title : </b> ${book.title }</h5>
                 	<hr>
-                	<font size="3"><b> Author :</b> ${book.author }</font><br><br>
-					<font size="3"><b> Publisher : </b>${book.publisher }</font>
-					<hr>
+                	<font size="2"><b> Author :</b> ${book.author }</font><br>
+					<font size="2"><b> Publisher : </b>${book.publisher }</font><br>
+					
 					<font size="2"><b> Year: </b>  ${book.year }</font><br>
 					<font size="2"><b> Available Quantity :</b> ${book.quantity }</font><br>
-					
+					<hr>
 					<font size="2"><b> Bid: </b>  ${book.bid }</font><br>
 					<font size="2"><b> Price :</b> $ ${book.price }</font><br>
 					<font size="2"><b> Available : </b>${book.available }</font>
 					<hr>
-					<div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Quantity</label>
-                                <input type="text" class="form-control" placeholder="Quantity" id="quantity" >
-                                <p class="help-block text-danger"></p>
-                            </div>
-                   	</div>
 					
 					<input type="hidden" id="buyerid" value=<%=request.getSession().getAttribute("userid")%>> 
 					<input type="hidden" id="bookid" value=${book.bookId }>
 					<input type="hidden" id="price" value=${book.price }>
 					<input type="hidden" id="bid" value=${book.bid }>
 					<c:if test="${book.bid == 'N' }">
+						<div class="row control-group">
+                            <!-- <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Quantity</label>
+                                <input type="text" class="form-control" placeholder="Quantity" id="quantity" >
+                                <p class="help-block text-danger"></p>
+                            </div> -->
+                            Quantity : &nbsp
+                            <select id="quantity" name="quantity">
+  								
+  								<script>
+								  var myDate = new Date();
+								  var year = myDate.getFullYear();
+								  for(var i = 1; i <= ${book.quantity}; i++){
+									  document.write('<option value="'+i+'">'+i+'</option>');
+								  }
+								</script>
+							</select>
+                            
+                            
+                   		</div>
 	                    <div class="text-right">
 	                        <button type="submit" onclick="javascript:buyNow();" class="btn btn-success btn-lg">Buy now</button>
 	                    </div>
                     </c:if>
                     
                     <c:if test="${book.bid == 'Y' }">
-                    	<input type="text" class="form-control" placeholder="Place Bid" id="bidPrice" >
+                    	<input type="text" class="form-control" placeholder="Place Bid" id="bidPrice" ><br>
 	                    <div class="text-right">
 	                        <button type="submit" onclick="javascript:placeBid();" class="btn btn-success btn-lg">Bid now</button>
 	                    </div>
@@ -167,14 +183,6 @@
 
         </div>
 
-    </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-      
     </div>
     <!-- /.container -->
 

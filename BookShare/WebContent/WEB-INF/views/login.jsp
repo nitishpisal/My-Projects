@@ -15,7 +15,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
  	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>  
  
-	<title>Simply Hired - Get your Job done</title>
+	<title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -130,7 +130,7 @@ function login(){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/resources/index.jsp">Simply Hired</a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/">BookShare</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -158,7 +158,7 @@ function login(){
 	 <div class="container">
           <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>Login/Register</h3>
+                    <h3>Login...Register</h3>
                     <hr class="star-primary">
 				</div>
            </div> 
@@ -197,26 +197,26 @@ function login(){
                 </div>
                 <!-- Register Section -->
                 <div class="col-lg-5 col-lg-offset-1">
-                    <form name="register" id="register" action="/resources/register.jsp">
+                    <form name="register" id="register" method="post" action="<%=request.getContextPath() %>/register">
                         
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group controls">
                                 <label>Email</label>
-                                <input type="text" class="form-control" placeholder="Email" name="email" id="username" >
+                                <input type="text" class="form-control" placeholder="Email" name="email" id="rEmail" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group controls">
                                 <label>pasword</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password" id="password" >
+                                <input type="password" class="form-control" name="password1" placeholder="Password" id="password1" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-10 floating-label-form-group controls">
                                 <label>confirm password</label>
-                                <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPass" id="cPassword">
+                                <input type="password" class="form-control" placeholder="Confirm Password" name="confirmPass2" id="confirmPass2">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

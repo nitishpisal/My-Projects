@@ -46,14 +46,7 @@ public class GlobalController {
 		System.out.println("book Id " + bookId);
 		String postId = (String )request.getParameter("postId");
 		String action = (String )request.getParameter("action");
-		/*int bookid = 0; int postid = 0;
-		if(bookId != null)
-			bookid = Integer.parseInt(bookId);
-		if(postId != null)
-			postid = Integer.parseInt(postId);
-		if(action.equals("buy")){
-			
-		}*/
+
 		ModelAndView mv = new ModelAndView("login");
 		if(action.equalsIgnoreCase("buy")){
 				//mv = new ModelAndView("specificBook");
@@ -75,7 +68,7 @@ public class GlobalController {
 	@RequestMapping(value="/validate", method = RequestMethod.POST)
 	public String validateLogin(HttpServletRequest request){
 		
-		String ret = "";
+		String ret = "redirect:/";
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String what = request.getParameter("what");
@@ -89,17 +82,23 @@ public class GlobalController {
 	//	String bookId = request.getParameter("bookId");
 	//	System.out.println("book "+ bookId);
 		Crud c = new Crud();
+		ModelAndView mv;
 		Session session = (Session) c.crudOpen();
 		Query query = session.createQuery("from Login where username = :uname");
 		query.setParameter("uname", username);
 		List<?> list = query.list();
+		if(list.size() ==0){
+			mv = new ModelAndView("login");
+			mv.addObject("bookOrPostId", bookOrPost);
+			mv.addObject("what", "buy");
+			return ret;
+		}
 		Login details = (Login)list.get(0);
 		query = session.createQuery("from Userdetail where userid = :uid");
 		query.setParameter("uid", details.getUserid());
 		List<?> list2 = query.list();
 		Userdetail userDetail = (Userdetail)list2.get(0);
-		ModelAndView mv;
-		if(details.getPassword().equals(password)){
+		if(details != null && details.getPassword().equals(password)){
 			request.getSession().setAttribute("login", "true");
 			request.getSession().setAttribute("username", username);
 			request.getSession().setAttribute("firstname", userDetail.getFirstname());

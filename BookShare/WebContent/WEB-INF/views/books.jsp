@@ -61,7 +61,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simply Hired - Get your Job done</title>
+    <title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -88,7 +88,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/">Simply Hired</a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/">BookShare</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -225,20 +225,6 @@
 		                     				**Please Login
 					                    	<button type="submit" class="btn btn-success btn-lg" disabled>Buy/Bid</button>
 					                </div>
-		                     		<%-- 
-		                     		
-		                     		<input type="hidden" id="bookIdt" value="${book.bookId}">
-		                     		<input type="hidden" id="buyNow" value="noLogin">
-				                    <c:if test="${book.bid == 'Y' }">
-					                    <div class="text-right">
-					                    	<input type=submit value="Bid Now" class="btn btn-success btn-lg">
-					                    </div>
-				                    </c:if>
-				                    <c:if test="${book.bid == 'N' }">
-					                    <div class="text-right">
-					                    	<input type=button value="Buy Now" onclick="javascript:login();" class="btn btn-success btn-lg">
-					                    </div>
-				                    </c:if> --%>
 		                    <%} %>
 		                </div>
 		              <%--  </form:form> --%>
@@ -273,7 +259,6 @@
 					                </div>
 		                    <%} %>
 		                </div>
-		              <%--  </form:form> --%>
 		             
 		             	</form>
 		             </c:if>
@@ -285,14 +270,6 @@
 
         </div>
 
-    </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-      
     </div>
     <!-- /.container -->
 
