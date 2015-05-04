@@ -31,6 +31,7 @@ public class Bids implements Record{
 	private String phno;
 	private String bookdetails;*/
 	private char accepted;
+	private String active;
 	
 	//-----------Constructors-----------------------//
 	
@@ -39,6 +40,7 @@ public class Bids implements Record{
 	public Bids(int bidPrice, char accepted){
 		this.bidPrice = bidPrice;
 		this.accepted = accepted;
+		this.active = "yes";
 	}
 	
 	
@@ -81,6 +83,14 @@ public class Bids implements Record{
 
 	public void setBidder(Userdetail bidder) {
 		this.bidder = bidder;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 	
 	

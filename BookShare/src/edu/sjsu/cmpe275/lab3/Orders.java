@@ -22,7 +22,7 @@ public class Orders implements Record {
 	
 	@ManyToOne
     @JoinColumn(name="userid",referencedColumnName = "userid")
-	private Login userId;
+	private Userdetail userId;
 	
 	@ManyToOne
     @JoinColumn(name="bookid",referencedColumnName = "bookid")
@@ -54,11 +54,11 @@ public class Orders implements Record {
 		this.orderId = orderId;
 	}
 
-	public Login getUserId() {
+	public Userdetail getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Login userId) {
+	public void setUserId(Userdetail userId) {
 		this.userId = userId;
 	}
 

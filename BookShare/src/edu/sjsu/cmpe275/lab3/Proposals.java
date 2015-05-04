@@ -17,7 +17,7 @@ public class Proposals implements Record{
 	
 	@ManyToOne
 	@JoinColumn(name="proposerid",referencedColumnName = "userid")
-	private Login proposerId;
+	private Userdetail proposerId;
 	
 	@ManyToOne
 	@JoinColumn(name="proposalforpostid",referencedColumnName = "postid")
@@ -25,11 +25,8 @@ public class Proposals implements Record{
 	
 	private String proposal;
 	
-	private String bookdetails;
-	private String username;
-	private String phno;
-	
 	private char accepted;
+	private String active;
 	
 	/**
 	 * constructors
@@ -37,12 +34,11 @@ public class Proposals implements Record{
 	 */
 	public Proposals(){}
 	
-	public Proposals(String proposal, char accepted, String username, String phno, String bookdetails){
+	public Proposals(String proposal, char accepted){
 		this.proposal = proposal;
 		this.accepted = accepted;
-		this.username = username;
-		this.phno = phno;
-		this.bookdetails = bookdetails;
+		this.active = "yes";
+		
 	}
 	
 	public long getProposalID() {
@@ -51,10 +47,10 @@ public class Proposals implements Record{
 	public void setProposalID(long proposalID) {
 		this.proposalID = proposalID;
 	}
-	public Login getProposerId() {
+	public Userdetail getProposerId() {
 		return proposerId;
 	}
-	public void setProposerId(Login proposerId) {
+	public void setProposerId(Userdetail proposerId) {
 		this.proposerId = proposerId;
 	}
 	public RequiredBooks getProposalForPostId() {
@@ -76,29 +72,14 @@ public class Proposals implements Record{
 		this.accepted = accepted;
 	}
 
-	public String getBookdetails() {
-		return bookdetails;
+	public String getActive() {
+		return active;
 	}
 
-	public void setBookdetails(String bookdetails) {
-		this.bookdetails = bookdetails;
+	public void setActive(String active) {
+		this.active = active;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPhno() {
-		return phno;
-	}
-
-	public void setPhno(String phno) {
-		this.phno = phno;
-	}
 	
 	
 }

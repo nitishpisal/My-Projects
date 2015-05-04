@@ -46,11 +46,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                	<li>
-                        <a href="<%=request.getContextPath()%>/postjob">Post Your Job</a>
-                    </li>
-                </ul>
+                
                 <ul class="nav navbar-nav navbar-right">
                     <%String login= (String)request.getSession().getAttribute("login");
                     if(login != null && login.equals("true")) { %>
@@ -85,15 +81,52 @@
                     <li><a href="<%=request.getContextPath()%>/myaccount?action=bidsformybooks" class="l">Bids for my Books</a></li>   
 					</ul>
                 </div>
+                <div class="list-group">
+                	<h5><a href = "<%=request.getContextPath()%>/books">Go to..</a></h5>
+                	<ul>
+	                    <li><a href="<%=request.getContextPath()%>/" class="l">Home</a></li>                	             	                 	
+	                    <li><a href="<%=request.getContextPath()%>/requestbook" class="l">Request A Book</a></li>
+	                	<li><a href="<%=request.getContextPath()%>/sellbook" class="l">Sell A Book</a></li>
+	                    <li><a href="<%=request.getContextPath()%>/books?action=available" class="l">Available Books</a></li>
+	                	<li><a href="<%=request.getContextPath()%>/books?action=required" class="l">Required Books</a></li>
+				 	</ul>
+                </div>
             </div>
             <div class="col-md-9"> 
             <c:choose>
-            	<c:when test="${what == 'myproposals'}">
+            	<c:when test="${what == 'mybooks'}">
 				<c:if test="${not empty books}">
-				<form method= "post" action="<%=request.getContextPath()%>/awardJob">
+				
 					<h5><b>Your Inventory</b></h5>
 	                <c:forEach var="book" items="${books}">
-			            	
+			            	<form method= "post" action="<%=request.getContextPath()%>/removebook">
+			                <div class="well" style="color:#2c3e50">
+			                	<h5><b>Title : </b> ${book.title }</h5>
+			                	<hr>
+			                	<font size="3"><b> ISBN :</b> ${book.isbn }</font><br><br>
+			                	<font size="3"><b> Author :</b> ${book.author }</font><br><br>
+								<font size="3"><b> Publisher : </b>${book.publisher }</font>
+								<hr>
+								<font size="2"><b> Year: </b>  ${book.year }</font><br>
+								<font size="2"><b> Available Quantity :</b> ${book.quantity }</font><br>
+								<input type="hidden" name="bookid" id="bookid" value=${book.bookId }>
+								<input type="hidden" name="removewhat" value="postedbook">
+			                    <div class="text-right">
+			                        <button type="submit" class="btn btn-success btn-lg">Remove</button>
+			                    </div>
+			                </div>
+			                </form>
+			          	</c:forEach>
+			          	
+			         </c:if>
+			        </c:when>
+			        
+			      <c:when test="${what == 'myrequestedbooks'}">
+				<c:if test="${not empty books}">
+				
+					<h5><b>Your Requirements</b></h5>
+	                <c:forEach var="book" items="${books}">
+			            	<form method= "post" action="<%=request.getContextPath()%>/removebook">
 			                <div class="well" style="color:#2c3e50">
 			                	<h5><b>Title : </b> ${book.title }</h5>
 			                	<hr>
@@ -105,51 +138,76 @@
 								<font size="2"><b> Available Quantity :</b> ${book.quantity }</font><br>
 								<%-- <input type="hidden" id="proposerId" value=<%=request.getSession().getAttribute("userid")%>>  --%>
 								
-								<c:if test="${what=='reqbooks'}">
-								<input type="hidden" id="postid" value=${book.postId }>
-								</c:if>
-								<c:if test="${what=='mybooks'}">
-								<input type="hidden" id="postid" value=${book.bookId }>
-								</c:if>
+								<input type="hidden" name="bookid" id="bookid" value=${book.postId }>
+								<input type="hidden" name="removewhat" value="requiredbook">
 			                    <div class="text-right">
-			                        <button type="submit" onclick="javascript:submitProposal();" class="btn btn-success btn-lg">Submit</button>
+			                        <button type="submit" class="btn btn-success btn-lg">Remove</button>
 			                    </div>
-								<hr>   
-			                    
 			                </div>
-			                </c:forEach>
-			          	</form>
+			                </form>
+			          	</c:forEach>
+			          	
 			         </c:if>
 			        </c:when>
 			        
-			        <c:when test="${what == 'mybids'}">
-			        I am here
+			   <c:when test="${what == 'mybids'}">
 				<c:if test="${not empty bids}">
-				<form method= "post" action="<%=request.getContextPath()%>/awardJob">
+				
 					<h5><b>Bids for your books</b></h5>
 	                <c:forEach var="bid" items="${bids}">
-			            	
+			            <form method= "post" action="<%=request.getContextPath()%>/acceptbid">
 			                <div class="well" style="color:#2c3e50">
 			                	<h5><b>Bid Id : </b> ${bid[0].bidId }</h5>
 			                	<hr>
-			                	<font size="2"><b> ISBN :</b> ${bid[0].bookId.isbn }</font><br><br>
-			                	<font size="2"><b> Title :</b> ${bid[0].bookId.title }</font><br><br>
-			                	<font size="2"><b> Author :</b> ${bid[0].bookId.author }</font><br><br>
-			                	<font size="2"><b> Bid Price :</b> ${bid[0].bidPrice }</font><br><br>
+			                	<h5><b>Book Details</b></h5>
+			                	<font size="2"><b> ISBN :</b> ${bid[0].bookId.isbn }</font><br>
+			                	<font size="2"><b> Title :</b> ${bid[0].bookId.title }</font><br>
+			                	<font size="2"><b> Author :</b> ${bid[0].bookId.author }</font><br>
+			                	<font size="2"><b> Bid Price :</b> ${bid[0].bidPrice }</font><br>
 								<hr>
 								<h5><b>Bidder Details </b></h5>
-								<font size="2"><b> Name :</b> ${bid[0].bidder.firstname }</font><br><br>
-			                	<font size="2"><b> Phone Number :</b> ${bid[0].bidder.phoneno }</font><br><br>
-			                	<font size="2"><b> Bidder :</b> ${bid[0].bidder.email }</font><br><br>
-								
+								<font size="2"><b> Name :</b> ${bid[0].bidder.firstname }</font><br>
+			                	<font size="2"><b> Phone Number :</b> ${bid[0].bidder.phoneno }</font><br>
+			                	<font size="2"><b> Bidder :</b> ${bid[0].bidder.email }</font><br>
+								<input type="hidden" name="bidId"  value=${bid[0].bidId }>
+								<input type="hidden" name="bookId"  value=${bid[0].bookId.bookId }>
 			                    <div class="text-right">
-			                        <button type="submit" onclick="javascript:submitProposal();" class="btn btn-success btn-lg">Submit</button>
+			                        <button type="submit" class="btn btn-success btn-lg">Accept Bid</button>
 			                    </div>
-								<hr>   
-			                    
 			                </div>
+			           	</form>
+			     	</c:forEach>
+			          	
+			         </c:if>
+			    </c:when><c:when test="${what == 'myproposals'}">
+				<c:if test="${not empty props}">
+				
+					<h5><b>Proposals for your Active Requirements</b></h5>
+	                <c:forEach var="prop" items="${props}">
+			    		<form method= "post" action="<%=request.getContextPath()%>/acceptproposal">        	
+			                <div class="well" style="color:#2c3e50">
+				                	<h5><b>Proposal ID : </b> ${prop[0].proposalID }</h5>
+				                	<hr>
+				                	<h5><b>Book Details</b></h5>
+				                	<font size="2"><b> ISBN:</b> ${prop[0].proposalForPostId.isbn }</font><br>
+				                	<font size="2"><b> Author:</b> ${prop[0].proposalForPostId.author }</font><br>
+				                	<font size="2"><b> Title:</b> ${prop[0].proposalForPostId.title }</font><br>
+				                	<hr>
+				                	<font size="3"><b> Proposal :</b> ${prop[0].proposal }</font><br>
+									<hr>
+									<h5><b>User Details</b></h5>
+									<font size="2"><b> Username : </b>  ${prop[0].proposerId.firstname }</font><br>
+									<font size="2"><b> Phone Number : </b>  ${prop[0].proposerId.phoneno }</font><br>
+									<font size="2"><b> Accepted :</b> ${prop[0].accepted }</font><br>
+									<input type="hidden" name="proposalId"  value=${prop[0].proposalID }>
+									<input type="hidden" name="proposalforpostId"  value=${prop[0].proposalForPostId.postId }>
+				                    <div class="text-right">
+				                        <button type="submit" class="btn btn-success btn-lg">Accept</button>
+				                    </div>
+							
+				                </div>
+				                </form>
 			                </c:forEach>
-			          	</form>
 			         </c:if>
 			        </c:when>
 			        
@@ -157,35 +215,30 @@
 			        
 			        <c:otherwise>
 			        	<%-- <c:if test="${not empty books}"> --%>
-						<form method= "post" action="<%=request.getContextPath()%>/awardJob">
-						<h5><b>Your Inventory</b></h5>
+						
+						<h5><b>Sorry! The requested Page is not available</b></h5>
 	                	<c:forEach var="detail" items="${details}">
-			                <div class="well" style="color:#2c3e50">
-			                	<h5><b>Proposal ID : </b> ${detail.proposalID }</h5>
-			                	<hr>
-			                	<font size="3"><b> ISBN/ Author/ Title:</b> ${detail.bookdetails }</font><br><br>
-			                	<font size="2"><b> Proposal :</b> ${detail.proposal }</font><br>
-								<hr>
-								<font size="2"><b> Accepted :</b> ${detail.accepted }</font><br>
-								<font size="2"><b> Username : </b>  ${detail.username }</font><br>
-								<font size="2"><b> Phone Number : </b>  ${detail.phno }</font><br>
-								<font size="2"><b> Accepted :</b> ${detail.accepted }</font><br>
-								<%-- <input type="hidden" id="proposerId" value=<%=request.getSession().getAttribute("userid")%>>  --%>
-								
-								<%-- <c:if test="${what=='reqbooks'}">
-								<input type="hidden" id="postid" value=${book.postId }>
-								</c:if>
-								<c:if test="${what=='mybooks'}">
-								<input type="hidden" id="postid" value=${book.bookId }>
-								</c:if> --%>
-			                    <div class="text-right">
-			                        <button type="submit" onclick="javascript:submitProposal();" class="btn btn-success btn-lg">Submit</button>
-			                    </div>
-								<hr>   
-			                    
-			                </div>
-			                </c:forEach>
-			          	</form>
+		                	<form method= "post" action="<%=request.getContextPath()%>/acceptproposal">
+				                <div class="well" style="color:#2c3e50">
+				                	<h5><b>Proposal ID : </b> ${detail.proposalID }</h5>
+				                	<hr>
+				                	<font size="3"><b> ISBN/ Author/ Title:</b> ${detail.bookdetails }</font><br><br>
+				                	<font size="2"><b> Proposal :</b> ${detail.proposal }</font><br>
+									<hr>
+									<font size="2"><b> Accepted :</b> ${detail.accepted }</font><br>
+									<font size="2"><b> Username : </b>  ${detail.username }</font><br>
+									<font size="2"><b> Phone Number : </b>  ${detail.phno }</font><br>
+									<font size="2"><b> Accepted :</b> ${detail.accepted }</font><br>
+									<input type="hidden" name="proposalId"  value=${detail.proposalID }>
+									
+				                    <div class="text-right">
+				                        <button type="submit" class="btn btn-success btn-lg">Accept</button>
+				                    </div>
+							
+				                </div>
+				           	</form>
+			        	</c:forEach>
+			          	
 			         <%-- </c:if> --%>
 			        
 			        </c:otherwise>

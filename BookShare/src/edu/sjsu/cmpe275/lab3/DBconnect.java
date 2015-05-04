@@ -31,38 +31,17 @@ public class DBconnect {
 		}
 	}
 
-	/*protected List<Bids> getBids(long userId){
-		
-		List<Bids> bids = new ArrayList<Bids>();
-		query = "select * from Bids Bi inner join Books Bo on "
-				+ "Bi.bookid = Bo.bookid "
-				+ "where Bo.owner = " + userId;
+	protected int updateBids(long bookId){
+		query = "update Bids set active = 'no' where bookid = " + bookId;
+		int status = 0;
 		try{
-			rs = st.executeQuery(query);
-			
-			while(rs.next()){
-				Bids g = new Bids();
-				Books b = new Books();
-				g.setBiddername(rs.getString("biddername"));
-				g.setPhno(rs.getString("phno"));
-				g.setPrice(rs.getInt("price"));
-				g.setBookdetails(rs.getString("bookdetails"));
-				g.setAccepted(rs.getString("accepted").charAt(0));
-				b.setBookId(rs.getLong("bookid"));
-				Crud c = new Crud();
-				b = (Books) c.get(b, b.getBookId());
-				g.setBookId(b);
-				g.setBidId(rs.getLong("bidid"));
-				
-			}
-		}catch(Exception ee){
-			System.out.println("Unable to get the bids for the user " + userId);
-			
+			status = st.executeUpdate(query);
+		}catch(Exception e){
+			System.out.println("Unable to update the bids in DB connect");
 		}
 		
-		return bids;
-	}*/
-	
+		return status;
+	}
 
 	protected void close(){
 		try{

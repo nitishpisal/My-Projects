@@ -58,11 +58,11 @@ public class OrderController {
 		long bookId = Long.parseLong(bookid);
 		float amount = Float.parseFloat(amount1);
 		Books book = new Books();
-		Login user = new Login();
+		Userdetail user = new Userdetail();
+		user = (Userdetail) request.getSession().getAttribute("userDetails");
 		Orders order = new Orders(quantity, amount);
 		Crud c = new Crud();
 		book =(Books) c.get(book, bookId);
-		user = (Login) c.get(user, userid);
 		order.setBookId(book);
 		order.setUserId(user);
 		c.save(order);

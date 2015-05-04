@@ -30,6 +30,7 @@ public class RequiredBooks implements Record{
     @JoinColumn(name="postuserid",referencedColumnName = "userid")
 	private Login postUserId;
 	
+	private char fulfilled;
 	/**
 	 * Constructors
 	 */
@@ -43,6 +44,7 @@ public class RequiredBooks implements Record{
 		this.publisher = publisher;
 		this.year = year;
 		this.quantity = quantity;
+		this.fulfilled = 'N';
 		
 	}
 	
@@ -112,6 +114,14 @@ public class RequiredBooks implements Record{
 
 	public void setPostUserId(Login postUserId) {
 		this.postUserId = postUserId;
+	}
+
+	public char getFulfilled() {
+		return fulfilled;
+	}
+
+	public void setFulfilled(char fulfilled) {
+		this.fulfilled = fulfilled;
 	}
 	
 	

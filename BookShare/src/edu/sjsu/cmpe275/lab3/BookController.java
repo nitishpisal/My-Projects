@@ -42,13 +42,13 @@ public class BookController {
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
 		if(action.equalsIgnoreCase("available")){
-			Query query = session.createQuery("from Books where owner.userid <>:usid");
+			Query query = session.createQuery("from Books where owner.userid <>:usid and available = 'Y'");
 			query.setParameter("usid", uid);
 			mv.addObject("what", "available");
 			list = query.list();
 		}
 		else{
-			Query query = session.createQuery("from RequiredBooks where postUserId.userid <>:usid");
+			Query query = session.createQuery("from RequiredBooks where postUserId.userid <>:usid and fulfilled = 'N'");
 			query.setParameter("usid", uid);
 			mv.addObject("what", "required");
 			list = query.list();
@@ -229,12 +229,12 @@ public class BookController {
 		String success = "";
 		/*try{*/
 			Userdetail userdetail = (Userdetail) request.getSession().getAttribute("userDetails");
-			String username = userdetail.getFirstname() +  " " + userdetail.getLastname();
+			/*String username = userdetail.getFirstname() +  " " + userdetail.getLastname();
 			String phno = userdetail.getPhoneno();
-			String bookdetails = post.getIsbn() + " " + post.getAuthor() + " " +post.getTitle();
-			Proposals proposal = new Proposals(desc, 'N', username, phno, bookdetails);
+			String bookdetails = post.getIsbn() + " " + post.getAuthor() + " " +post.getTitle();*/
+			Proposals proposal = new Proposals(desc, 'N');
 			post = (RequiredBooks) c.get(post, postId);
-			proposal.setProposerId(detail);
+			proposal.setProposerId(userdetail);
 			proposal.setProposalForPostId(post);
 			
 			c.save(proposal);
@@ -262,14 +262,15 @@ public class BookController {
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
 		if(action == null || action.equalsIgnoreCase("mybooks")){
-			query = session.createQuery("from Books where owner.userid =:usid");
+			System.out.println("userid is " + uid);
+			query = session.createQuery("from Books where owner.userid =:usid and available = 'Y'");
 			mv.addObject("what", "mybooks");
 			query.setParameter("usid", uid);
 			list = query.list();
 			mv.addObject("books", list);
 		}else{
 			if(action.equalsIgnoreCase("myrequestedbooks")){
-				query = session.createQuery("from RequiredBooks where postUserId.userid =:usid");
+				query = session.createQuery("from RequiredBooks where postUserId.userid =:usid and fulfilled = 'N'");
 				mv.addObject("what", "reqbooks");
 				System.out.println("uid is " + uid);
 				query.setParameter("usid", uid);
@@ -278,22 +279,20 @@ public class BookController {
 				mv.addObject("what", "myrequestedbooks");
 			}
 			else if(action.equalsIgnoreCase("myproposals")){
-				/*query = session.createQuery("from Proposals p inner join edu.sjsu.cmpe275.lab3.RequiredBooks r "
-													+ " inner join edu.sjsu.cmpe275.lab3.Userdetail u"
-													+ " where p.proposerId <> : uid");*/
-				query = session.createQuery("from Proposals where proposerId.userid <> :usid"
-						+ "	and accepted = 'N'");
+				 query = session.createQuery("from Proposals P inner join P.proposerId UD"
+						 					+ " inner join P.proposalForPostId RB where P.proposerId.userid <> :usid "
+						 					+ " and RB.postUserId.userid = :usid"
+						 					+ " and P.accepted ='N' and P.active = 'yes'");
 				
-				System.out.println("userid   " + uid);
 				query.setParameter("usid", uid);
 				list = query.list();
-				mv.addObject("details", list);
+				mv.addObject("props", list);
 				mv.addObject("what", "myproposals");
 				
 			}
 			else{
 				query = session.createQuery("from Bids Bi inner join Bi.bookId B where Bi.bidder.userid <> :usid"
-						+ " and B.owner.userid = :usid");
+						+ " and B.owner.userid = :usid and Bi.active = 'yes'");
 				query.setParameter("usid", uid);
 				list = query.list();
 				List<Object> bidList = new ArrayList<Object>();
@@ -308,13 +307,21 @@ public class BookController {
 				
 				
 				mv.addObject("bids", list);
-				//mv.addObject("books", list);
 				mv.addObject("what", "mybids");
 			}
 		}
 		
 		return mv;
 	}
+	/**
+	 * 
+	 * Place bid for a Book
+	 * @param bookid
+	 * @param bidPrice
+	 * @param buyerId
+	 * @param request
+	 * @return
+	 */
 	
 	@RequestMapping(value="/placebid" , method=RequestMethod.POST)
 	public ModelAndView placeBid(@RequestParam("bookid") long bookid,
@@ -344,6 +351,48 @@ public class BookController {
 		return mv;
 	}
 	
+	/**
+	 * 
+	 * Accept bid for your book
+	 */
+	
+	@RequestMapping(value="/acceptbid", method=RequestMethod.POST)
+	public ModelAndView acceptBid(@RequestParam("bidId") long bidId,
+									@RequestParam("bookId") long bookId,
+									HttpServletRequest request){
+		
+		long uid = (Long) request.getSession().getAttribute("userid");
+		Query query;
+		ModelAndView mv = new ModelAndView("myAccount");
+		List<?> list;
+		
+		Crud c = new Crud();
+		Session session = (Session) c.crudOpen();
+		Bids bid = new Bids();
+		//get the bid from DB
+		bid = (Bids) c.get(bid, bidId);
+		bid.setAccepted('Y');
+		DBconnect db = new DBconnect();
+		//update the accepted to Y in DB
+		try{
+			c.update(bid);
+			db.updateBids(bookId);
+		}catch(Exception e){
+			System.out.println("unable to update the bid in Bookcontroller");
+		}
+		
+		query = session.createQuery("from Bids Bi inner join Bi.bookId B where Bi.bidder.userid <> :usid"
+				+ " and B.owner.userid = :usid and Bi.active = 'yes'");
+		query.setParameter("usid", uid);
+		list = query.list();
+		
+		mv.addObject("bids", list);
+		mv.addObject("what", "mybids");
+		
+		return mv;
+		
+	}
+	
 	
 	/**
 	 * 
@@ -365,10 +414,10 @@ public class BookController {
 		user = (Userdetail) request.getSession().getAttribute("userDetails");
 		if (user != null){
 			query = session.createQuery("from Books where isbn like :si or title like :st or author like :sa"
-					+ " and owner.userid <> :uid");
+					+ " and owner.userid <> :uid and available = 'Y'");
 			query.setParameter("uid", user.getUserid());
 		}else{
-			query = session.createQuery("from Books where isbn like :si or title like :st or author like :sa");
+			query = session.createQuery("from Books where available = 'Y' and isbn like :si or title like :st or author like :sa");
 		}
 		query.setString("si", '%'+searchStr+'%');
 		query.setString("st", '%'+searchStr+'%');
@@ -381,6 +430,100 @@ public class BookController {
 		return mv;
 		
 	}
+	
+	/**
+	 * Badal Changes 3rd May 2015
+	 * after 6 PM
+	 * 
+	 */
+	
+	@RequestMapping(value="/removebook" , method=RequestMethod.POST)
+	public ModelAndView removeBook(@RequestParam("bookid") long bookid,
+									HttpServletRequest request){
+		
+		String removeWhat = request.getParameter("removewhat");
+		
+		long uid = (Long) request.getSession().getAttribute("userid");
+		Query query;
+		ModelAndView mv = new ModelAndView("myAccount");
+		List<?> list;
+		Crud c = new Crud();
+		//Check if user wants to remove his available books
+		//update the book inventory set available to false
+		if(removeWhat.equalsIgnoreCase("postedbook")){
+			Books book = new Books();
+			book = (Books)c.get(book, bookid);
+			book.setAvailable('N');
+			c.update(book);
+		}
+		//Check if user wants to remove his requirements
+		else if(removeWhat.equalsIgnoreCase("requiredbook")){
+			RequiredBooks rb = new RequiredBooks();
+			rb = (RequiredBooks) c.get(rb, bookid);
+			rb.setFulfilled('Y');
+			c.update(rb);
+		}
+		
+		
+		//Get the user inventory for available books
+		Session session = (Session) c.crudOpen();
+		System.out.println("userid is " + uid);
+		query = session.createQuery("from Books where owner.userid =:usid and available = 'Y'");
+		query.setParameter("usid", uid);
+		list = query.list();
+		mv.addObject("what", "mybooks");
+		mv.addObject("books", list);
+			
+		return mv;
+	}
+	
+	@RequestMapping(value="/acceptproposal", method=RequestMethod.POST)
+	public ModelAndView acceptProposal(@RequestParam("proposalId") long proposalId,
+										@RequestParam("proposalforpostId") long postId,
+										HttpServletRequest request){
+		
+		long uid = (Long) request.getSession().getAttribute("userid");
+		Query query;
+		ModelAndView mv = new ModelAndView("myAccount");
+		List<?> list;
+		Crud c = new Crud();
+		//Open the session
+		//Update the proposal to accepted state
+		Proposals proposal = new Proposals();
+		proposal = (Proposals) c.get(proposal, proposalId);
+		proposal.setAccepted('Y');
+		c.update(proposal);
+		
+		//Update the required book's fulfill proposal status to Yes
+		
+		RequiredBooks rb = new RequiredBooks();
+		rb = (RequiredBooks) c.get(rb, postId);
+		rb.setFulfilled('Y');
+		c.update(rb);
+		
+		//get the updated list of proposals from the database
+		Session session = (Session) c.crudOpen();
+		
+	/*	//Set all the proposals for this requirement to inactive
+		query = session.createQuery("update Proposals set active = 'no' where proposalForPostId.postId = :postId");
+		query.setLong("postId", postId);
+		query.executeUpdate();*/
+		
+		query = session.createQuery("from Proposals P inner join P.proposerId UD"
+					+ " inner join P.proposalForPostId RB where P.proposerId.userid <> :usid "
+					+ " and RB.postUserId.userid = :usid"
+					+ " and P.accepted ='N' and P.active = 'yes'");
+		
+		//System.out.println("userid   " + uid);
+		query.setParameter("usid", uid);
+		list = query.list();
+		mv.addObject("props", list);
+		mv.addObject("what", "myproposals");
+		
+		return mv;
+		
+	}
+	
 	
 		
 }
