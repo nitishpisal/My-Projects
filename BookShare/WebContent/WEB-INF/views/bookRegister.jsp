@@ -13,7 +13,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>  
  	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>  
  
-	<title>Simply Hired - Get your Job done</title>
+	<title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<c:url value="/" />">Simply Hired</a>
+                <a class="navbar-brand" href="<c:url value="/" />">BookShare</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -75,7 +75,6 @@
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
                     <form name="buyrequest" id="buyrequest" method="post" action='<%=request.getContextPath() %>/postrequirements'>
                         <div class="row control-group">
-                        	<h4>Please give your requirements</h4><br><br>
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <input type="text" class="form-control" placeholder="ISBN" id="isbn" name="isbn" >
                                 <p class="help-block text-danger"></p>
@@ -101,15 +100,6 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-                       <!--  <br>
-                          <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                 <label>Describe it</label>
-                                <textarea rows="5" name="desc" class="form-control" placeholder="Description of the job" id="desc" ></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                         -->
                         <br>
                         <div id="success"></div>
                         <div class="row">
@@ -174,7 +164,7 @@
 	                            <div class="row control-group">
 		                            <div class="form-group col-xs-12 floating-label-form-group controls">
 				                    	<!-- <input type="tel" class="form-control" name="price" placeholder="Enter the pay amount" id="price" > -->
-			                       			<input type="tel" class="form-control" name="price" placeholder="Enable bidding" " >
+			                       			<input type="tel" class="form-control" name="price" placeholder="Enable bidding"  disabled>
 						                       	<!-- <form action=""> -->
 						                       	<input type="radio" name="bid" value="Y" >Yes<br>      
 												<input type="radio" name="bid" value="N">No
@@ -183,15 +173,6 @@
 			                     	</div>
 		                        </div>
 	                        </div>
-	                       <!--  <br>
-	                          <div class="row control-group">
-	                            <div class="form-group col-xs-12 floating-label-form-group controls">
-	                                 <label>Describe it</label>
-	                                <textarea rows="5" name="desc" class="form-control" placeholder="Description of the job" id="desc" ></textarea>
-	                                <p class="help-block text-danger"></p>
-	                            </div>
-	                        </div>
-	                         -->
 	                        <br>
 	                        <div id="success"></div>
 	                        <div class="row">
@@ -212,7 +193,7 @@
                 <div class="row">
                     <div class="footer-col col-md-4">
                         <h3>Location</h3>
-                        <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                        <p>San Farnando, CA 95112</p>
                     </div>
                     <div class="footer-col col-md-4">
                         <h3>Around the Web</h3>
@@ -235,8 +216,8 @@
                         </ul>
                     </div>
                     <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                        <h3>About BookShare</h3>
+                        <p>BookShare is a web app created by a group of SJSU students.</p>
                     </div>
                 </div>
             </div>
@@ -245,7 +226,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Your Website 2014
+                        Copyright@Bookshare.com . All Rights Reserved
                     </div>
                 </div>
             </div>

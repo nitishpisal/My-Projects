@@ -132,8 +132,8 @@ public class BookController {
 		rb.setPostUserId(details);
 		c.save(rb);
 		
-		ModelAndView mv = new ModelAndView("bookRegister");
-		mv.addObject("what", "buyRequest");
+		ModelAndView mv = new ModelAndView("success");
+		mv.addObject("success", "Thank you! your requirements are successfully posted");
 		return mv;		
 	}
 	
