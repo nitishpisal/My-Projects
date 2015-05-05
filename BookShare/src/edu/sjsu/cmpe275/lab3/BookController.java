@@ -410,12 +410,12 @@ public class BookController {
 		List<?> list;
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
-		Userdetail user = new Userdetail();
-		user = (Userdetail) request.getSession().getAttribute("userDetails");
-		if (user != null){
+		Userdetail user3 = new Userdetail();
+		user3 = (Userdetail) request.getSession().getAttribute("userDetails");
+		if (user3 != null){
 			query = session.createQuery("from Books where isbn like :si or title like :st or author like :sa"
 					+ " and owner.userid <> :uid and available = 'Y'");
-			query.setParameter("uid", user.getUserid());
+			query.setParameter("uid", user3.getUserid());
 		}else{
 			query = session.createQuery("from Books where available = 'Y' and isbn like :si or title like :st or author like :sa");
 		}
@@ -493,22 +493,14 @@ public class BookController {
 		proposal = (Proposals) c.get(proposal, proposalId);
 		proposal.setAccepted('Y');
 		c.update(proposal);
-		
-		//Update the required book's fulfill proposal status to Yes
-		
+
 		RequiredBooks rb = new RequiredBooks();
 		rb = (RequiredBooks) c.get(rb, postId);
 		rb.setFulfilled('Y');
 		c.update(rb);
-		
-		//get the updated list of proposals from the database
+
 		Session session = (Session) c.crudOpen();
-		
-	/*	//Set all the proposals for this requirement to inactive
-		query = session.createQuery("update Proposals set active = 'no' where proposalForPostId.postId = :postId");
-		query.setLong("postId", postId);
-		query.executeUpdate();*/
-		
+
 		query = session.createQuery("from Proposals P inner join P.proposerId UD"
 					+ " inner join P.proposalForPostId RB where P.proposerId.userid <> :usid "
 					+ " and RB.postUserId.userid = :usid"
@@ -567,11 +559,11 @@ public class BookController {
 		if(null != request.getParameter("rating")){
 			Crud c = new Crud();
 			Feedback feedback = new Feedback();
-			Userdetail user = new Userdetail();
-			user = (Userdetail) request.getSession().getAttribute("userDetails");
+			Userdetail user2 = new Userdetail();
+			user2 = (Userdetail) request.getSession().getAttribute("userDetails");
 			feedback.setComments(request.getParameter("comment"));
 			feedback.setRating(Integer.parseInt(request.getParameter("rating")));
-			feedback.setUserId(user);
+			feedback.setUserId(user2);
 			feedback.setRole(request.getParameter("userRole"));
 			//System.out.println("usertype" + (String)request.getParameter("userRole"));
 			feedback.setRatingForUser(Integer.parseInt(request.getParameter("ratingTo")));
