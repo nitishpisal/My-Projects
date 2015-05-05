@@ -524,6 +524,63 @@ public class BookController {
 		
 	}
 	
+	/**
+	 * Feedback to Buyer and seller
+	 * Aditya Feedback function
+	 */
+	
+	@RequestMapping(value="/feedback", method = RequestMethod.GET)
+	public ModelAndView provideFeedback(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("getreviews");
+		String action = (String) request.getParameter("action");
+		String role = (String) request.getParameter("role");
+		if (null == action)
+			return mv;
+		Crud c = new Crud();
+		List<?> list;
+		long uid;
+		try{
+			uid = (Long) request.getSession().getAttribute("userid");
+		}catch(NullPointerException e){
+			System.out.println("User not logged in");
+			uid = 0;
+		}
+		Session session = c.crudOpen();
+		if(action.equalsIgnoreCase("rateBuyer")){
+			Query query = session.createQuery("from Orders o inner join o.userId u inner join o.bookId b where b.owner.userid =:uid");
+			query.setParameter("uid", uid);
+			list = query.list();
+		} else {
+			Query query = session.createQuery("from Orders o inner join o.userId u inner join o.bookId b where b.owner.userid =:uid");
+			query.setParameter("uid", uid);
+			list = query.list();
+			System.out.println(list.size());
+		}
+		mv.addObject("ratingsTo",list);
+		mv.addObject("role", role);
+		return mv;
+	}
+	
+	@RequestMapping(value="/feedback/save", method=RequestMethod.POST)
+	public ModelAndView saveFeedback(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("getreviews");
+		if(null != request.getParameter("rating")){
+			Crud c = new Crud();
+			Feedback feedback = new Feedback();
+			Userdetail user = new Userdetail();
+			user = (Userdetail) request.getSession().getAttribute("userDetails");
+			feedback.setComments(request.getParameter("comment"));
+			feedback.setRating(Integer.parseInt(request.getParameter("rating")));
+			feedback.setUserId(user);
+			feedback.setRole(request.getParameter("userRole"));
+			//System.out.println("usertype" + (String)request.getParameter("userRole"));
+			feedback.setRatingForUser(Integer.parseInt(request.getParameter("ratingTo")));
+			c.save(feedback);
+			mv = new ModelAndView("success");
+			mv.addObject("success", "Thank you! Your Valuable feedback is posted");
+		}
+		return mv;
+	}
 	
 		
 }

@@ -42,7 +42,6 @@ public class Crud {
 		}
 		session.close();
 		s.close();
-		
 		return id;
 	}
 	

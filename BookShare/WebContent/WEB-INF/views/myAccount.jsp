@@ -94,6 +94,14 @@
 	                	<li><a href="<%=request.getContextPath()%>/books?action=required" class="l">Required Books</a></li>
 				 	</ul>
                 </div>
+                
+                <div class="list-group">
+                	<h5><a href = "<%=request.getContextPath()%>/books">Rate</a></h5>
+                	<ul>
+	                    <li><a href="<%=request.getContextPath()%>/feedback" class="l">Feedback</a></li>
+	                  </ul>
+                </div>
+                
             </div>
             <div class="col-md-9"> 
             <c:choose>
