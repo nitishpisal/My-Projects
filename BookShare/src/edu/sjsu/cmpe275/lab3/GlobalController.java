@@ -20,9 +20,24 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class GlobalController {
 	
+	
+	/**'
+	 * Rishi khurana, Index page redirection
+	 * @return
+	 */
+	
+	@RequestMapping(value="/", method = RequestMethod.GET)
+	public ModelAndView getHome(){
+		
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
+	}
+	
+	
 	/**
 	 * get Login page
 	 * @return
+	 * Agam
 	 */
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -33,7 +48,7 @@ public class GlobalController {
 	}
 	
 	/**
-	 * 
+	 * Pranjal
 	 * 
 	 * Login post call for buying or fulfilling the request
 	 */
@@ -63,7 +78,7 @@ public class GlobalController {
 	
 	/**
 	 *validate login 
-	 * 
+	 * Badal Jain validate function
 	 */
 	@RequestMapping(value="/validate", method = RequestMethod.POST)
 	public String validateLogin(HttpServletRequest request){
@@ -129,6 +144,7 @@ public class GlobalController {
 	
 	/**
 	 * Logout from the account
+	 * Badal Jain
 	 */
 
 	@RequestMapping(value="/logout", method = RequestMethod.GET)

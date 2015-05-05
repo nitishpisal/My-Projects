@@ -49,13 +49,8 @@
 				+ "&state=" + state 
 				+ "&zip=" + zip;
 		
-		/* if(name == "")
-			alert("Please enter your name");
-		else{ */
 			console.log(regForm.action);
 			regForm.submit();
-		/* 	alert("Sponsor created...");
-		} */
 	}
 	
 	

@@ -47,7 +47,7 @@ public class UserController {
 		String city= request.getParameter("city");
 		String state = request.getParameter("state");
 		String zip = request.getParameter("zip");
-		String phno = request.getParameter("phoneno");
+		String phno = request.getParameter("contact");
 		
 		Login newLogin = new Login(email, password);
 		Address address = new Address(street, city, state, zip);

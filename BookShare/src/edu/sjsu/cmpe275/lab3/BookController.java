@@ -23,6 +23,7 @@ import com.sun.xml.internal.ws.resources.HttpserverMessages;
 public class BookController {
 	
 	/**
+	 * Agam
 	 * Get the book from DB and display it to books.jsp
 	 * @return
 	 */
@@ -59,7 +60,7 @@ public class BookController {
 	
 	/**
 	 * Post ad for selling the book
-	 * 
+	 * Agam
 	 */
 	
 
@@ -72,6 +73,7 @@ public class BookController {
 	}
 	
 	/**
+	 * Pranjal Shah
 	 * Request book controller redirecting to post book requirements
 	 * 
 	 */
@@ -102,6 +104,7 @@ public class BookController {
 	}
 	
 	/**
+	 * Pranjal Shah
 	 * get the details of the books required by user and add it to DB
 	 * @return
 	 */
@@ -138,6 +141,7 @@ public class BookController {
 	}
 	
 	/**
+	 * Rishi Khurana
 	 * Post your book to sell
 	 * @param request
 	 * @return
@@ -158,7 +162,6 @@ public class BookController {
 		int qty = Integer.parseInt(quantity);
 		int prc = Integer.parseInt(price);
 		
-		//get the user details using the username
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
 		Query query = session.createQuery("from Login where username = :uname");
@@ -181,6 +184,7 @@ public class BookController {
 	 * this is called when a user presses to buy a paricular book
 	 * and specfbook page is called
 	 * 
+	 * Badal jain
 	 * @param bookId
 	 * @return
 	 */
@@ -213,6 +217,7 @@ public class BookController {
 	
 	/**
 	 * Submit the user proposal
+	 * Badal Jain
 	 */
 	
 	@RequestMapping(value="/proposal", method=RequestMethod.POST)
@@ -248,7 +253,7 @@ public class BookController {
 	}
 	
 	/**
-	 * 
+	 * Badal jain
 	 * My account redirection
 	 */
 	@RequestMapping (value="/myaccount" , method=RequestMethod.GET)
@@ -299,8 +304,6 @@ public class BookController {
 				List<Object> bookList = new ArrayList<Object>();
 				
 				for(int i=0; i<list.size(); i++){
-				//	System.out.println(((Object[]) list.get(i))[0]);
-				//	System.out.println(((Object[]) list.get(i))[1]);
 					bidList.add(((Object[]) list.get(i))[0]);
 					bookList.add(((Object[]) list.get(i))[1]);
 				}
@@ -315,6 +318,7 @@ public class BookController {
 	}
 	/**
 	 * 
+	 * Rishi Khurana
 	 * Place bid for a Book
 	 * @param bookid
 	 * @param bidPrice
@@ -352,7 +356,7 @@ public class BookController {
 	}
 	
 	/**
-	 * 
+	 * Rishi Khurana
 	 * Accept bid for your book
 	 */
 	
@@ -395,7 +399,7 @@ public class BookController {
 	
 	
 	/**
-	 * 
+	 * Badal Jain 
 	 * Search for a book based on title, author or ISBN
 	 * 
 	 */
@@ -487,8 +491,7 @@ public class BookController {
 		ModelAndView mv = new ModelAndView("myAccount");
 		List<?> list;
 		Crud c = new Crud();
-		//Open the session
-		//Update the proposal to accepted state
+		
 		Proposals proposal = new Proposals();
 		proposal = (Proposals) c.get(proposal, proposalId);
 		proposal.setAccepted('Y');
@@ -506,7 +509,6 @@ public class BookController {
 					+ " and RB.postUserId.userid = :usid"
 					+ " and P.accepted ='N' and P.active = 'yes'");
 		
-		//System.out.println("userid   " + uid);
 		query.setParameter("usid", uid);
 		list = query.list();
 		mv.addObject("props", list);
@@ -565,7 +567,7 @@ public class BookController {
 			feedback.setRating(Integer.parseInt(request.getParameter("rating")));
 			feedback.setUserId(user2);
 			feedback.setRole(request.getParameter("userRole"));
-			//System.out.println("usertype" + (String)request.getParameter("userRole"));
+			
 			feedback.setRatingForUser(Integer.parseInt(request.getParameter("ratingTo")));
 			c.save(feedback);
 			mv = new ModelAndView("success");
