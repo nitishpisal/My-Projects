@@ -29,6 +29,7 @@
 		var buyerid = document.getElementById("buyerid").value;
 		var price = document.getElementById("price").value;
 		var quantity = document.getElementById("quantity").value;
+		alert("bid");
 		var regForm = document.forms['buyForm'];
 		var bidPrice = document.getElementById("bidPrice").value;
 		regForm.method = "POST";
@@ -166,10 +167,11 @@
                    		</div>
 	                    <div class="text-right">
 	                        <button type="submit" onclick="javascript:buyNow();" class="btn btn-success btn-lg">Buy now</button>
-	                    </div>
+	                    </div>bid
                     </c:if>
                     
                     <c:if test="${book.bid == 'Y' }">
+                    	<input type="hidden" id="quantity" value=${book.quantity }>
                     	<input type="text" class="form-control" placeholder="Place Bid" id="bidPrice" ><br>
 	                    <div class="text-right">
 	                        <button type="submit" onclick="javascript:placeBid();" class="btn btn-success btn-lg">Bid now</button>
