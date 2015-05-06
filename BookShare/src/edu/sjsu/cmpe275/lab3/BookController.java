@@ -117,10 +117,18 @@ public class BookController {
 		String publisher = request.getParameter("publisher");
 		String year = request.getParameter("year");
 		String quantity = request.getParameter("quantity");
-		
-		int yr = Integer.parseInt(year);
-		int qty = Integer.parseInt(quantity);
-		
+		int yr=2014;
+		int qty = 1;
+		try{
+			 yr = Integer.parseInt(year);
+			}catch(NumberFormatException n){
+				System.out.println("number format exception for year" + n);
+			}
+		try{
+			qty = Integer.parseInt(quantity);
+		}catch(NumberFormatException n){
+			System.out.println("number format exception for year" + n);
+		}
 		//get the user details using the username
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
@@ -158,6 +166,9 @@ public class BookController {
 		String price = request.getParameter("price");
 		String quantity = request.getParameter("quantity");
 		String bid = request.getParameter("bid");
+		if (bid == "" || bid == null){
+			bid = "N";
+		}
 		int yr=2014;
 		int qty = 1;
 		int prc =0;
