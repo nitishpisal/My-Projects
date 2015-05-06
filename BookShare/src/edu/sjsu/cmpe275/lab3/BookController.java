@@ -158,10 +158,24 @@ public class BookController {
 		String price = request.getParameter("price");
 		String quantity = request.getParameter("quantity");
 		String bid = request.getParameter("bid");
-		int yr = Integer.parseInt(year);
-		int qty = Integer.parseInt(quantity);
-		int prc = Integer.parseInt(price);
-		
+		int yr=2014;
+		int qty = 1;
+		int prc =0;
+		try{
+		 yr = Integer.parseInt(year);
+		}catch(NumberFormatException n){
+			System.out.println("number format exception for year" + n);
+		}
+		try{
+			qty = Integer.parseInt(quantity);
+		}catch(NumberFormatException n){
+			System.out.println("number format exception for year" + n);
+		}
+		try{
+			prc = Integer.parseInt(price);
+		}catch(NumberFormatException n){
+			System.out.println("number format exception for year" + n);
+		}
 		Crud c = new Crud();
 		Session session = (Session) c.crudOpen();
 		Query query = session.createQuery("from Login where username = :uname");
