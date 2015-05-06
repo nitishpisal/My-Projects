@@ -141,9 +141,9 @@
 			                <div class="well" style="color:#2c3e50">
 			                	<h5><b>Title : </b> ${book.title }</h5>
 			                	<hr>
-			                	<font size="3"><b> ISBN :</b> ${book.isbn }</font><br><br>
-			                	<font size="3"><b> Author :</b> ${book.author }</font><br><br>
-								<font size="3"><b> Publisher : </b>${book.publisher }</font>
+			                	<font size="2"><b> ISBN :</b> ${book.isbn }</font><br>
+			                	<font size="2"><b> Author :</b> ${book.author }</font><br>
+								<font size="2"><b> Publisher : </b>${book.publisher }</font>
 								<hr>
 								<font size="2"><b> Year: </b>  ${book.year }</font><br>
 								<font size="2"><b> Available Quantity :</b> ${book.quantity }</font><br>

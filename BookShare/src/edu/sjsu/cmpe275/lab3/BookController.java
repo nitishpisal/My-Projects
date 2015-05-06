@@ -130,17 +130,18 @@ public class BookController {
 			System.out.println("number format exception for year" + n);
 		}
 		//get the user details using the username
+		Login logindetails = (Login) request.getSession().getAttribute("loginDetails");
 		Crud c = new Crud();
-		Session session = (Session) c.crudOpen();
+		/*Session session = (Session) c.crudOpen();
 		Query query = session.createQuery("from Login where username = :uname");
 		query.setParameter("uname", "badal.jain77@gmail.com");
 		List<?> list = query.list();
 		Login details = (Login)list.get(0);
-		c.crudClose();
+		c.crudClose();*/
 		
 		//set the book object
 		RequiredBooks rb = new RequiredBooks(isbn, title, author, publisher, yr, qty);
-		rb.setPostUserId(details);
+		rb.setPostUserId(logindetails);
 		c.save(rb);
 		
 		ModelAndView mv = new ModelAndView("success");
