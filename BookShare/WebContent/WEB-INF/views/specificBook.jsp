@@ -29,7 +29,6 @@
 		var buyerid = document.getElementById("buyerid").value;
 		var price = document.getElementById("price").value;
 		var quantity = document.getElementById("quantity").value;
-		alert("bid");
 		var regForm = document.forms['buyForm'];
 		var bidPrice = document.getElementById("bidPrice").value;
 		regForm.method = "POST";
