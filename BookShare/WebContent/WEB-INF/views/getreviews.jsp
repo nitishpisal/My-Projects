@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simply Hired - Get your Job done</title>
+    <title>Book Share - Share Knowledge, Go Wise</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<c:url value="/resources/forwards/css/bootstrap.min.css" />" rel="stylesheet">
@@ -32,7 +32,6 @@
 		
 		$('#id1 a').click(function(){
 			$('#hidden2').val($(this).attr("id"));
-			alert($('#hidden2').val());
 		});
 		
 	});
