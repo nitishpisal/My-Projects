@@ -167,7 +167,7 @@
                    		</div>
 	                    <div class="text-right">
 	                        <button type="submit" onclick="javascript:buyNow();" class="btn btn-success btn-lg">Buy now</button>
-	                    </div>bid
+	                    </div>
                     </c:if>
                     
                     <c:if test="${book.bid == 'Y' }">
@@ -177,8 +177,7 @@
 	                        <button type="submit" onclick="javascript:placeBid();" class="btn btn-success btn-lg">Bid now</button>
 	                    </div>
                     </c:if>
-					<hr>   
-                    
+					
                 	</div>
           	</form:form>
 			 </div>
