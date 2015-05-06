@@ -17,7 +17,6 @@
 		regForm.action = "http://localhost:8080/Poker/proposal?"
 				+ "postId="+postId
 				+ "&desc="+desc;
-		alert(regForm.action);
 		regForm.submit();
 	}
 </script>
@@ -113,14 +112,13 @@
 					<font size="2"><b> Publisher : </b>${post.publisher }</font>
 					<hr>
 					<font size="2"><b> Year: </b>  ${post.year }</font><br>
-					<font size="2"><b> Required Quantity :</b> ${post.quantity }</font><br><br>
-					
+					<font size="2"><b> Required Quantity :</b> ${post.quantity }</font>
+					<hr>
 					<div class="form-group col-xs-12 floating-label-form-group controls">
                        	<textarea rows="5" name="desc" class="form-control" placeholder="Your Proposal" id="desc" ></textarea>
                        	<p class="help-block text-danger"></p>
                     </div>
 					
-					<%-- <input type="hidden" id="proposerId" value=<%=request.getSession().getAttribute("userid")%>>  --%>
 					<input type="hidden" id="postid" value=${post.postId }>
                     <div class="text-right">
                         <button type="submit" onclick="javascript:submitProposal();" class="btn btn-success btn-lg">Submit</button>
