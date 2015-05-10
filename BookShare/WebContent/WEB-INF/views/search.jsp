@@ -7,7 +7,7 @@
 		var search = document.getElementById("search").value;
 		var regForm = document.forms['searchForm'];
 		regForm.method = "GET";
-		regForm.action = "http://localhost:8080/Poker/search/?value="+search;
+		regForm.action = "<%=request.getContextPath()%>/search/?value="+search;
 		regForm.submit();
 	}
 	
@@ -21,11 +21,11 @@
 				+ "&action=buy";
 		 */
 		if(loginVal == "noLogin"){
-			regForm.action = "http://localhost:8080/Poker/login/?bookId=" + bookId
+			regForm.action = "<%=request.getContextPath()%>/login/?bookId=" + bookId
 					+ "&action=buy" ;
 		}
 		else{
-			regForm.action = "http://localhost:8080/Poker/buy?bookId=" + bookId;
+			regForm.action = "<%=request.getContextPath()%>/buy?bookId=" + bookId;
 		}
 		
 		regForm.submit();
@@ -39,11 +39,11 @@
 		alert(loginVal + postId);
 		regForm.method = "POST";
 		if(loginVal == "noLogin"){
-			regForm.action = "http://localhost:8080/Poker/login/?postId=" + postId 
+			regForm.action = "<%=request.getContextPath()%>/login/?postId=" + postId 
 					+ "&action=fulfill" ;
 		}
 		else{
-			regForm.action = "http://localhost:8080/Poker/fulfill?postId=" + postId;
+			regForm.action = "<%=request.getContextPath()%>/fulfill?postId=" + postId;
 		}
 		regForm.submit();
 	}

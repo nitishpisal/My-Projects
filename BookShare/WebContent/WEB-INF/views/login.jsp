@@ -106,7 +106,7 @@ function login(){
 	
 	var regForm = document.forms['loginform'];
 	regForm.method = "POST";
-	regForm.action = "http://localhost:8080/Poker/validate/?username=" + username 
+	regForm.action = "<%=request.getContextPath()%>/validate/?username=" + username 
 						+ "&password=" + password
 						+ "&what=" + what
 						+ "&bookOrPostId=" + bookOrPostId;

@@ -14,7 +14,7 @@
 		var desc = document.getElementById("desc").value;
 		var regForm = document.forms['submitProposal'];
 		regForm.method = "POST";
-		regForm.action = "http://localhost:8080/Poker/proposal?"
+		regForm.action = "<%=request.getContextPath()%>/proposal?"
 				+ "postId="+postId
 				+ "&desc="+desc;
 		regForm.submit();

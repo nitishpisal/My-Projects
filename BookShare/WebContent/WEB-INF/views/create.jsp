@@ -20,7 +20,7 @@
 		var regForm = document.forms['playerRegisterationForm'];
 		regForm.method = "POST";
 		console.log(regForm.action);
-		regForm.action = "http://localhost:8080/Poker/player?"
+		regForm.action = "<%=request.getContextPath()%>/player?"
 				+ "firstname=" + firstname + "&lastname=" + lastname
 				+ "&email=" + email + "&street=" + street + "&city=" + city
 				+ "&description=" + description + "&state=" + state + "&zip=" + zip
@@ -41,7 +41,7 @@
 		var regForm = document.forms['sponsorRegistration'];
 		regForm.method = "POST";
 		console.log(regForm.action);
-		regForm.action = "http://localhost:8080/Poker/sponsor?"
+		regForm.action = "<%=request.getContextPath()%>/sponsor?"
 				+ "name=" + name 
 				+ "&description=" + description 
 				+ "&street=" + street 
